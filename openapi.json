@@ -1,0 +1,192 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ACME API",
+    "description": "ACME API allows you to programmatically manage your documentation and content",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.devscribe.com"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/documents/{id}": {
+      "put": {
+        "summary": "Update Document",
+        "description": "Updates an existing document by replacing its content with the provided fields.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier of the document to update",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The document fields to update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name"],
+                "properties": {
+                  "name": {
+                    "description": "The display name of the document",
+                    "type": "string"
+                  },
+                  "content": {
+                    "description": "The markdown body content",
+                    "type": "string"
+                  },
+                  "status": {
+                    "description": "Publication status",
+                    "type": "string",
+                    "enum": ["draft", "review", "published", "archived"]
+                  },
+                  "tags": {
+                    "description": "Labels for categorizing the document",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "pinned": {
+                    "description": "Whether the document is pinned to the top of listings",
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Document updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "description": "Unique document identifier",
+                      "type": "integer"
+                    },
+                    "name": {
+                      "description": "The display name of the document",
+                      "type": "string"
+                    },
+                    "slug": {
+                      "description": "URL-friendly identifier",
+                      "type": "string"
+                    },
+                    "status": {
+                      "description": "Current publication status",
+                      "type": "string"
+                    },
+                    "tags": {
+                      "description": "Labels for categorizing the document",
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "pinned": {
+                      "description": "Whether the document is pinned",
+                      "type": "boolean"
+                    },
+                    "created_at": {
+                      "description": "Timestamp when the document was created",
+                      "type": "string",
+                      "example": "2024-01-15T10:30:00Z"
+                    },
+                    "updated_at": {
+                      "description": "Timestamp of the last update",
+                      "type": "string",
+                      "example": "2024-02-01T09:00:00Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed for the provided fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication credentials are missing or invalid"
+          },
+          "404": {
+            "description": "No document found with the specified ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unexpected server error occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
