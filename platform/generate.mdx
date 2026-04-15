@@ -158,49 +158,6 @@ When you save generated documentation, the system **automatically updates your d
 Generated documentation is saved to the `generated/` directory. The page entry in docs.json uses the format `"generated/{slug}"` without the `.mdx` extension.
 </Callout>
 
-### docs.json Structure
-
-Your docs.json file controls all documentation site navigation:
-
-<CodeSnippet language="json" title="docs.json">
-{`{
-  "name": "your-project",
-  "favicon": "/favicon.svg",
-  "navigation": {
-    "tabs": [
-      {
-        "tab": "Guides",
-        "groups": [
-          {
-            "group": "Get Started",
-            "pages": ["introduction", "quickstart"]
-          },
-          {
-            "group": "Generated Documentation",
-            "pages": [
-              "generated/user-authentication",
-              "generated/api-overview"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API Reference",
-        "groups": [
-          {
-            "group": "Endpoints",
-            "pages": [
-              "generated/create-user",
-              "generated/get-user"
-            ]
-          }
-        ]
-      }
-    ]
-  }
-}`}
-</CodeSnippet>
-
 ### Tab Assignment Logic
 
 Generated documentation is added to tabs based on type:
@@ -224,16 +181,6 @@ You can manually edit docs.json to:
 <Callout type="danger">
 docs.json cannot be deleted, moved, or renamed. Any MDX files not referenced in docs.json will not appear on your documentation site.
 </Callout>
-
-<CodeSnippet language="json" title="Page entry format">
-{`{
-  "group": "Authentication",
-  "pages": [
-    "generated/oauth-setup",
-    "generated/api-keys"
-  ]
-}`}
-</CodeSnippet>
 
 ## Best Practices
 
