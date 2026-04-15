@@ -46,7 +46,8 @@
       },
       {
         "tab": "Changelog",
-        "href": "/changelog"
+        "external": true,
+        "url": "/changelog"
       }
     ],
     "global": {
