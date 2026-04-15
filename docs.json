@@ -17,7 +17,7 @@
               "platform/api",
               "platform/dj",
               "platform/frontmatter",
-              "platform/gen",
+              "platform/generate",
               "platform/platforms",
               "platform/themes",
               "platform/updates"
