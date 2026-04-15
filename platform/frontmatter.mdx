@@ -1,0 +1,408 @@
+---
+title: "Frontmatter"
+description: "Complete guide to configuring page metadata using YAML frontmatter in your documentation files"
+---
+
+## Overview
+
+Frontmatter is a YAML block at the beginning of your documentation files that defines metadata and configuration. The system uses the `gray-matter` library to parse frontmatter from `.mdx` and `.md` files located in `src/app/(pages)/`.
+
+<Callout type="info">
+All frontmatter fields are extracted server-side during page compilation. Changes require rebuilding your documentation site to take effect.
+</Callout>
+
+## Required Fields
+
+<ParameterField name="title" type="string" required>
+Display title for the page. Appears in navigation, page headers, and browser tabs. Should be clear, concise, and keyword-rich.
+</ParameterField>
+
+<CodeSnippet language="yaml" title="Minimal frontmatter">
+{`---
+title: Getting Started
+---`}
+</CodeSnippet>
+
+## Optional Fields
+
+### General Metadata
+
+<ParameterField name="description" type="string">
+Brief summary of page content displayed below the title. Typically 1-2 sentences describing the page's purpose and value.
+</ParameterField>
+
+<ParameterField name="icon" type="string">
+Lucide React icon name displayed in navigation and sidebar. Common values: `rocket`, `book`, `code`, `file`, `key`, `clock`.
+</ParameterField>
+
+<CodeSnippet language="yaml" title="General page frontmatter">
+{`---
+title: Introduction
+description: Welcome to Devscribe - the powerful documentation platform for developers.
+icon: rocket
+---`}
+</CodeSnippet>
+
+### API Documentation
+
+<ParameterField name="api" type="string">
+HTTP method and endpoint path for API reference pages. Format: `METHOD /path`. Example: `GET /documents` or `POST /documents`.
+</ParameterField>
+
+<ParameterField name="openapi" type="string">
+Alternative to `api` field using OpenAPI specification format. Preferred for OpenAPI-compliant documentation. Format: `METHOD /path`.
+</ParameterField>
+
+<ParameterField name="num" type="integer">
+Number of code blocks to extract and display separately from the main content. The system extracts the first N code blocks (including `CodeGroup` components and fenced code blocks) in document order.
+</ParameterField>
+
+<Callout type="tip">
+Use `openapi` instead of `api` for better OpenAPI tooling integration. Both fields accept the same format but `openapi` is the preferred field name.
+</Callout>
+
+<CodeGroup>
+<CodeSnippet language="yaml" title="GET endpoint">
+{`---
+title: Get Documents
+description: Retrieve a list of documents in your Devscribe workspace
+api: GET /documents
+num: 2
+---`}
+</CodeSnippet>
+
+<CodeSnippet language="yaml" title="POST endpoint">
+{`---
+title: Create Document
+description: Creates a new document in your Devscribe workspace
+api: POST /documents
+num: 2
+---`}
+</CodeSnippet>
+
+<CodeSnippet language="yaml" title="DELETE with path parameter">
+{`---
+title: Delete Document
+description: Delete a Document from the store
+api: DELETE /documents/{id}
+num: 2
+---`}
+</CodeSnippet>
+
+<CodeSnippet language="yaml" title="Using openapi field">
+{`---
+title: Update Document
+description: Updates an existing document in your Devscribe workspace
+openapi: PUT /documents/{id}
+---`}
+</CodeSnippet>
+</CodeGroup>
+
+### Changelog Entries
+
+<ParameterField name="date" type="string">
+ISO 8601 date string for changelog entries. Format: `YYYY-MM-DD`. Used for chronological sorting and display.
+</ParameterField>
+
+<ParameterField name="category" type="string">
+Changelog entry classification. Valid categories must be defined in `docs.json` under `navigation.changelogCategories`. Common values: `improvement`, `release`, `feature`, `fix`.
+</ParameterField>
+
+<Callout type="warning">
+Changelog categories are case-sensitive and must match entries in your `docs.json` configuration. Undefined categories will cause filtering issues.
+</Callout>
+
+<CodeSnippet language="yaml" title="Changelog entry">
+{`---
+title: "Web editor improvements"
+date: "2025-01-09"
+category: "improvement"
+---`}
+</CodeSnippet>
+
+### Advanced Configuration
+
+<ParameterField name="theme" type="string">
+Theme configuration for specialized page styling. Currently referenced in the codebase but not actively used in the template.
+</ParameterField>
+
+## Field Usage by Document Type
+
+<Tabs>
+<Tab title="Guide Pages">
+**Use for:** Tutorials, conceptual documentation, how-to guides
+
+```yaml
+---
+title: Markdown Guide
+icon: book
+---
+```
+
+**Required:** `title`
+
+**Recommended:** `icon`
+
+**Optional:** `description`
+</Tab>
+
+<Tab title="Introduction Pages">
+**Use for:** Landing pages, overview sections, welcome pages
+
+```yaml
+---
+title: Introduction
+description: Welcome to Devscribe - the powerful documentation platform for developers.
+icon: rocket
+---
+```
+
+**Required:** `title`
+
+**Recommended:** `description`, `icon`
+</Tab>
+
+<Tab title="API Reference">
+**Use for:** Endpoint documentation, API method descriptions
+
+```yaml
+---
+title: Get Documents
+description: Retrieve a list of documents in your Devscribe workspace
+api: GET /documents
+num: 2
+---
+```
+
+**Required:** `title`, `api` or `openapi`
+
+**Recommended:** `description`, `num`
+</Tab>
+
+<Tab title="Changelog">
+**Use for:** Release notes, update announcements, version history
+
+```yaml
+---
+title: "Web editor improvements"
+date: "2025-01-09"
+category: "improvement"
+---
+```
+
+**Required:** `title`, `date`, `category`
+</Tab>
+</Tabs>
+
+## Implementation Details
+
+### Parsing Process
+
+The frontmatter parsing occurs in `src/lib/markdown.ts:17` using the `gray-matter` library:
+
+<CodeSnippet language="typescript" showLineNumbers={true}>
+{`const source = fs.readFileSync(filePath, 'utf-8');
+const matterResult = matter(source);
+const { title, theme, description, openapi, api, num } = matterResult.data;`}
+</CodeSnippet>
+
+### Code Block Extraction
+
+When `num` is specified, the system extracts code blocks in this order:
+
+1. Identifies all `CodeGroup` components (both Markdoc `{% codeGroup %}` and MDX `<CodeGroup>` syntax)
+2. Identifies all fenced code blocks (` ``` `)
+3. Excludes fenced blocks inside `CodeGroup` components
+4. Sorts all code items by document position
+5. Extracts the first N items as specified by `num`
+
+<Callout type="info">
+Extracted code blocks are removed from the main content and displayed separately, typically in an API reference sidebar or dedicated code panel.
+</Callout>
+
+### Icon System
+
+Icons use the Lucide React library. Valid icon names include:
+
+- **Navigation:** `rocket`, `book`, `file`, `folder`, `home`
+- **Actions:** `code`, `edit`, `trash`, `settings`, `search`  
+- **Status:** `check`, `alert-circle`, `info`, `warning`
+- **API:** `key`, `lock`, `cloud`, `server`, `database`
+
+<Callout type="tip">
+Browse all available icons at [lucide.dev/icons](https://lucide.dev/icons). Use the lowercase, hyphenated name from the URL.
+</Callout>
+
+## Best Practices
+
+<Steps>
+<Step title="Keep titles concise">
+Aim for 3-7 words that clearly describe the page content. Avoid redundant words like "Documentation" or "Guide" unless necessary for clarity.
+
+<CodeSnippet language="yaml">
+{`# Good
+title: Authentication Methods
+
+# Too verbose
+title: Documentation for All Authentication Methods and Approaches`}
+</CodeSnippet>
+</Step>
+
+<Step title="Write descriptive descriptions">
+Use 1-2 complete sentences that explain what the user will learn or accomplish. Focus on user benefits rather than feature lists.
+
+<CodeSnippet language="yaml">
+{`# Good
+description: Learn how to authenticate API requests using bearer tokens, API keys, or OAuth 2.0 flows.
+
+# Too vague
+description: Information about authentication.`}
+</CodeSnippet>
+</Step>
+
+<Step title="Choose appropriate icons">
+Select icons that visually represent the page content. Maintain consistency across similar page types.
+
+<CodeSnippet language="yaml">
+{`# API endpoints
+icon: key
+
+# Getting started
+icon: rocket
+
+# Reference docs
+icon: book
+
+# Configuration
+icon: settings`}
+</CodeSnippet>
+</Step>
+
+<Step title="Format API endpoints consistently">
+Always use uppercase HTTP methods followed by the complete path including path parameters.
+
+<CodeSnippet language="yaml">
+{`# Correct
+api: GET /users/{userId}
+api: POST /documents
+api: DELETE /items/{id}
+
+# Incorrect
+api: get /users
+api: /documents
+api: DELETE items/:id`}
+</CodeSnippet>
+</Step>
+</Steps>
+
+## Common Issues
+
+<AccordionGroup>
+<Accordion title="Frontmatter not parsing correctly">
+Ensure proper YAML syntax with:
+- Three dashes (`---`) on lines before and after
+- Proper indentation (spaces, not tabs)
+- Quoted values containing special characters
+- No trailing spaces after closing dashes
+
+<CodeSnippet language="yaml">
+{`# Correct
+---
+title: "API: Getting Started"
+description: Learn the basics
+---
+
+# Incorrect - missing closing dashes
+---
+title: Getting Started
+description: Learn the basics
+
+# Incorrect - unquoted special characters
+---
+title: Getting Started: The Basics
+---`}
+</CodeSnippet>
+</Accordion>
+
+<Accordion title="Icons not displaying">
+Verify that:
+- Icon name matches a valid Lucide icon (lowercase, hyphenated)
+- Icon name is spelled correctly
+- No quotes around the icon name
+
+<CodeSnippet language="yaml">
+{`# Correct
+icon: rocket
+
+# Incorrect
+icon: "rocket"
+icon: Rocket
+icon: rocketIcon`}
+</CodeSnippet>
+</Accordion>
+
+<Accordion title="Changelog entries not appearing">
+Check that:
+- Date format is `YYYY-MM-DD`
+- Category exists in `docs.json` under `navigation.changelogCategories`
+- Category case matches exactly
+- File is in the correct changelog directory
+
+<CodeSnippet language="yaml">
+{`# Correct (if "improvement" is defined in docs.json)
+date: "2025-01-09"
+category: "improvement"
+
+# Incorrect
+date: 2025-01-09
+category: "Improvement"  # Case mismatch
+category: "update"       # Not defined in docs.json`}
+</CodeSnippet>
+</Accordion>
+
+<Accordion title="Code blocks not extracting with num">
+The `num` field only works on API reference pages. Ensure:
+- File is in the API reference section
+- Code blocks are properly formatted with triple backticks or `CodeGroup` components
+- Value is a positive integer
+- Code blocks exist in the document
+
+<CodeSnippet language="yaml">
+{`# Correct
+num: 2
+
+# Incorrect
+num: "2"
+num: two
+num: 0
+num: -1`}
+</CodeSnippet>
+</Accordion>
+</AccordionGroup>
+
+## Field Reference Table
+
+| Field | Type | Required | Used In | Example |
+|-------|------|----------|---------|---------|
+| `title` | string | Yes | All pages | `"Getting Started"` |
+| `description` | string | No | General, API | `"Learn how to..."` |
+| `icon` | string | No | General, guides | `rocket` |
+| `api` | string | No | API reference | `GET /documents` |
+| `openapi` | string | No | API reference | `POST /users/{id}` |
+| `num` | integer | No | API reference | `2` |
+| `date` | string | No | Changelog | `"2025-01-09"` |
+| `category` | string | No | Changelog | `"improvement"` |
+| `theme` | string | No | Advanced | `"custom"` |
+
+## Related Configuration
+
+Frontmatter works in conjunction with `docs.json` located at `src/app/(pages)/docs.json`. This file defines:
+
+- **Navigation structure** - Tab organization and page hierarchy
+- **Changelog categories** - Valid values for the `category` field
+- **Global anchors** - External links displayed site-wide
+- **Dropdown menus** - Nested navigation groups
+
+<Callout type="info">
+Learn more about navigation configuration in the [docs.json reference](/quickstart/docs-json).
+</Callout>

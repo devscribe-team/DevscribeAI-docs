@@ -1,0 +1,154 @@
+---
+title: "Card"
+description: "Display content in organized, visually distinct containers with optional icons and descriptions"
+---
+
+The Card component creates self-contained content blocks that help organize information and improve readability. Cards can include titles, descriptions, icons, and custom content.
+
+## Basic Usage
+
+<TabGroup>
+  <Tab title="Preview">
+    <Card title="Simple Card" description="This is a basic card with title and description">
+      Basic card content goes here. This card uses the default attributes.
+    </Card>
+
+    <Card title="Card with Icon" description="This card demonstrates the icon and showIcon attributes" icon="star">
+      This card includes an icon. The icon name should be from Lucide React.
+    </Card>
+
+    <Card title="Card without Icon" description="This card has showIcon set to false" icon="user" showIcon={false}>
+      Even though an icon is specified, it won't be displayed because showIcon is false.
+    </Card>
+  </Tab>
+
+  <Tab title="Syntax">
+    ```markdown
+    <Card title="Simple Card" description="This is a basic card with title and description">
+      Basic card content goes here. This card uses the default attributes.
+    </Card>
+
+    <Card title="Card with Icon" description="This card demonstrates the icon and showIcon attributes" icon="star">
+      This card includes an icon. The icon name should be from Lucide React.
+    </Card>
+
+    <Card title="Card without Icon" description="This card has showIcon set to false" icon="user" showIcon={false}>
+      Even though an icon is specified, it won't be displayed because showIcon is false.
+    </Card>
+    ```
+  </Tab>
+</TabGroup>
+
+## Properties
+
+<ParameterField name="title" type="string" required>
+  Card heading that appears at the top of the component.
+</ParameterField>
+
+<ParameterField name="description" type="string">
+  Subtitle text that appears below the title for additional context.
+</ParameterField>
+
+<ParameterField name="icon" type="string">
+  Icon name from the [Lucide React](https://lucide.dev/) icon library. Display controlled by `showIcon`.
+</ParameterField>
+
+<ParameterField name="showIcon" type="boolean" default="true">
+  Controls icon visibility. Set to `false` to hide the icon even when `icon` is specified.
+</ParameterField>
+
+<ParameterField name="href" type="string">
+  URL to navigate to when the card is clicked, converting the card into a clickable link.
+</ParameterField>
+
+## Card Groups
+
+Use `CardGroup` to display multiple cards in a grid layout. Control the number of columns with the `cols` attribute.
+
+<TabGroup>
+  <Tab title="Preview">
+    <CardGroup cols={2}>
+      <Card title="Authentication" icon="key" href="/auth">
+        Secure your API requests with token-based authentication.
+      </Card>
+
+      <Card title="Rate Limits" icon="clock" href="/rate-limits">
+        Understand request quotas and throttling policies.
+      </Card>
+
+      <Card title="Webhooks" icon="webhook" href="/webhooks">
+        Receive real-time notifications for events.
+      </Card>
+
+      <Card title="Error Codes" icon="alert-circle" href="/errors">
+        Reference guide for API error responses.
+      </Card>
+    </CardGroup>
+  </Tab>
+
+  <Tab title="Syntax">
+    ```markdown
+    <CardGroup cols={2}>
+      <Card title="Authentication" icon="key" href="/auth">
+        Secure your API requests with token-based authentication.
+      </Card>
+
+      <Card title="Rate Limits" icon="clock" href="/rate-limits">
+        Understand request quotas and throttling policies.
+      </Card>
+
+      <Card title="Webhooks" icon="webhook" href="/webhooks">
+        Receive real-time notifications for events.
+      </Card>
+
+      <Card title="Error Codes" icon="alert-circle" href="/errors">
+        Reference guide for API error responses.
+      </Card>
+    </CardGroup>
+    ```
+  </Tab>
+</TabGroup>
+
+## Common Patterns
+
+### Navigation Cards
+
+Use cards with `href` to create visual navigation menus for documentation sections.
+
+```markdown
+<Card title="Getting Started" icon="rocket" href="/quickstart">
+  Complete setup in under 10 minutes with our quickstart guide.
+</Card>
+```
+
+### Feature Highlights
+
+Combine cards in groups to showcase product features or capabilities.
+
+```markdown
+<CardGroup cols={3}>
+  <Card title="Fast" icon="zap">
+    Optimized for performance with sub-second response times.
+  </Card>
+
+  <Card title="Reliable" icon="shield">
+    99.9% uptime SLA with automatic failover.
+  </Card>
+
+  <Card title="Scalable" icon="trending-up">
+    Handle millions of requests without configuration changes.
+  </Card>
+</CardGroup>
+```
+
+### Content Organization
+
+Use cards to separate distinct topics or concepts within a single page.
+
+```markdown
+<Card title="Prerequisites" icon="list-checks">
+  - Node.js 18 or higher
+  - Valid API key
+  - Basic JavaScript knowledge
+</Card>
+```

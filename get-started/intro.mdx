@@ -1,0 +1,126 @@
+---
+title: "Introduction to Devscribe"
+description: "Get started with AI-powered documentation that stays in sync with your codebase"
+---
+## What is Devscribe?
+
+Devscribe is an AI-native documentation platform that generates, updates, and deploys technical documentation directly from your codebase. It keeps your documentation synchronized with code changes, making it accurate and always up-to-date for developers, teams, and AI agents.
+
+## How it works
+
+### 1. Automated repository creation
+
+When you sign up and connect your GitHub account, Devscribe automatically creates a dedicated documentation repository in your GitHub account. This repository stores all your documentation content and connects to Vercel for deployment.
+
+### 2. Generate documentation
+
+Create documentation by selecting your source repository and documentation type:
+
+- **API Reference** - Auto-generated from OpenAPI specs or code analysis
+- **External Docs** - User guides, tutorials, and public-facing documentation
+- **Internal Docs** - Technical specs and internal knowledge base
+
+The AI analyzes your codebase and generates complete documentation with proper structure, code examples, and explanations.
+
+### 3. Edit and refine
+
+Use the built-in web editor to refine AI-generated content:
+
+- Toggle between preview and edit modes
+- Use markdown and MDX with built-in components
+- Changes auto-save with status indicators
+- Real-time preview of your documentation site
+
+### 4. Deploy instantly
+
+Push your documentation live with one click. Your documentation site deploys automatically via Vercel integration.
+
+### 5. Stay synchronized with Autopilot
+
+Devscribe monitors merged pull requests in your source repositories and automatically identifies documentation that needs updates.
+
+<Steps>
+  <Step title="Code changes detected">
+When you merge a pull request, Devscribe analyzes the code changes and identifies affected documentation.
+  </Step>
+  <Step title="AI generates update suggestions">
+The platform creates specific documentation updates based on the code changes and adds them to your Autopilot queue.
+  </Step>
+  <Step title="Review or auto-apply">
+Choose your automation level:
+
+- **Manual Review Mode** - Review and approve each suggestion before deployment
+- **Autopilot Mode** - Automatically apply and deploy updates without manual review
+
+<Callout type="tip">
+Start with manual review mode while you build trust in the AI's suggestions, then switch to autopilot mode for fully automated documentation updates.
+</Callout>
+  </Step>
+</Steps>
+
+## Key features
+
+### Code-to-docs generation
+
+Generate any documentation piece instantly from your codebase. Devscribe analyzes your code structure, APIs, and logic to create accurate, comprehensive documentation.
+
+### Automatic updates
+
+Documentation updates automatically with every merged pull request. Never worry about outdated docs again—changes in your code trigger corresponding documentation updates.
+
+### AI-ready documentation
+
+Built-in support for `llms.txt` and Model Context Protocol (MCP) makes your documentation discoverable by AI assistants and agents. Enable AI-powered search and chat for your users.
+
+### API playground
+
+Let users test your APIs directly within the documentation. Import OpenAPI specifications (YAML or JSON) and provide interactive endpoint testing.
+
+### Custom themes and branding
+
+Apply your brand identity with custom themes, logos, and styling. Make your documentation site match your company's look and feel.
+
+### Analytics
+
+Track page views, searches, and user navigation patterns. Understand how users explore your documentation and identify content gaps.
+
+## Your documentation repository
+
+The documentation repository created in your GitHub account serves as the single source of truth for your documentation content. It contains:
+
+- All documentation pages in markdown/MDX format
+- Configuration files (`docs.json` for navigation)
+- Theme and branding assets
+- Deployment configuration
+
+<Callout type="warning">
+**Repository management rules:**
+
+- Never commit or push changes directly to this repository
+- All edits must be made through the Devscribe web editor
+- Do not modify repository settings or webhooks
+- Contact support if you need to rename or relocate the repository
+</Callout>
+
+The platform manages this repository automatically, ensuring proper file structure, deployment triggers, and synchronization with your documentation site.
+
+## Getting started
+
+<CardGroup cols={2} gap="md">
+  <Card title="Generate your first doc" icon="wand-magic-sparkles" href="/generating">
+Learn how to generate documentation from your codebase in minutes.
+  </Card>
+  <Card title="Understand deployment" icon="rocket" href="/deployment">
+Explore how file states work and how to deploy your documentation.
+  </Card>
+  <Card title="Customize your theme" icon="palette" href="/themes">
+Apply custom branding and styling to your documentation site.
+  </Card>
+  <Card title="Set up automation" icon="robot" href="/automation">
+Configure Autopilot to keep your docs synchronized automatically.
+  </Card>
+</CardGroup>
+
+## Need help?
+
+If you experience issues with your documentation repository or have questions about the platform, reach out to our support team. We're here to help you maintain accurate, up-to-date documentation without the manual effort.

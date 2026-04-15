@@ -7,25 +7,41 @@
         "groups": [
           {
             "group": "Get Started",
-            "pages": ["introduction"]
+            "pages": [
+            "get-started/intro"
           },
           {
-            "group": "Quickstart",
+            "group": "Platform",
             "pages": [
-              "quickstart/guide",
-              "quickstart/docs-json",
+              "platform/api",
+              "platform/dj",
+              "platform/frontmatter",
+              "platform/gen",
+              "platform/platforms",
+              "platform/themes",
+              "platform/updates",
               {
                 "dropdown": "Components",
                 "pages": [
-                  "quickstart/tabs",
-                  "quickstart/dropdown-doc-b"
+                  "components/accordion",
+                  "components/callout",
+                  "components/card",
+                  "components/clickable",
+                  "components/code",
+                  "components/expand",
+                  "components/fields",
+                  "components/headers",
+                  "components/image",
+                  "components/links",
+                  "components/lists",
+                  "components/steps",
+                  "components/tabs",
+                  "components/tooltip"
                 ],
                 "defaultOpen": true
               }
             ]
           }
-        ]
-      },
         ]
       },
       {
@@ -34,21 +50,18 @@
         "url": "/changelog"
       }
     ],
-
     "global": {
       "anchors": []
     },
-
     "changelogCategories": ["improvement", "release"],
-
     "buttons": [
       {
-        "label": "Button 1",
-        "href": "/"
+        "label": "Login",
+        "href": "/login"
       },
       {
-        "label": "Button 2",
-        "href": "/"
+        "label": "Start for free",
+        "href": "/signup"
       }
     ]
   }
