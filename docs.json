@@ -15,9 +15,9 @@
               "quickstart/guide",
               "quickstart/docs-json",
               {
-                "dropdown": "Dropdown Example",
+                "dropdown": "Components",
                 "pages": [
-                  "quickstart/dropdown-doc-a",
+                  "quickstart/tabs",
                   "quickstart/dropdown-doc-b"
                 ],
                 "defaultOpen": true
@@ -26,22 +26,6 @@
           }
         ]
       },
-      {
-        "tab": "API Reference",
-        "groups": [
-          {
-            "group": "API Documentation",
-            "pages": ["api-reference/introduction"]
-          },
-          {
-            "group": "Endpoints",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/post",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/put"
-            ]
-          }
         ]
       },
       {
