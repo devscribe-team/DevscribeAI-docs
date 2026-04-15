@@ -20,35 +20,33 @@
               "platform/gen",
               "platform/platforms",
               "platform/themes",
-              "platform/updates",
-              {
-                "dropdown": "Components",
-                "pages": [
-                  "components/accordion",
-                  "components/callout",
-                  "components/card",
-                  "components/clickable",
-                  "components/code",
-                  "components/expand",
-                  "components/fields",
-                  "components/headers",
-                  "components/image",
-                  "components/links",
-                  "components/lists",
-                  "components/steps",
-                  "components/tabs",
-                  "components/tooltip"
-                ],
-                "defaultOpen": true
-              }
+              "platform/updates"
+            ]
+          },
+          {
+            "group": "Components",
+            "pages": [
+              "components/accordion",
+              "components/callout",
+              "components/card",
+              "components/clickable",
+              "components/code",
+              "components/expand",
+              "components/fields",
+              "components/headers",
+              "components/image",
+              "components/links",
+              "components/lists",
+              "components/steps",
+              "components/tabs",
+              "components/tooltip"
             ]
           }
         ]
       },
       {
         "tab": "Changelog",
-        "external": true,
-        "url": "/changelog"
+        "href": "/changelog"
       }
     ],
     "global": {
