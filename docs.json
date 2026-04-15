@@ -8,7 +8,7 @@
           {
             "group": "Get Started",
             "pages": [
-              "get-started/intro"
+              "get-started/introduction"
             ]
           },
           {
@@ -27,16 +27,18 @@
             "group": "Components",
             "pages": [
               "components/accordion",
-              "components/callout",
+              "components/callouts",
               "components/card",
-              "components/clickable",
               "components/code",
+              "components/code-group",
               "components/expand",
               "components/fields",
+              "components/formatting",
               "components/headers",
-              "components/image",
+              "components/images",
               "components/links",
               "components/lists",
+              "components/order",
               "components/steps",
               "components/tabs",
               "components/tooltip"
@@ -66,3 +68,4 @@
     ]
   }
 }
+
