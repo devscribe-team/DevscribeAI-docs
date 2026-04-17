@@ -1,0 +1,314 @@
+---
+title: "Code Blocks"
+description: "Learn how to display code examples using inline code, basic code blocks, and advanced CodeSnippet components with syntax highlighting, line numbers, and highlighting."
+---
+
+## Overview
+
+Devscribe provides multiple ways to display code in your documentation: inline code for short snippets within text, basic code blocks for simple examples, and the `CodeSnippet` component for advanced formatting with titles, line numbers, and highlighted lines.
+
+## Inline Code
+
+Use single backticks to display code within sentences. This is ideal for referencing variable names, function names, or short commands.
+
+```markdown
+Use `console.log()` to output values to the console.
+```
+
+**Result:** Use `console.log()` to output values to the console.
+
+## Basic Code Blocks
+
+Create code blocks using triple backticks with a language identifier. This provides syntax highlighting but no additional features.
+
+<TabGroup>
+  <Tab title="Preview">
+  ```typescript
+  function greet(name: string): string {
+    return `Hello, ${name}!`
+  }
+  ```
+  </Tab>
+
+  <Tab title="Syntax">
+  ````markdown
+  ```typescript
+  function greet(name: string): string {
+    return `Hello, ${name}!`
+  }
+  ```
+  ````
+  </Tab>
+</TabGroup>
+
+<Callout type="tip">
+Basic code blocks support all common programming languages including JavaScript, TypeScript, Python, Bash, JSON, YAML, and more.
+</Callout>
+
+## CodeSnippet Component
+
+The `CodeSnippet` component provides advanced formatting options for code examples.
+
+### Basic CodeSnippet
+
+<TabGroup>
+  <Tab title="Preview">
+  <CodeSnippet language="javascript">
+  {`const API_URL = 'https://api.example.com'
+  
+  async function fetchData() {
+    const response = await fetch(API_URL)
+    return response.json()
+  }`}
+  </CodeSnippet>
+  </Tab>
+
+  <Tab title="Syntax">
+  ````markdown
+  <CodeSnippet language="javascript">
+  {`const API_URL = 'https://api.example.com'
+  
+  async function fetchData() {
+    const response = await fetch(API_URL)
+    return response.json()
+  }`}
+  </CodeSnippet>
+  ````
+  </Tab>
+</TabGroup>
+
+### Adding a Title
+
+Include a title to provide context or specify the filename.
+
+<TabGroup>
+  <Tab title="Preview">
+  <CodeSnippet language="python" title="database.py">
+  {`import sqlite3
+
+  def connect_db(db_path):
+      return sqlite3.connect(db_path)`}
+  </CodeSnippet>
+  </Tab>
+
+  <Tab title="Syntax">
+  ````markdown
+  <CodeSnippet language="python" title="database.py">
+  {`import sqlite3
+
+  def connect_db(db_path):
+      return sqlite3.connect(db_path)`}
+  </CodeSnippet>
+  ````
+  </Tab>
+</TabGroup>
+
+### Enabling Line Numbers
+
+Display line numbers to help reference specific lines in documentation.
+
+<TabGroup>
+  <Tab title="Preview">
+  <CodeSnippet language="go" showLineNumbers={true}>
+  {`package main
+
+  import "fmt"
+
+  func main() {
+      fmt.Println("Hello, World!")
+  }`}
+  </CodeSnippet>
+  </Tab>
+
+  <Tab title="Syntax">
+  ````markdown
+  <CodeSnippet language="go" showLineNumbers={true}>
+  {`package main
+
+  import "fmt"
+
+  func main() {
+      fmt.Println("Hello, World!")
+  }`}
+  </CodeSnippet>
+  ````
+  </Tab>
+</TabGroup>
+
+### Highlighting Specific Lines
+
+Draw attention to important lines using the `highlight` prop. Specify individual lines or ranges separated by commas.
+
+<TabGroup>
+  <Tab title="Preview">
+  <CodeSnippet language="typescript" title="config.ts" showLineNumbers={true} highlight="3,6-8">
+  {`export const config = {
+    apiUrl: process.env.API_URL,
+    apiKey: process.env.API_KEY,
+    timeout: 5000,
+    retries: 3,
+    cache: {
+      enabled: true,
+      ttl: 3600
+    }
+  }`}
+  </CodeSnippet>
+  </Tab>
+
+  <Tab title="Syntax">
+  ````markdown
+  <CodeSnippet language="typescript" title="config.ts" showLineNumbers={true} highlight="3,6-8">
+  {`export const config = {
+    apiUrl: process.env.API_URL,
+    apiKey: process.env.API_KEY,
+    timeout: 5000,
+    retries: 3,
+    cache: {
+      enabled: true,
+      ttl: 3600
+    }
+  }`}
+  </CodeSnippet>
+  ````
+  </Tab>
+</TabGroup>
+
+<Callout type="info">
+The `highlight` prop accepts comma-separated values: use single numbers for individual lines (e.g., "2,5,9") or ranges with hyphens (e.g., "3-7,10-12").
+</Callout>
+
+### Complete Example with All Options
+
+<TabGroup>
+  <Tab title="Preview">
+  <CodeSnippet language="typescript" title="auth-middleware.ts" showLineNumbers={true} highlight="5-7,12">
+  {`import { Request, Response, NextFunction } from 'express'
+
+  export function authenticateToken(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    const authHeader = req.headers['authorization']
+    const token = authHeader?.split(' ')[1]
+    
+    if (!token) {
+      return res.status(401).json({ error: 'Authentication required' })
+    }
+    
+    // Verify token logic here
+    next()
+  }`}
+  </CodeSnippet>
+  </Tab>
+
+  <Tab title="Syntax">
+  ````markdown
+  <CodeSnippet language="typescript" title="auth-middleware.ts" showLineNumbers={true} highlight="5-7,12">
+  {`import { Request, Response, NextFunction } from 'express'
+
+  export function authenticateToken(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    const authHeader = req.headers['authorization']
+    const token = authHeader?.split(' ')[1]
+    
+    if (!token) {
+      return res.status(401).json({ error: 'Authentication required' })
+    }
+    
+    // Verify token logic here
+    next()
+  }`}
+  </CodeSnippet>
+  ````
+  </Tab>
+</TabGroup>
+
+## CodeSnippet Props Reference
+
+<ParameterField name="language" type="string" required>
+Programming language for syntax highlighting (e.g., `javascript`, `python`, `typescript`, `bash`, `json`).
+</ParameterField>
+
+<ParameterField name="title" type="string">
+Optional title displayed above the code block, typically used for filenames or descriptive labels.
+</ParameterField>
+
+<ParameterField name="showLineNumbers" type="boolean" default="false">
+Enable line numbers on the left side of the code block.
+</ParameterField>
+
+<ParameterField name="highlight" type="string">
+Comma-separated list of lines or ranges to highlight (e.g., `"2,5-7,10"`).
+</ParameterField>
+
+## Important: Escaping Curly Braces
+
+When writing code examples in MDX that contain curly braces `{}`, wrap the content in template literals to prevent MDX from interpreting them as JSX expressions.
+
+<TabGroup>
+  <Tab title="Correct">
+  ````markdown
+  <CodeSnippet language="json">
+  {`{
+    "name": "example",
+    "version": "1.0.0"
+  }`}
+  </CodeSnippet>
+  ````
+  </Tab>
+
+  <Tab title="Incorrect">
+  ````markdown
+  <CodeSnippet language="json">
+  {
+    "name": "example",
+    "version": "1.0.0"
+  }
+  </CodeSnippet>
+  ````
+  </Tab>
+</TabGroup>
+
+<Callout type="warning">
+Always use `{` followed by a backtick at the start and a backtick followed by `}` at the end when your code contains curly braces.
+</Callout>
+
+## Supported Languages
+
+CodeSnippet supports syntax highlighting for all major programming languages:
+
+- **Web:** JavaScript, TypeScript, HTML, CSS, JSX, TSX
+- **Backend:** Python, Java, Go, Ruby, PHP, C#, C++
+- **Shell:** Bash, PowerShell, Shell
+- **Data:** JSON, YAML, XML, SQL
+- **Config:** TOML, INI, Dockerfile
+- **Other:** Markdown, GraphQL, Rust, Swift, Kotlin
+
+<Callout type="tip">
+Specify the exact language variant when available (e.g., use `typescript` instead of `javascript` for TypeScript code) to ensure accurate syntax highlighting.
+</Callout>
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="When to use basic code blocks vs CodeSnippet">
+  Use basic code blocks (triple backticks) for simple examples where no additional context is needed. Use `CodeSnippet` when you need titles, line numbers, or highlighting to draw attention to specific parts of the code.
+  </Accordion>
+
+  <Accordion title="Choosing what to highlight">
+  Highlight lines that are most important for understanding the example: new code additions, critical configuration values, or lines that solve a specific problem. Avoid highlighting too many lines as it reduces the visual impact.
+  </Accordion>
+
+  <Accordion title="Writing effective titles">
+  Use filenames as titles when showing complete file contents. For partial examples, use descriptive titles that explain the purpose (e.g., "Database Connection Logic" or "Error Handling Function").
+  </Accordion>
+
+  <Accordion title="Combining with other components">
+  CodeSnippet works well inside Tabs for showing platform-specific examples, within Steps for tutorial-style documentation, and alongside Callouts to provide additional context about the code.
+  </Accordion>
+</AccordionGroup>
+
