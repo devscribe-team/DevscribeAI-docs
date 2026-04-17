@@ -1,0 +1,140 @@
+---
+title: "Ordered Lists"
+description: "Create numbered sequential lists in your documentation"
+---
+
+Ordered lists display content as numbered items in sequential order. Use them for step-by-step instructions, ranked items, or any content where sequence matters.
+
+## Basic usage
+
+<TabGroup>
+  <Tab title="Preview">
+  1. First item
+  2. Second item
+  3. Third item
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  1. First item
+  2. Second item
+  3. Third item
+  ```
+  </Tab>
+</TabGroup>
+
+<Callout type="info">
+Markdown automatically handles numbering. You can write all items as `1.` and they'll render correctly.
+</Callout>
+
+## When to use ordered lists
+
+Use ordered lists when:
+
+- **Sequence matters** - Steps must be completed in a specific order
+- **Ranking content** - Items are prioritized or ordered by importance
+- **Reference by number** - Users need to refer to specific steps
+- **Multi-step procedures** - Breaking down complex tasks into discrete actions
+
+<Callout type="tip">
+For procedures with additional context, code examples, or warnings, use the Steps component instead for better visual hierarchy.
+</Callout>
+
+## Multi-level ordered lists
+
+Create nested ordered lists by indenting with 2-4 spaces:
+
+<TabGroup>
+  <Tab title="Preview">
+  1. First level item
+  2. Another first level item
+     1. Nested item
+     2. Another nested item
+  3. Back to first level
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  1. First level item
+  2. Another first level item
+     1. Nested item
+     2. Another nested item
+  3. Back to first level
+  ```
+  </Tab>
+</TabGroup>
+
+## Combining with other content
+
+Ordered lists work seamlessly with other markdown elements:
+
+<TabGroup>
+  <Tab title="Preview">
+  1. Install the package
+     ```bash
+     npm install example-package
+     ```
+  2. Configure your environment variables
+  3. Start the development server
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  1. Install the package
+     ```bash
+     npm install example-package
+     ```
+  2. Configure your environment variables
+  3. Start the development server
+  ```
+  </Tab>
+</TabGroup>
+
+<Callout type="warning">
+Maintain consistent indentation when including code blocks or multi-paragraph content within list items. Use 3 spaces for proper alignment.
+</Callout>
+
+## Ordered lists vs Steps component
+
+<CardGroup cols={2}>
+  <Card title="Use ordered lists" icon="list-ol">
+  - Simple sequential items
+  - Brief, single-line steps
+  - Minimal additional context
+  - Embedded within larger content
+  </Card>
+
+  <Card title="Use Steps component" icon="stairs">
+  - Complex multi-step procedures
+  - Steps requiring code examples
+  - Procedures with callouts or warnings
+  - Standalone tutorials or guides
+  </Card>
+</CardGroup>
+
+## Examples
+
+### Installation procedure
+
+1. Download the installer from the official website
+2. Run the installer and accept the license agreement
+3. Choose your installation directory
+4. Complete the installation wizard
+5. Restart your computer
+
+### Configuration checklist
+
+1. Create a `.env` file in your project root
+2. Add your API credentials
+3. Configure database connection settings
+4. Set up authentication tokens
+5. Verify configuration by running tests
+
+### Troubleshooting steps
+
+1. Check if the service is running
+2. Verify network connectivity
+3. Review error logs for specific messages
+4. Restart the service
+5. Contact support if issues persist
+
