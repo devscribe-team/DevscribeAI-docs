@@ -1,0 +1,111 @@
+---
+title: "Links"
+description: "Learn how to create and customize hyperlinks in your Devscribe documentation using standard Markdown syntax"
+---
+Links allow you to connect your documentation pages to external resources, internal pages, or specific sections within your content.
+
+## Basic link syntax
+
+Create links using standard Markdown syntax with the pattern `[link text](URL)`:
+
+<TabGroup>
+  <Tab title="Preview">
+  <a href="https://devscribe.com">Devscribe</a>
+  </Tab>
+  <Tab title="Syntax">
+  ```markdown
+    [Devscribe](https://devscribe.com)
+  ```
+  </Tab>
+</TabGroup>
+
+## Link components
+
+Links consist of three parts:
+
+<ParameterField name="Link text" type="string">
+The visible, clickable text that appears in your documentation. Use descriptive, actionable text instead of generic phrases like "click here".
+</ParameterField>
+
+<ParameterField name="URL" type="string">
+The destination address. Can be an absolute URL (`https://example.com`), relative path (`/docs/guide`), or anchor link (`#section-heading`).
+</ParameterField>
+
+<ParameterField name="Title attribute" type="string">
+Optional tooltip text that appears when users hover over the link. Enclose in quotes after the URL.
+</ParameterField>
+
+## Link types
+
+## Best practices
+
+<CardGroup cols={2} gap="md">
+  <Card title="Descriptive link text" icon="text">
+Use specific, meaningful text that describes the destination:
+
+**Good**: [View authentication guide](/auth)  
+**Avoid**: [Click here](/auth)
+  </Card>
+  <Card title="Link titles" icon="message">
+Add title attributes to provide additional context:
+
+```markdown
+[API Docs](https://api.devscribe.com "Complete API reference")
+```
+  </Card>
+</CardGroup>
+
+<Callout type="warning">
+Avoid linking to the same URL multiple times in close proximity. Consolidate related links or use different anchor points.
+</Callout>
+
+## Common patterns
+
+### Inline documentation references
+
+When referencing other documentation sections inline:
+
+```markdown
+For more details, see the [Rate Limiting guide](/guides/rate-limits) 
+or [Authentication reference](/api/auth).
+```
+
+### Resource lists
+
+Create organized lists of related links:
+
+```markdown
+## Additional resources
+
+- [Official GitHub repository](https://github.com/devscribe)
+- [Community Discord](https://discord.gg/devscribe "Join our community")
+- [API Status page](https://status.devscribe.com)
+```
+
+### Links with code
+
+Reference code-related resources:
+
+```markdown
+Install via npm: [`npm install devscribe`](https://npmjs.com/package/devscribe)
+```
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Link not working or showing 404">
+  - Verify the URL is correct and accessible
+  - For internal links, ensure the path matches your docs.json navigation structure
+  - Check for typos in anchor links (they're case-sensitive in some systems)
+  - Confirm relative paths are correct relative to the current file location
+  </Accordion>
+  <Accordion title="Link title tooltip not appearing">
+  - Ensure the title attribute is enclosed in quotes: `"Title text"`
+  - Verify there's a space between the URL closing parenthesis and title
+  - Some browsers may have accessibility settings that affect tooltip display
+  </Accordion>
+</AccordionGroup>
+
+<Callout type="info">
+Links automatically inherit your Devscribe theme styling, including colors, hover states, and typography.
+</Callout>
