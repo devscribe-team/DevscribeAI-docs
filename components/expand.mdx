@@ -1,0 +1,251 @@
+---
+title: "Expands"
+description: "Create collapsible sections to organize optional content and improve documentation readability"
+---
+## Overview 
+
+The Expand component creates collapsible sections that hide optional content until users need it. Use it to reduce visual clutter while keeping detailed information accessible.
+
+## Basic Usage
+
+The simplest implementation uses default settings with the content collapsed by default.
+
+<TabGroup>
+  <Tab title="Preview">
+  <Expand title="Details">
+  This expand component uses the default title and starts closed.
+  </Expand>
+  </Tab>
+  <Tab title="Syntax">
+  ```markdown
+    <Expand>
+    This expand component uses the default title and starts closed.
+    </Expand>
+  ```
+  </Tab>
+</TabGroup>
+
+## Properties
+
+<ParameterField name="title" type="string" default="Details">
+Custom heading text displayed in the expand header.
+</ParameterField>
+
+<ParameterField name="defaultOpen" type="boolean" default="false">
+Controls initial state. Set to `true` to display content expanded on page load.
+</ParameterField>
+
+## Custom Title
+
+Replace the default "Details" heading with descriptive text that indicates the hidden content.
+
+<TabGroup>
+  <Tab title="Preview">
+  <Expand title="Custom Expand Title">
+  You can include any content inside, like lists and code blocks.
+
+    ```javascript
+    function example() {
+      return 'Expand components show/hide optional content';
+    }
+    ```
+  </Expand>
+  </Tab>
+  <Tab title="Syntax">
+  ````markdown
+    <Expand title="Custom Expand Title">
+    You can include any content inside, like lists and code blocks.
+
+  ```
+
+  function example() { return 'Expand components show/hide optional content'; }
+
+  ```text
+    </Expand>
+  ```
+  </Tab>
+</TabGroup>
+
+## Default Open State
+
+Display content expanded by default when users frequently need the information.
+
+<TabGroup>
+  <Tab title="Preview">
+  <Expand title="Open by Default" defaultOpen={true}>
+  This expand component starts in the open state because defaultOpen is true.
+  </Expand>
+  </Tab>
+  <Tab title="Syntax">
+  ```markdown
+    <Expand title="Open by Default" defaultOpen={true}>
+    This expand component starts in the open state because defaultOpen is true.
+    </Expand>
+  ```
+  </Tab>
+</TabGroup>
+
+<Callout type="tip">
+Set `defaultOpen={true}` for critical information that most users need, while keeping less common details collapsed.
+</Callout>
+
+## Supported Content
+
+Expand components accept any valid Markdown or MDX content.
+
+### Lists and Text
+
+<Expand title="Supported Features">
+- Plain text paragraphs
+- Bulleted and numbered lists
+- **Bold** and *italic* formatting
+- Links and inline code
+- Multiple paragraphs with proper spacing
+</Expand>
+
+### Code Blocks
+
+<Expand title="Code Example">
+```typescript
+interface ExpandProps {
+  title?: string;
+  defaultOpen?: boolean;
+  children: React.ReactNode;
+}
+
+const MyExpand: React.FC<ExpandProps> = ({ 
+  title = "Details", 
+  defaultOpen = false,
+  children 
+}) => {
+  return <Expand title={title} defaultOpen={defaultOpen}>{children}</Expand>;
+};
+```
+</Expand>
+
+### Nested Components
+
+<Expand title="Advanced Content">
+You can nest callouts, code snippets, and other components inside Expand.
+
+<Callout type="info">
+This callout is nested inside the expand component.
+</Callout>
+
+<CodeSnippet language="bash" title="install.sh">
+npm install @devscribe/components
+</CodeSnippet>
+</Expand>
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="When to use Expand">
+  - **Optional details** - Advanced configuration, technical specifications, or edge cases
+  - **Verbose examples** - Long code samples or detailed output that clutters the page
+  - **Nested API properties** - Object hierarchies with multiple levels (use with ResponseField)
+  - **Troubleshooting steps** - Error resolution that most users won't need
+  </Accordion>
+  <Accordion title="When not to use Expand">
+  - **Critical information** - Prerequisites, warnings, or essential setup steps
+  - **Primary instructions** - Main workflow steps should remain visible
+  - **Short content** - Content under 3-4 lines doesn't justify hiding
+  - **Navigation** - Use Tabs or Accordions for alternative paths or categories
+  </Accordion>
+  <Accordion title="Writing effective titles">
+  - Use descriptive, actionable titles: "Advanced Configuration Options" not "More Info"
+  - Indicate content type: "Example Response", "Troubleshooting Steps", "Code Sample"
+  - Keep titles concise: 2-6 words maximum
+  - Use parallel structure when multiple expands appear together
+  </Accordion>
+</AccordionGroup>
+
+## Common Patterns
+
+### API Response Fields
+
+Use Expand with ResponseField to document nested object properties.
+
+<ResponseField name="user" type="object">
+Complete user profile data.
+
+<Expand title="User properties">
+<ResponseField name="id" type="string">
+Unique identifier in UUID v4 format.
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+Custom key-value pairs attached to the user.
+
+<Expand title="Metadata structure">
+<ResponseField name="created_by" type="string">
+User ID of the account creator.
+</ResponseField>
+
+<ResponseField name="tags" type="array">
+Classification labels for organization.
+</ResponseField>
+
+</Expand>
+
+</ResponseField>
+
+</Expand>
+
+</ResponseField>
+
+### Troubleshooting Sections
+
+Group related solutions under descriptive expand titles.
+
+<Expand title="Connection timeout errors">
+**Cause**: Network latency or firewall blocking requests.
+
+**Solutions**:
+1. Increase timeout in configuration: `timeout: 30000`
+2. Check firewall rules for ports 80 and 443
+3. Verify DNS resolution: `nslookup api.example.com`
+</Expand>
+
+<Expand title="Authentication failures">
+**Cause**: Invalid or expired API key.
+
+**Solutions**:
+1. Regenerate API key in dashboard settings
+2. Verify key format: `Bearer sk_live_xxxxxxxxxxxx`
+3. Check key permissions match required scopes
+</Expand>
+
+### Multiple Examples
+
+Provide basic examples visibly, with advanced cases in expand sections.
+
+```javascript
+// Basic usage - always visible
+const result = api.fetchData();
+```
+
+<Expand title="Advanced Examples">
+<CodeGroup>
+<CodeSnippet language="javascript" title="With pagination">
+{`const result = api.fetchData({
+  page: 2,
+  limit: 50,
+  sort: 'created_at:desc'
+});`}
+</CodeSnippet>
+
+<CodeSnippet language="javascript" title="With filtering">
+{`const result = api.fetchData({
+  filters: {
+    status: 'active',
+    created_after: '2024-01-01'
+  }
+});`}
+</CodeSnippet>
+</CodeGroup>
+</Expand>
+
+<Callout type="warning">
+Never nest Expand components more than two levels deep. Excessive nesting creates poor user experience and indicates content needs restructuring.
+</Callout>
