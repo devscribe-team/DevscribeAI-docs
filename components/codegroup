@@ -1,0 +1,399 @@
+---
+title: "Code Groups"
+description: "Display multiple code examples in a tabbed interface with syntax highlighting, copy functionality, and AI assistance"
+---
+## Overview
+
+Code Groups organize multiple code examples into a tabbed interface, making it easy to show the same concept across different programming languages or provide alternative implementations. Each tab contains a CodeSnippet component with full syntax highlighting, line numbering, and interactive features.
+
+<Callout type="tip">
+Use Code Groups when documenting API endpoints, SDK usage, or any feature that has multiple language implementations.
+</Callout>
+
+## Basic Usage
+
+<TabGroup>
+  <Tab title="Preview">
+  <CodeGroup>
+    <CodeSnippet language="javascript" title="JavaScript">
+    {`fetch('/api/users', {
+          method: 'GET',
+          headers: {
+            'Authorization': 'Bearer YOUR_API_KEY'
+          }
+        })
+          .then(response => response.json())
+          .then(data => console.log(data));`}
+    </CodeSnippet>
+    <CodeSnippet language="python" title="Python">
+    {`import requests
+
+        response = requests.get(
+          '/api/users',
+          headers={'Authorization': 'Bearer YOUR_API_KEY'}
+        )
+        print(response.json())`}
+    </CodeSnippet>
+    <CodeSnippet language="bash" title="cURL">
+    {`curl -X GET '/api/users' \\
+          -H 'Authorization: Bearer YOUR_API_KEY'`}
+    </CodeSnippet>
+  </CodeGroup>
+  </Tab>
+  <Tab title="Syntax">
+  ````markdown
+    <CodeGroup>
+      <CodeSnippet language="javascript" title="JavaScript">
+        {`fetch('/api/users', {
+          method: 'GET',
+          headers: {
+            'Authorization': 'Bearer YOUR_API_KEY'
+          }
+        })
+          .then(response => response.json())
+          .then(data => console.log(data));`}
+      </CodeSnippet>
+
+      <CodeSnippet language="python" title="Python">
+        {`import requests
+
+        response = requests.get(
+          '/api/users',
+          headers={'Authorization': 'Bearer YOUR_API_KEY'}
+        )
+        print(response.json())`}
+      </CodeSnippet>
+
+      <CodeSnippet language="bash" title="cURL">
+        {`curl -X GET '/api/users' \\
+          -H 'Authorization: Bearer YOUR_API_KEY'`}
+      </CodeSnippet>
+    </CodeGroup>
+  ```
+  </Tab>
+</TabGroup>
+
+## Props
+
+<ParameterField name="children" type="ReactNode">
+CodeSnippet components to display in tabs. Each child should be a CodeSnippet with its own language and content.
+</ParameterField>
+
+<ParameterField name="title" type="string">
+Optional header text displayed above the code group.
+</ParameterField>
+
+<ParameterField name="className" type="string">
+Additional CSS classes for custom styling.
+</ParameterField>
+
+## Features
+
+### Tab Labels
+
+Tab labels are automatically extracted from CodeSnippet children using this priority order:
+
+1. `title` prop from CodeSnippet
+2. `filename` prop from CodeSnippet (if no title)
+3. `language` prop as fallback
+
+<TabGroup>
+  <Tab title="Preview">
+  <CodeGroup>
+    <CodeSnippet language="javascript" title="Node.js">
+    {`const express = require('express');
+        const app = express();`}
+    </CodeSnippet>
+    <CodeSnippet language="python" title="Flask">
+    {`from flask import Flask
+        app = Flask(__name__)`}
+    </CodeSnippet>
+  </CodeGroup>
+  </Tab>
+  <Tab title="Syntax">
+  ````markdown
+    <CodeGroup>
+      <CodeSnippet language="javascript" title="Node.js">
+        {`const express = require('express');
+        const app = express();`}
+      </CodeSnippet>
+
+      <CodeSnippet language="python" title="Flask">
+        {`from flask import Flask
+        app = Flask(__name__)`}
+      </CodeSnippet>
+    </CodeGroup>
+  ```
+  </Tab>
+</TabGroup>
+
+### Copy to Clipboard
+
+The copy button in the top-right corner copies the currently active tab's code content. Individual CodeSnippet copy buttons are automatically hidden inside Code Groups to avoid duplication.
+
+### AI Integration
+
+Click the "Ask AI" button to open an AI chat with the code from the active tab pre-filled with the prompt: "Explain this code to me."
+
+<Callout type="info">
+The AI assistant uses keyboard shortcuts: Cmd+I (macOS) or Ctrl+I (Windows/Linux) to toggle the sidebar.
+</Callout>
+
+### Syntax Highlighting
+
+All code snippets use Shiki syntax highlighting with dual theme support (light and dark modes). Themes are pre-rendered to eliminate visual flash when switching between modes.
+
+## Advanced Usage
+
+### With Line Numbers and Highlighting
+
+<TabGroup>
+  <Tab title="Preview">
+  <CodeGroup>
+    <CodeSnippet language="javascript" title="api/users.js">
+    {`import express from 'express'
+        const router = express.Router()
+
+        router.get('/users', async (req, res) => {
+          const users = await db.query('SELECT * FROM users')
+          res.json(users)
+        })
+
+        router.post('/users', async (req, res) => {
+          const { name, email } = req.body
+          const result = await db.query(
+            'INSERT INTO users(name, email) VALUES($1,$2) RETURNING *',
+            [name, email]
+          )
+          res.status(201).json(result.rows[0])
+        })
+
+        export default router`}
+    </CodeSnippet>
+    <CodeSnippet language="python" title="api/users.py">
+    {`from flask import Flask, request, jsonify
+
+        @app.route('/users', methods=['GET'])
+        def get_users():
+          users = db.execute('SELECT * FROM users')
+          return jsonify(users)
+
+        @app.route('/users', methods=['POST'])
+        def create_user():
+          data = request.json
+          result = db.execute('INSERT INTO users(name, email) VALUES(?,?) RETURNING *', [data['name'], data['email']])
+          return jsonify(result), 201`}
+    </CodeSnippet>
+  </CodeGroup>
+  </Tab>
+  <Tab title="Syntax">
+  ````markdown
+    <CodeGroup title="API Implementation">
+      <CodeSnippet language="javascript" title="api/users.js" showLineNumbers={true} highlight="5-7,12-14">
+        {`import express from 'express'
+        const router = express.Router()
+
+        router.get('/users', async (req, res) => {
+          const users = await db.query('SELECT * FROM users')
+          res.json(users)
+        })
+
+        router.post('/users', async (req, res) => {
+          const { name, email } = req.body
+          const result = await db.query(
+            'INSERT INTO users(name, email) VALUES($1,$2) RETURNING *',
+            [name, email]
+          )
+          res.status(201).json(result.rows[0])
+        })
+
+        export default router`}
+      </CodeSnippet>
+
+      <CodeSnippet language="python" title="api/users.py" showLineNumbers={true} highlight="4-6,9-11">
+        {`from flask import Flask, request, jsonify
+
+        @app.route('/users', methods=['GET'])
+        def get_users():
+          users = db.execute('SELECT * FROM users')
+          return jsonify(users)
+
+        @app.route('/users', methods=['POST'])
+        def create_user():
+          data = request.json
+          result = db.execute('INSERT INTO users(name, email) VALUES(?,?) RETURNING *', [data['name'], data['email']])
+          return jsonify(result), 201`}
+      </CodeSnippet>
+    </CodeGroup>
+  ```
+  </Tab>
+</TabGroup>
+
+## Code Snippet Props
+
+When using CodeSnippet components inside Code Groups, you have access to these props:
+
+<ParameterField name="language" type="string" default="javascript">
+Programming language for syntax highlighting. Supports all languages recognized by Shiki.
+</ParameterField>
+
+<ParameterField name="title" type="string">
+Display title for the code block. Used as the tab label in Code Groups.
+</ParameterField>
+
+<ParameterField name="showLineNumbers" type="boolean" default="false">
+Display line numbers on the left side of the code block.
+</ParameterField>
+
+<ParameterField name="highlight" type="string | number[]">
+Highlight specific lines. Use comma-separated values or ranges (e.g., "2,5-7" or [2,5,6,7]).
+</ParameterField>
+
+<ParameterField name="wordWrap" type="boolean" default="false">
+Enable word wrapping for long lines of code.
+</ParameterField>
+
+<ParameterField name="showInlineCopyButton" type="boolean" default="true">
+Show individual copy button. Automatically disabled inside Code Groups.
+</ParameterField>
+
+## Best Practices
+
+<Callout type="tip">
+Place the most commonly used language or framework first in the Code Group. Users often default to the first tab.
+</Callout>
+
+<AccordionGroup>
+  <Accordion title="Use descriptive tab labels">
+  Provide clear `title` props that identify the language or framework:
+
+  ```jsx
+  <CodeSnippet language="javascript" title="Node.js with Express">
+  ```
+
+  This is clearer than just "JavaScript" when multiple JS frameworks are shown.
+  </Accordion>
+  <Accordion title="Keep code examples concise">
+  Show only the relevant portions of code. Long examples reduce scannability:
+
+  **Good:**
+  ```jsx
+  <CodeSnippet language="python" title="Authentication">
+  {`headers = {'Authorization': f'Bearer {api_key}'}
+  response = requests.get('/api/endpoint', headers=headers)`}
+  </CodeSnippet>
+  ```
+
+  **Avoid:**
+  Including full class definitions, imports, and boilerplate when only demonstrating authentication.
+  </Accordion>
+  <Accordion title="Maintain consistency across tabs">
+  Ensure all code examples in a Code Group demonstrate the same concept or API call:
+
+  **Good:** All tabs show how to make a GET request to `/api/users`
+
+  **Avoid:** Mixing GET requests in one tab with POST requests in another
+  </Accordion>
+  <Accordion title="Use highlighting strategically">
+  Highlight key lines that differ between implementations or emphasize important logic:
+
+  ```jsx
+  <CodeSnippet language="javascript" highlight="3-5">
+  {`const config = {
+    baseURL: 'https://api.example.com',
+    timeout: 5000,
+    headers: {
+      'Authorization': `Bearer ${apiKey}`
+    }
+  };`}
+  </CodeSnippet>
+  ```
+  </Accordion>
+</AccordionGroup>
+
+## Common Patterns
+
+### SDK Installation
+
+<CodeGroup>
+  <CodeSnippet language="bash" title="npm">
+  {`npm install @your-org/sdk`}
+  </CodeSnippet>
+  <CodeSnippet language="bash" title="yarn">
+  {`yarn add @your-org/sdk`}
+  </CodeSnippet>
+  <CodeSnippet language="bash" title="pnpm">
+  {`pnpm add @your-org/sdk`}
+  </CodeSnippet>
+</CodeGroup>
+
+### Authentication Examples
+
+<CodeGroup>
+  <CodeSnippet language="bash" title="cURL">
+  {`curl -X GET 'https://api.example.com/v1/users' \\
+      -H 'Authorization: Bearer YOUR_API_KEY' \\
+      -H 'Content-Type: application/json'`}
+  </CodeSnippet>
+  <CodeSnippet language="javascript" title="JavaScript">
+  {`const response = await fetch('https://api.example.com/v1/users', {
+      headers: {
+        'Authorization': 'Bearer YOUR_API_KEY',
+        'Content-Type': 'application/json'
+      }
+    });
+    const data = await response.json();`}
+  </CodeSnippet>
+  <CodeSnippet language="python" title="Python">
+  {`import requests
+
+    headers = {
+      'Authorization': 'Bearer YOUR_API_KEY',
+      'Content-Type': 'application/json'
+    }
+    response = requests.get('https://api.example.com/v1/users', headers=headers)
+    data = response.json()`}
+  </CodeSnippet>
+</CodeGroup>
+
+### Configuration Files
+
+<CodeGroup>
+  <CodeSnippet language="bash" title=".env">
+  {`API_KEY=your_api_key_here
+    API_URL=https://api.example.com
+    TIMEOUT=5000`}
+  </CodeSnippet>
+  <CodeSnippet language="json" title="config.json">
+  {`{
+      "apiKey": "your_api_key_here",
+      "apiUrl": "https://api.example.com",
+      "timeout": 5000
+    }`}
+  </CodeSnippet>
+  <CodeSnippet language="yaml" title="config.yaml">
+  {`api_key: your_api_key_here
+    api_url: https://api.example.com
+    timeout: 5000`}
+  </CodeSnippet>
+</CodeGroup>
+
+## Technical Implementation
+
+Code Groups are implemented in two variants:
+
+- **MDX Documentation** (`src/components/mdx/code-group.tsx`) - Standard documentation pages with smaller text styling
+- **API Documentation** (`src/components/tags/code-group.tsx`) - Right-side code snippets with larger text styling
+
+Both variants share core functionality:
+
+- Automatic tab label extraction from child CodeSnippet components
+- Active tab state management
+- Copy-to-clipboard for the active tab's content
+- AI integration for code explanation
+- Child prop manipulation to ensure seamless visual integration
+
+<Callout type="info">
+The component automatically clones children and overrides props to remove borders, disable inline copy buttons, and suppress title display for a cohesive tabbed interface.
+</Callout>
+
