@@ -1,0 +1,343 @@
+---
+title: "Platform Management"
+description: "Create platforms, invite team members, and manage roles within your organization"
+---
+
+## Overview
+
+Each platform is a separate documentation project with its own content, website, and team members. You can create multiple platforms, invite collaborators, and assign specific access permissions.
+
+## Creating a New Platform
+
+<Steps>
+<Step title="Access platform creation">
+Navigate to **Settings** > **Organization** and click the **Create Platform** button in the Platforms section.
+</Step>
+
+<Step title="Name your platform">
+Enter a descriptive name for your platform. This name will be used for:
+- The platform's documentation website URL
+- The GitHub/GitLab repository name
+- Display throughout the interface
+
+<Callout type="tip">
+Choose a clear, lowercase name without special characters (e.g., "api-docs", "developer-guide").
+</Callout>
+</Step>
+
+<Step title="Platform provisioning">
+After clicking **Create**, the system automatically:
+1. Creates the platform in your organization
+2. Adds you as a platform member
+3. Provisions a GitHub or GitLab repository (based on your org settings)
+4. Sets up Vercel deployment infrastructure
+5. Generates your platform's deployment URL
+
+<Callout type="info">
+Platform creation typically takes 30-60 seconds. You'll be notified once deployment is complete.
+</Callout>
+</Step>
+
+<Step title="Verify creation">
+Your new platform appears in the Platforms list showing:
+- Platform name
+- Number of members
+- Deployment status
+
+<Callout type="success">
+You can now access your platform's repository and begin adding documentation content.
+</Callout>
+</Step>
+</Steps>
+
+## Inviting Team Members
+
+### Sending Invitations
+
+<Steps>
+<Step title="Open invitation modal">
+In **Settings** > **Organization**, click **Invite Teammate** in the Invitations section.
+</Step>
+
+<Step title="Configure invitation details">
+Fill in the following fields:
+
+**Email Address** (required)
+- Enter the email address of the person you're inviting
+- Must be a valid email format
+
+**Platform Access** (optional)
+- Select a specific platform from the dropdown, or
+- Leave blank to invite them to the organization without platform access
+
+**Role** (required)
+- **Member**: Standard access to assigned platforms
+- **Admin**: Full organization access including platform management, member management, and settings
+
+<Callout type="warning">
+Admin role grants organization-wide permissions. Use member role for contributors who only need access to specific platforms.
+</Callout>
+</Step>
+
+<Step title="Send invitation">
+Click **Invite** to send the invitation email. The system will:
+1. Create a pending invitation with a unique token
+2. Send an email with an invitation link to the recipient
+3. Set a 14-day expiration on the invitation
+
+<Callout type="info">
+Recipients have 14 days to accept the invitation before it expires. You can resend expired invitations.
+</Callout>
+</Step>
+</Steps>
+
+### Managing Pending Invitations
+
+View all pending invitations in the Invitations section. Each invitation displays:
+- Email address
+- Assigned platform (if any)
+- Current status (pending/accepted)
+- Role assignment
+- Action menu
+
+You can:
+- **Update** invitation details before acceptance
+- **Delete** unwanted invitations
+- **Search** invitations by email address
+
+<Callout type="tip">
+If you invited someone to the wrong platform, update the invitation before they accept it rather than removing and re-adding them later.
+</Callout>
+
+## Understanding Roles
+
+### Member Role
+
+Members have access to assigned platforms only. They can:
+- View and edit documentation content
+- Access platform repositories
+- View platform deployment settings
+
+Members cannot:
+- Create or delete platforms
+- Invite other team members
+- Access organization settings
+- Manage roles
+
+### Admin Role
+
+Admins have full organization access. They can:
+- Create and delete platforms
+- Invite and remove team members
+- Change member roles
+- Assign members to platforms
+- Access all organization settings
+- View and manage all platforms
+
+<Callout type="warning">
+Admins automatically have access to all platforms in the organization, regardless of specific platform assignments.
+</Callout>
+
+## Managing Platform Access
+
+### Adding Members to a Platform
+
+<Steps>
+<Step title="Open platform members">
+Click on a platform card in the Platforms section, then select **View Members** from the dropdown menu.
+</Step>
+
+<Step title="Add member">
+Click **Add Member** in the platform members modal.
+</Step>
+
+<Step title="Select member">
+The member list shows organization members who aren't already on this platform. You can:
+- Search by name using the search bar
+- Select a member from the filtered list
+- Click **Add** to grant platform access
+
+<Callout type="success">
+The member immediately gains access to the platform's repository and documentation.
+</Callout>
+</Step>
+</Steps>
+
+### Removing Members from a Platform
+
+<Steps>
+<Step title="Access platform members">
+Open the platform's member list from the Platforms section.
+</Step>
+
+<Step title="Remove member">
+Click the dropdown menu next to a member's name and select **Remove**.
+</Step>
+
+<Step title="Confirm removal">
+Confirm the action. The member loses access to this platform but remains in your organization.
+
+<Callout type="info">
+Removing a member from a platform doesn't delete them from your organization. They retain access to other assigned platforms.
+</Callout>
+</Step>
+</Steps>
+
+### Bulk Platform Assignment
+
+Assign members to multiple platforms simultaneously:
+
+<Steps>
+<Step title="Open member actions">
+In the Organization Members section, click the dropdown menu next to a member's name and select **Choose Platforms**.
+</Step>
+
+<Step title="Select platforms">
+Check the platforms you want this member to access. Previously assigned platforms are pre-selected.
+</Step>
+
+<Step title="Apply changes">
+Click **Assign**. The system will:
+- Add the member to newly selected platforms
+- Remove the member from unselected platforms
+
+<Callout type="danger">
+If you deselect all platforms, the member will lose access to all platforms. You'll be asked to confirm this action.
+</Callout>
+</Step>
+</Steps>
+
+## Changing Member Roles
+
+<Steps>
+<Step title="Access role management">
+In the Organization Members section, locate the member and click their dropdown menu. Select **Change Role**.
+</Step>
+
+<Step title="Select new role">
+Choose either:
+- **Member**: Restricts access to assigned platforms only
+- **Admin**: Grants full organization access
+
+<Callout type="warning">
+Changing a member from admin to member doesn't affect their platform assignments, but they lose organization management capabilities.
+</Callout>
+</Step>
+
+<Step title="Confirm change">
+Click **Change Role**. The role update takes effect immediately across the organization.
+
+<Callout type="success">
+The member's new role is reflected throughout the platform with updated permissions.
+</Callout>
+</Step>
+</Steps>
+
+## Removing Members from Organization
+
+<Steps>
+<Step title="Open member menu">
+In the Organization Members section, click the dropdown menu next to the member's name and select **Delete from Organization**.
+</Step>
+
+<Step title="Confirm deletion">
+Confirm the removal. This action:
+- Removes the member from all platforms
+- Deletes their organization access
+- Cannot be undone
+
+<Callout type="danger">
+Deleting a member from the organization removes them from all platforms. To remove access to specific platforms only, use platform-level removal instead.
+</Callout>
+</Step>
+</Steps>
+
+## Search and Filter
+
+All management sections include search functionality:
+
+**Platforms**: Search by platform name to quickly locate specific documentation projects
+
+**Invitations**: Filter by email address to find pending or accepted invitations
+
+**Members**: Search by name to find organization members
+
+<Callout type="tip">
+Use search when managing large teams or multiple platforms to reduce visual clutter and find items faster.
+</Callout>
+
+## Common Workflows
+
+<AccordionGroup>
+<Accordion title="Onboarding a new team member">
+1. Click **Invite Teammate**
+2. Enter their email address
+3. Select **Member** role
+4. Assign them to a specific platform
+5. Click **Invite**
+
+They'll receive an email with access instructions and have 14 days to accept.
+</Accordion>
+
+<Accordion title="Setting up a new documentation project">
+1. Click **Create Platform**
+2. Enter the project name
+3. Wait for provisioning to complete
+4. Invite team members or assign existing members
+5. Share the repository URL with your team
+</Accordion>
+
+<Accordion title="Promoting a member to admin">
+1. Navigate to Organization Members
+2. Find the member and open their dropdown menu
+3. Select **Change Role**
+4. Choose **Admin**
+5. Confirm the change
+
+Admins gain immediate access to all platforms and organization settings.
+</Accordion>
+
+<Accordion title="Reorganizing team access">
+1. Locate the member in Organization Members
+2. Select **Choose Platforms** from their dropdown
+3. Check or uncheck platforms as needed
+4. Click **Assign**
+
+The system automatically adds or removes platform access based on your selections.
+</Accordion>
+</AccordionGroup>
+
+## Troubleshooting
+
+<AccordionGroup>
+<Accordion title="Invitation email not received">
+- Verify the email address is correct in the Invitations list
+- Check the recipient's spam/junk folder
+- Ensure invitations haven't expired (14-day limit)
+- Delete and resend the invitation if needed
+</Accordion>
+
+<Accordion title="Cannot remove last admin">
+Organizations require at least one admin. To remove the last admin:
+1. Promote another member to admin first
+2. Then change the original admin's role to member
+</Accordion>
+
+<Accordion title="Member can't access platform">
+Verify:
+- The member is listed in the platform's member list
+- Their organization role (admins have access to all platforms)
+- They've accepted their organization invitation
+- The platform deployment is active
+</Accordion>
+
+<Accordion title="Platform creation failed">
+Platform creation may fail if:
+- The platform name is already in use
+- GitHub/GitLab rate limits are exceeded
+- Vercel deployment errors occur
+
+Check your organization's integration status and try again. Contact support if the issue persists.
+</Accordion>
+</AccordionGroup>
+
