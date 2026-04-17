@@ -18,11 +18,9 @@ The simplest implementation uses default settings with the content collapsed by 
     </Expand>
   </Tab>
   <Tab title="Syntax">
-```mdx
-<Expand>
-  This expand component uses the default title and starts closed.
-</Expand>
-```
+    &lt;Expand&gt;
+      This expand component uses the default title and starts closed.
+    &lt;/Expand&gt;
   </Tab>
 </TabGroup>
 
@@ -45,25 +43,24 @@ Replace the default "Details" heading with descriptive text that indicates the h
     <Expand title="Custom Expand Title">
       You can include any content inside, like lists and code blocks.
 
-```javascript
-function example() {
-  return 'Expand components show/hide optional content';
-}
-```
+      ```javascript
+      function example() {
+        return 'Expand components show/hide optional content';
+      }
+      ```
     </Expand>
   </Tab>
   <Tab title="Syntax">
-```mdx
-<Expand title="Custom Expand Title">
-  You can include any content inside, like lists and code blocks.
+    &lt;Expand title="Custom Expand Title"&gt;
+      You can include any content inside, like lists and code blocks.
 
-```javascript
-function example() {
-  return 'Expand components show/hide optional content';
-}
-```
-</Expand>
-```
+      ```javascript
+      function example() {
+        return 'Expand components show/hide optional content';
+      }
+      ```
+
+    &lt;/Expand&gt;
   </Tab>
 </TabGroup>
 
@@ -78,11 +75,9 @@ Display content expanded by default when users frequently need the information.
     </Expand>
   </Tab>
   <Tab title="Syntax">
-```mdx
-<Expand title="Open by Default" defaultOpen={true}>
-  This expand component starts in the open state because defaultOpen is true.
-</Expand>
-```
+    &lt;Expand title="Open by Default" defaultOpen={true}&gt;
+      This expand component starts in the open state because defaultOpen is true.
+    &lt;/Expand&gt;
   </Tab>
 </TabGroup>
 
@@ -172,21 +167,21 @@ Complete user profile data.
 
 <Expand title="User properties">
   <ResponseField name="id" type="string">
-  Unique identifier in UUID v4 format.
+    Unique identifier in UUID v4 format.
   </ResponseField>
 
   <ResponseField name="metadata" type="object">
-  Custom key-value pairs attached to the user.
+    Custom key-value pairs attached to the user.
 
-  <Expand title="Metadata structure">
-    <ResponseField name="created_by" type="string">
-    User ID of the account creator.
-    </ResponseField>
+    <Expand title="Metadata structure">
+      <ResponseField name="created_by" type="string">
+        User ID of the account creator.
+      </ResponseField>
 
-    <ResponseField name="tags" type="array">
-    Classification labels for organization.
-    </ResponseField>
-  </Expand>
+      <ResponseField name="tags" type="array">
+        Classification labels for organization.
+      </ResponseField>
+    </Expand>
   </ResponseField>
 </Expand>
 </ResponseField>
