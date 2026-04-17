@@ -1,0 +1,435 @@
+---
+title: "Docs.json Structure"
+description: "Learn how to configure your documentation navigation with tabs, groups, dropdowns, and organize your file structure"
+---
+
+## Overview
+
+The `docs.json` file is the central configuration for your documentation site's navigation. It defines how your content is organized, structured, and displayed to users.
+
+**Location**: `src/app/(pages)/docs.json`
+
+## Basic Structure
+
+<CodeSnippet language="json" title="docs.json">
+{`{
+  "name": "your-site-name",
+  "navigation": {
+    "tabs": [],
+    "global": {
+      "anchors": []
+    },
+    "changelogCategories": [],
+    "buttons": []
+  }
+}`}
+</CodeSnippet>
+
+<ParameterField name="name" type="string" required>
+Site identifier used for branding and configuration.
+</ParameterField>
+
+<ParameterField name="navigation.tabs" type="array" required>
+Primary navigation areas that appear as top-level tabs in your sidebar.
+</ParameterField>
+
+<ParameterField name="navigation.global.anchors" type="array">
+External links rendered globally across all tabs.
+</ParameterField>
+
+<ParameterField name="navigation.changelogCategories" type="array">
+Categories for filtering changelog entries.
+</ParameterField>
+
+<ParameterField name="navigation.buttons" type="array">
+Button configurations with labels and URLs for custom actions.
+</ParameterField>
+
+## Tabs
+
+Tabs represent major sections of your documentation and appear as top-level navigation items.
+
+### Standard Tab
+
+<CodeSnippet language="json">
+{`{
+  "tab": "Guides",
+  "groups": [
+    {
+      "group": "Get Started",
+      "pages": ["introduction"]
+    }
+  ]
+}`}
+</CodeSnippet>
+
+### External Tab
+
+Link to external pages or sections like changelogs:
+
+<CodeSnippet language="json">
+{`{
+  "tab": "Changelog",
+  "external": true,
+  "url": "/changelog"
+}`}
+</CodeSnippet>
+
+<ParameterField name="tab" type="string" required>
+Display name for the tab shown in navigation.
+</ParameterField>
+
+<ParameterField name="groups" type="array">
+Array of group objects containing organized pages. Required for standard tabs.
+</ParameterField>
+
+<ParameterField name="external" type="boolean">
+Set to `true` for tabs that link to external URLs.
+</ParameterField>
+
+<ParameterField name="url" type="string">
+Target URL for external tabs.
+</ParameterField>
+
+## Groups
+
+Groups organize related pages within a tab. Each group appears as a labeled section in the sidebar.
+
+<CodeSnippet language="json">
+{`{
+  "group": "API Documentation",
+  "pages": [
+    "api-reference/introduction",
+    "api-reference/authentication",
+    "api-reference/rate-limits"
+  ]
+}`}
+</CodeSnippet>
+
+<ParameterField name="group" type="string" required>
+Display name for the group shown as a section header.
+</ParameterField>
+
+<ParameterField name="pages" type="array" required>
+Array of page paths or dropdown objects defining the group's content.
+</ParameterField>
+
+## Dropdowns
+
+Dropdowns create collapsible navigation sections within a group, allowing nested page organization.
+
+<CodeSnippet language="json">
+{`{
+  "group": "Quickstart",
+  "pages": [
+    "quickstart/guide",
+    {
+      "dropdown": "Advanced Topics",
+      "pages": [
+        "quickstart/advanced-config",
+        "quickstart/custom-components"
+      ],
+      "defaultOpen": false
+    }
+  ]
+}`}
+</CodeSnippet>
+
+<ParameterField name="dropdown" type="string" required>
+Display name for the collapsible section.
+</ParameterField>
+
+<ParameterField name="pages" type="array" required>
+Array of page paths included in the dropdown.
+</ParameterField>
+
+<ParameterField name="defaultOpen" type="boolean">
+Controls whether the dropdown is expanded by default. Defaults to `false`.
+</ParameterField>
+
+<Callout type="tip">
+Mix regular page paths and dropdowns within the same `pages` array to create flexible navigation hierarchies.
+</Callout>
+
+## Complete Example
+
+<CodeSnippet language="json" title="docs.json">
+{`{
+  "name": "devscribe",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Guides",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": ["introduction"]
+          },
+          {
+            "group": "Quickstart",
+            "pages": [
+              "quickstart/guide",
+              "quickstart/docs-json",
+              {
+                "dropdown": "Dropdown Example",
+                "pages": [
+                  "quickstart/dropdown-doc-a",
+                  "quickstart/dropdown-doc-b"
+                ],
+                "defaultOpen": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "API Documentation",
+            "pages": ["api-reference/introduction"]
+          },
+          {
+            "group": "Endpoints",
+            "pages": [
+              "api-reference/endpoint/get",
+              "api-reference/endpoint/post",
+              "api-reference/endpoint/delete",
+              "api-reference/endpoint/put"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Changelog",
+        "external": true,
+        "url": "/changelog"
+      }
+    ],
+    "global": {
+      "anchors": []
+    },
+    "changelogCategories": ["improvement", "release"],
+    "buttons": [
+      {
+        "label": "Get Started",
+        "href": "/quickstart/guide"
+      }
+    ]
+  }
+}`}
+</CodeSnippet>
+
+## File Structure
+
+Documentation files must be organized within the `src/app/(pages)/` directory. The file paths in `docs.json` correspond directly to this structure.
+
+### Directory Organization
+
+```
+src/app/(pages)/
+├── docs.json                    # Navigation configuration
+├── introduction.mdx             # Root-level page
+├── quickstart/
+│   ├── guide.mdx
+│   ├── docs-json.mdx
+│   ├── dropdown-doc-a.mdx
+│   └── dropdown-doc-b.mdx
+├── api-reference/
+│   ├── introduction.mdx
+│   └── endpoint/
+│       ├── get.mdx
+│       ├── post.mdx
+│       ├── put.mdx
+│       └── delete.mdx
+└── changelog/
+    └── 2025-01-09-web-editor.mdx
+```
+
+### Path Mapping Rules
+
+<Steps>
+<Step title="Use .mdx extension for all files">
+All documentation files must use the `.mdx` extension.
+</Step>
+
+<Step title="Omit file extensions in docs.json">
+Reference pages without the `.mdx` extension in your `docs.json` configuration.
+
+<CodeSnippet language="json">
+{`{
+  "pages": [
+    "quickstart/guide",       // maps to quickstart/guide.mdx
+    "api-reference/endpoint/get"  // maps to api-reference/endpoint/get.mdx
+  ]
+}`}
+</CodeSnippet>
+</Step>
+
+<Step title="Match paths exactly">
+The path in `docs.json` must match the file path relative to the `(pages)` directory.
+</Step>
+</Steps>
+
+<Callout type="warning">
+If paths don't match exactly, pages won't load. Verify your file structure matches your `docs.json` configuration.
+</Callout>
+
+## Page Frontmatter
+
+Each `.mdx` file requires frontmatter metadata at the top:
+
+### Standard Page
+
+<CodeSnippet language="yaml">
+{`---
+title: My Page Title
+description: Short description shown below the title
+icon: code
+---`}
+</CodeSnippet>
+
+### API Endpoint Page
+
+<CodeSnippet language="yaml">
+{`---
+title: Get Documents
+description: Retrieve a list of documents
+api: GET /documents
+num: 1
+---`}
+</CodeSnippet>
+
+<ParameterField name="title" type="string" required>
+Page title displayed in navigation and page header. Auto-generated from filename if omitted.
+</ParameterField>
+
+<ParameterField name="description" type="string">
+Subtitle or description shown below the title.
+</ParameterField>
+
+<ParameterField name="icon" type="string">
+Icon name from [Lucide icons](https://lucide.dev/icons) displayed next to the title.
+</ParameterField>
+
+<ParameterField name="api" type="string">
+API method and path (e.g., `GET /documents`) that enables API-specific UI components.
+</ParameterField>
+
+<ParameterField name="num" type="number">
+Ordering number for API endpoints to control display sequence.
+</ParameterField>
+
+## Adding New Pages
+
+<Steps>
+<Step title="Create the .mdx file">
+Add your documentation file in the appropriate directory under `src/app/(pages)/`.
+
+<CodeSnippet language="markdown" title="src/app/(pages)/guides/new-feature.mdx">
+{`---
+title: New Feature Guide
+description: Learn how to use the new feature
+icon: star
+---
+
+# Content here`}
+</CodeSnippet>
+</Step>
+
+<Step title="Add to docs.json">
+Reference the page in your `docs.json` navigation structure.
+
+<CodeSnippet language="json">
+{`{
+  "group": "Guides",
+  "pages": [
+    "guides/existing-guide",
+    "guides/new-feature"
+  ]
+}`}
+</CodeSnippet>
+</Step>
+
+<Step title="Deploy your changes">
+Changes take effect after deployment.
+
+<Callout type="success">
+Verify your page appears in navigation and that previous/next links work correctly.
+</Callout>
+</Step>
+</Steps>
+
+## Navigation Order
+
+The order of pages in your `pages` arrays determines:
+
+- Display order in the sidebar
+- Previous/Next navigation at the bottom of pages
+
+<Callout type="info">
+All pages are collected sequentially: tabs → groups → pages (including dropdown items). This order controls the entire navigation flow.
+</Callout>
+
+## Best Practices
+
+<AccordionGroup>
+<Accordion title="Organize by user journey">
+Structure your tabs and groups to match how users progress through your documentation, from getting started to advanced topics.
+</Accordion>
+
+<Accordion title="Use descriptive names">
+Choose clear, specific names for tabs, groups, and dropdowns that immediately convey their contents.
+</Accordion>
+
+<Accordion title="Limit nesting depth">
+Avoid deeply nested structures. Use dropdowns sparingly for optional or advanced content within a group.
+</Accordion>
+
+<Accordion title="Maintain consistent paths">
+Follow a consistent naming convention for file paths and directories to make your structure predictable and maintainable.
+</Accordion>
+
+<Accordion title="Test navigation flow">
+After adding pages, verify that previous/next links work correctly and that the navigation order makes sense to users.
+</Accordion>
+</AccordionGroup>
+
+## Common Issues
+
+<AccordionGroup>
+<Accordion title="Page not appearing in navigation">
+**Causes:**
+- File path doesn't match `docs.json` reference
+- File missing `.mdx` extension
+- Typo in `docs.json` path
+
+**Solution:** Verify the file exists at the exact path specified in `docs.json` (without the `.mdx` extension in the config).
+</Accordion>
+
+<Accordion title="Broken previous/next links">
+**Cause:** Page order in `docs.json` doesn't match user expectations
+
+**Solution:** Reorder pages in your `pages` arrays to create a logical flow. The array order directly controls navigation.
+</Accordion>
+
+<Accordion title="Icon not displaying">
+**Cause:** Invalid icon name used in frontmatter
+
+**Solution:** Use icon names from [Lucide icons](https://lucide.dev/icons). Check spelling and capitalization.
+</Accordion>
+
+<Accordion title="Dropdown not expanding">
+**Cause:** Missing or malformed dropdown object
+
+**Solution:** Ensure dropdown follows the correct structure:
+<CodeSnippet language="json">
+{`{
+  "dropdown": "Name",
+  "pages": ["path/to/page"],
+  "defaultOpen": false
+}`}
+</CodeSnippet>
+</Accordion>
+</AccordionGroup>
+
