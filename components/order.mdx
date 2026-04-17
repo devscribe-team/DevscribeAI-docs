@@ -2,22 +2,23 @@
 title: "Ordered Lists"
 description: "Create numbered sequential lists in your documentation"
 ---
+
 Ordered lists display content as numbered items in sequential order. Use them for step-by-step instructions, ranked items, or any content where sequence matters.
 
-## Basic usage 
+## Basic Usage
 
 <TabGroup>
   <Tab title="Preview">
-  1. First item
-  2. Second item
-  3. Third item
-  </Tab>
-  <Tab title="Syntax">
-  ```markdown
     1. First item
     2. Second item
     3. Third item
-  ```
+  </Tab>
+  <Tab title="Syntax">
+```mdx
+1. First item
+2. Second item
+3. Third item
+```
   </Tab>
 </TabGroup>
 
@@ -44,20 +45,20 @@ Create nested ordered lists by indenting with 2-4 spaces:
 
 <TabGroup>
   <Tab title="Preview">
-  1. First level item
-  2. Another first level item
-  3. Nested item
-  4. Another nested item
-  5. Back to first level
-  </Tab>
-  <Tab title="Syntax">
-  ```markdown
     1. First level item
     2. Another first level item
        1. Nested item
        2. Another nested item
     3. Back to first level
-  ```
+  </Tab>
+  <Tab title="Syntax">
+```mdx
+1. First level item
+2. Another first level item
+   1. Nested item
+   2. Another nested item
+3. Back to first level
+```
   </Tab>
 </TabGroup>
 
@@ -67,26 +68,26 @@ Ordered lists work seamlessly with other markdown elements:
 
 <TabGroup>
   <Tab title="Preview">
-  1. Install the package
-
-  ```bash
-       npm install example-package
-  ```
-
-  1. Configure your environment variables
-  2. Start the development server
-  </Tab>
-  <Tab title="Syntax">
-  ```markdown
     1. Install the package
-  ```
 
-  npm install example-package
+```bash
+npm install example-package
+```
 
-  ```text
     2. Configure your environment variables
     3. Start the development server
-  ```
+  </Tab>
+  <Tab title="Syntax">
+```mdx
+1. Install the package
+
+```bash
+npm install example-package
+```
+
+2. Configure your environment variables
+3. Start the development server
+```
   </Tab>
 </TabGroup>
 
@@ -98,16 +99,16 @@ Maintain consistent indentation when including code blocks or multi-paragraph co
 
 <CardGroup cols={2} gap="md">
   <Card title="Use ordered lists" icon="list-ol">
-- Simple sequential items
-  - Brief, single-line steps
-  - Minimal additional context
-  - Embedded within larger content
+    - Simple sequential items
+    - Brief, single-line steps
+    - Minimal additional context
+    - Embedded within larger content
   </Card>
   <Card title="Use Steps component" icon="stairs">
-- Complex multi-step procedures
-  - Steps requiring code examples
-  - Procedures with callouts or warnings
-  - Standalone tutorials or guides
+    - Complex multi-step procedures
+    - Steps requiring code examples
+    - Procedures with callouts or warnings
+    - Standalone tutorials or guides
   </Card>
 </CardGroup>
 
