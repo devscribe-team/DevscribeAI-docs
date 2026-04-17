@@ -1,0 +1,172 @@
+---
+title: "Images"
+description: "Learn how to add and configure images in your Devscribe documentation with proper syntax and formatting"
+---
+
+## Overview
+
+Images enhance documentation by providing visual context and improving comprehension. Devscribe supports standard Markdown image syntax with additional configuration options.
+
+## Basic image syntax
+
+The standard Markdown image format includes two components:
+
+- **Alt text** - Descriptive text for accessibility and SEO
+- **Image path** - Relative or absolute URL to the image file
+
+```markdown
+![Alt text description](/path/to/image.png)
+```
+
+### Image paths
+
+Store images in your documentation repository's public directory. Reference them using absolute paths starting from the root:
+
+```markdown
+![Dashboard overview](/images/dashboard.png)
+```
+
+For images in subdirectories:
+
+```markdown
+![API response example](/assets/screenshots/api-response.png)
+```
+
+## Image with title attribute
+
+Add an optional title that appears on hover by including quoted text after the image path:
+
+<TabGroup>
+  <Tab title="Preview">
+  ![Devscribe icon](/devscribe-logo.png)
+
+  ![Devscribe logo](/devscribe-logo.png "Devscribe Logo")
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  ![Devscribe icon](/devscribe-logo.png)
+  ![Devscribe logo](/devscribe-logo.png "Devscribe Logo")
+  ```
+  </Tab>
+</TabGroup>
+
+## Alt text best practices
+
+Write descriptive alt text that conveys the image's purpose and content:
+
+<CodeGroup>
+  <CodeSnippet language="markdown" title="Poor alt text">
+    ![Image](/screenshot.png)
+    ![Picture](/diagram.png)
+  </CodeSnippet>
+
+  <CodeSnippet language="markdown" title="Good alt text">
+    ![Authentication flow diagram showing OAuth token exchange](/auth-flow.png)
+    ![Dashboard displaying active users and revenue metrics](/dashboard.png)
+  </CodeSnippet>
+</CodeGroup>
+
+<Callout type="tip">
+Alt text improves accessibility for screen readers and serves as fallback content if images fail to load. Include key information visible in the image.
+</Callout>
+
+## Common use cases
+
+### Screenshots and UI elements
+
+Capture interface elements at actual size or 2x resolution for clarity on high-DPI displays:
+
+```markdown
+![Settings panel with API key configuration options](/screenshots/settings-panel.png)
+```
+
+### Diagrams and architecture
+
+Use diagrams to illustrate system architecture, data flows, or process workflows:
+
+```markdown
+![Microservices architecture diagram showing API gateway, services, and database](/architecture-diagram.png)
+```
+
+### Logos and branding
+
+Reference brand assets for consistency across documentation:
+
+```markdown
+![Company logo](/branding/company-logo.svg "Company Name")
+```
+
+<Callout type="info">
+SVG format is recommended for logos and icons as it scales without quality loss.
+</Callout>
+
+## Image formatting considerations
+
+### File formats
+
+- **PNG** - Screenshots, UI elements, images requiring transparency
+- **JPG** - Photographs, complex images where file size matters
+- **SVG** - Logos, icons, diagrams that need to scale
+- **GIF** - Simple animations demonstrating interactions
+
+### File size optimization
+
+Optimize images before adding them to documentation:
+
+- Compress screenshots to reduce file size
+- Use appropriate dimensions (avoid oversized images)
+- Consider lazy loading for pages with multiple images
+
+<Callout type="warning">
+Large image files slow page load times. Keep individual images under 500KB when possible.
+</Callout>
+
+## Troubleshooting
+
+<AccordionGroup>
+<Accordion title="Image not displaying">
+- Verify the file path is correct and case-sensitive
+- Ensure the image exists in your repository's public directory
+- Check that the file extension matchesthe actual file type
+- Confirm the image is committed to version control
+</Accordion>
+
+<Accordion title="Image displays but appears broken">
+- Validate the image file is not corrupted
+- Check file permissions allow public access
+- Ensure the image format is supported by browsers
+- Try re-uploading or re-committing the image file
+</Accordion>
+</AccordionGroup>
+
+## Examples
+
+### Documentation with multiple images
+
+```markdown
+## Installation verification
+
+After installation, your dashboard should display the welcome screen:
+
+![Welcome screen with quick start guide](/screenshots/welcome.png "Welcome Screen")
+
+Navigate to Settings to configure your API credentials:
+
+![Settings page showing API key input field](/screenshots/settings.png)
+```
+
+### Before and after comparison
+
+```markdown
+## UI improvements
+
+Previous interface:
+
+![Old dashboard with cluttered navigation](/screenshots/old-dashboard.png)
+
+Updated interface with streamlined design:
+
+![New dashboard with simplified navigation and improved layout](/screenshots/new-dashboard.png)
+```
+
