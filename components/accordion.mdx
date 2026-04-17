@@ -2,7 +2,6 @@
 title: "Accordions"
 description: "Learn how to create collapsible content sections using Accordion and AccordionGroup components in your documentation."
 ---
-
 ## Overview
 
 Accordions let you hide and show content sections, keeping your documentation clean and scannable. Users can expand only the information they need.
@@ -14,35 +13,30 @@ Use accordions for:
 - Detailed explanations
 - Step-by-step tutorials
 
----
-
 ## Basic Accordion
 
 <TabGroup>
   <Tab title="Preview">
-    <AccordionGroup>
-      <Accordion title="Basic Accordion">
-        This accordion starts closed by default.
+  <AccordionGroup>
+    <Accordion title="Basic Accordion">
+    This accordion starts closed by default.
 
-        - Item 1  
-        - Item 2  
-        - Item 3  
-      </Accordion>
-    </AccordionGroup>
+            - Item 1  
+            - Item 2  
+            - Item 3
+    </Accordion>
+  </AccordionGroup>
   </Tab>
-
   <Tab title="Syntax">
-{`<Accordion title="Basic Accordion" description="This is a basic accordion">
-This accordion starts closed by default.
+  {`<Accordion title="Basic Accordion" description="This is a basic accordion"> This accordion starts closed by default.
 
-- Item 1
-- Item 2
-- Item 3
-</Accordion>`}
+  - Item 1
+  - Item 2
+  - Item 3
+
+  </Accordion>`}
   </Tab>
 </TabGroup>
-
----
 
 ## Accordion Attributes
 
@@ -66,23 +60,20 @@ Icon name (requires showIcon).
 Display the icon.
 </ParameterField>
 
----
-
 ## Open by Default
 
 <TabGroup>
   <Tab title="Preview">
-    <AccordionGroup>
-      <Accordion title="Open by Default" defaultOpen={true}>
-        This accordion starts open.
-      </Accordion>
-    </AccordionGroup>
+  <AccordionGroup>
+    <Accordion title="Open by Default" defaultOpen={true}>
+    This accordion starts open.
+    </Accordion>
+  </AccordionGroup>
   </Tab>
-
   <Tab title="Syntax">
-{`<Accordion title="Open by Default" defaultOpen={true}>
-This accordion starts open.
-</Accordion>`}
+  {`<Accordion title="Open by Default" defaultOpen={true}> This accordion starts open.
+
+  </Accordion>`}
   </Tab>
 </TabGroup>
 
@@ -90,27 +81,22 @@ This accordion starts open.
 Use defaultOpen for important content.
 </Callout>
 
----
-
 ## Accordion with Icon
 
 <TabGroup>
   <Tab title="Preview">
-    <AccordionGroup>
-      <Accordion title="Accordion with Icon" icon="star" showIcon={true}>
-        This accordion displays an icon.
-      </Accordion>
-    </AccordionGroup>
+  <AccordionGroup>
+    <Accordion title="Accordion with Icon" icon="star">
+    This accordion displays an icon.
+    </Accordion>
+  </AccordionGroup>
   </Tab>
-
   <Tab title="Syntax">
-{`<Accordion title="Accordion with Icon" icon="star" showIcon={true}>
-This accordion displays an icon.
-</Accordion>`}
+  {`<Accordion title="Accordion with Icon" icon="star" showIcon={true}> This accordion displays an icon.
+
+  </Accordion>`}
   </Tab>
 </TabGroup>
-
----
 
 ## Accordion Groups
 
@@ -118,118 +104,114 @@ This accordion displays an icon.
 
 <TabGroup>
   <Tab title="Preview">
-    <AccordionGroup>
-      <Accordion title="FAQ: Getting Started">
-        Run:
+  <AccordionGroup>
+    <Accordion title="FAQ: Getting Started">
+    Run:
 
-        ```bash
-        npm install @my-package/core
-        ```
-      </Accordion>
+            ```bash
+            npm install @my-package/core
+            ```
+    </Accordion>
+    <Accordion title="FAQ: Configuration">
+    Create config:
 
-      <Accordion title="FAQ: Configuration">
-        Create config:
-
-        <CodeSnippet language="javascript" title="config.js">
-{`module.exports = { apiUrl: 'https://api.example.com' };`}
-        </CodeSnippet>
-      </Accordion>
-    </AccordionGroup>
+            <CodeSnippet language="javascript" title="config.js">
+    {`module.exports = { apiUrl: 'https://api.example.com' };`}
+            </CodeSnippet>
+    </Accordion>
+  </AccordionGroup>
   </Tab>
-
   <Tab title="Syntax">
-{`<AccordionGroup>
-  <Accordion title="FAQ: Getting Started">
-    npm install @my-package/core
-  </Accordion>
+  {`<AccordionGroup>
 
-  <Accordion title="FAQ: Configuration">
+  <AccordionGroup>
+    <Accordion title="FAQ: Getting Started">
+    npm install @my-package/core
+    </Accordion>
+  </AccordionGroup>
+
+  <AccordionGroup>
+    <Accordion title="FAQ: Configuration">
     // config.js
-    module.exports = { apiUrl: 'https://api.example.com' };
-  </Accordion>
-</AccordionGroup>`}
+        module.exports = { apiUrl: 'https://api.example.com' };
+    </Accordion>
+  </AccordionGroup>
+
+  </AccordionGroup>`}
   </Tab>
 </TabGroup>
-
----
 
 ### Exclusive Mode
 
 <TabGroup>
   <Tab title="Preview">
-    <AccordionGroup exclusive={true}>
-      <Accordion title="Step 1" defaultOpen={true}>
-        ```bash
-        mkdir project
-        ```
-      </Accordion>
-
-      <Accordion title="Step 2">
-        ```bash
-        npm install
-        ```
-      </Accordion>
-    </AccordionGroup>
+  <AccordionGroup>
+    <Accordion title="Step 1" defaultOpen={true}>
+    ```bash
+            mkdir project
+            ```
+    </Accordion>
+    <Accordion title="Step 2">
+    ```bash
+            npm install
+            ```
+    </Accordion>
+  </AccordionGroup>
   </Tab>
-
   <Tab title="Syntax">
-{`<AccordionGroup exclusive={true}>
-  <Accordion title="Step 1" defaultOpen={true}>
-    mkdir project
-  </Accordion>
+  {`<AccordionGroup exclusive={true}>
 
-  <Accordion title="Step 2">
+  <AccordionGroup>
+    <Accordion title="Step 1" defaultOpen={true}>
+    mkdir project
+    </Accordion>
+  </AccordionGroup>
+
+  <AccordionGroup>
+    <Accordion title="Step 2">
     npm install
-  </Accordion>
-</AccordionGroup>`}
+    </Accordion>
+  </AccordionGroup>
+
+  </AccordionGroup>`}
   </Tab>
 </TabGroup>
-
----
 
 ## Nested Content
 
 <AccordionGroup>
   <Accordion title="Rich Content">
-    <Callout type="info">
-      You can nest components.
-    </Callout>
+  <Callout type="info">
+        You can nest components.
+      </Callout>
 
-    <CodeSnippet language="javascript">
-{`function greet(name) {
-  return "Hello " + name;
-}`}
-    </CodeSnippet>
+      <CodeSnippet language="javascript">
+  {`function greet(name) {
+    return "Hello " + name;
+  }`}
+      </CodeSnippet>
 
-    <Accordion title="Nested Accordion">
-      Inner accordion content.
-    </Accordion>
+      <Accordion title="Nested Accordion">
+        Inner accordion content.
   </Accordion>
 </AccordionGroup>
-
----
 
 ## Common Use Cases
 
 <AccordionGroup>
   <Accordion title="FAQs">
-    Use exclusive groups for FAQs.
+  Use exclusive groups for FAQs.
   </Accordion>
-
   <Accordion title="Troubleshooting">
-    Group errors into sections.
+  Group errors into sections.
   </Accordion>
-
   <Accordion title="Advanced Config">
-    Hide complex settings.
+  Hide complex settings.
   </Accordion>
-
   <Accordion title="Tutorials">
-    Use exclusive mode for steps.
+  Use exclusive mode for steps.
   </Accordion>
 </AccordionGroup>
-
----
 
 ## Best Practices
 
@@ -242,11 +224,13 @@ Don’t hide critical info in closed accordions.
 </Callout>
 
 **Do:**
-- Use descriptive titles  
-- Group related accordions  
-- Keep content focused  
+
+- Use descriptive titles
+- Group related accordions
+- Keep content focused
 
 **Don’t:**
-- Over-nest accordions  
-- Hide critical info  
-- Use for navigation  
+
+- Over-nest accordions
+- Hide critical info
+- Use for navigation
