@@ -1,0 +1,860 @@
+---
+title: "Fields"
+description: "Complete reference for using ParameterField, ResponseField, and APIResponse components in your API documentation"
+---
+
+## Overview
+
+Field components are specialized MDX components for documenting API parameters, response structures, and HTTP responses. These components provide consistent, professional formatting for technical specifications.
+
+## ParameterField
+
+Document request parameters, headers, query strings, and body fields with clear type information and validation indicators.
+
+### Basic Usage
+
+<TabGroup>
+  <Tab title="Preview">
+  <ParameterField name="userId" type="string" required>
+  Unique identifier for the user account.
+  </ParameterField>
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  <ParameterField name="userId" type="string" required>
+  Unique identifier for the user account.
+  </ParameterField>
+  ```
+  </Tab>
+</TabGroup>
+
+### Available Props
+
+<ParameterField name="name" type="string" required>
+The parameter name. Displayed in monospace font with brand color.
+</ParameterField>
+
+<ParameterField name="type" type="string" required>
+Data type of the parameter (e.g., `string`, `integer`, `boolean`, `array`, `object`).
+</ParameterField>
+
+<ParameterField name="required" type="boolean" default="false">
+Displays a red "required" badge when set to `true`.
+</ParameterField>
+
+<ParameterField name="default" type="string">
+Default value for the parameter. Displays as a badge with the format `default: value`.
+</ParameterField>
+
+<ParameterField name="deprecated" type="boolean" default="false">
+Displays a yellow "deprecated" badge when set to `true`. Use for parameters being phased out.
+</ParameterField>
+
+<ParameterField name="example" type="string">
+Example value for the parameter. Displays as a badge with the format `example: value`.
+</ParameterField>
+
+<ParameterField name="enum" type="string[]">
+Array of allowed values. Displays as comma-separated list in a badge.
+</ParameterField>
+
+<ParameterField name="children" type="ReactNode">
+Description text and rich content. Supports full MDX formatting including code blocks, lists, and nested components.
+</ParameterField>
+
+### Examples
+
+#### Required Parameter
+
+<TabGroup>
+  <Tab title="Preview">
+  <ParameterField name="email" type="string" required>
+  User's email address. Must be valid and unique.
+  </ParameterField>
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  <ParameterField name="email" type="string" required>
+  User's email address. Must be valid and unique.
+  </ParameterField>
+  ```
+  </Tab>
+</TabGroup>
+
+#### Parameter with Default Value
+
+<TabGroup>
+  <Tab title="Preview">
+  <ParameterField name="limit" type="integer" default="10">
+  Maximum number of results to return. Range: 1-100.
+  </ParameterField>
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  <ParameterField name="limit" type="integer" default="10">
+  Maximum number of results to return. Range: 1-100.
+  </ParameterField>
+  ```
+  </Tab>
+</TabGroup>
+
+#### Parameter with Example
+
+<TabGroup>
+  <Tab title="Preview">
+  <ParameterField name="Authorization" type="string" required example="Bearer sk_live_123">
+  Bearer authentication token. Include in header for all authenticated requests.
+  </ParameterField>
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  <ParameterField name="Authorization" type="string" required example="Bearer sk_live_123">
+  Bearer authentication token. Include in header for all authenticated requests.
+  </ParameterField>
+  ```
+  </Tab>
+</TabGroup>
+
+#### Parameter with Enum Values
+
+<TabGroup>
+  <Tab title="Preview">
+  <ParameterField name="status" type="string" enum={["active", "inactive", "pending"]}>
+  Current status of the resource. Must be one of the allowed values.
+  </ParameterField>
+  </Tab>
+
+  <Tab title="Syntax">
+  ````markdown
+  <ParameterField name="status" type="string" enum={["active", "inactive", "pending"]}>
+  Current status of the resource. Must be one of the allowed values.
+  </ParameterField>
+  ````
+  </Tab>
+</TabGroup>
+
+#### Deprecated Parameter
+
+<TabGroup>
+  <Tab title="Preview">
+  <ParameterField name="legacyId" type="number" deprecated>
+  Legacy identifier. Use `id` instead. This field will be removed in v2.0.
+  </ParameterField>
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  <ParameterField name="legacyId" type="number" deprecated>
+  Legacy identifier. Use `id` instead. This field will be removed in v2.0.
+  </ParameterField>
+  ```
+  </Tab>
+</TabGroup>
+
+#### Parameter with Rich Content
+
+<TabGroup>
+  <Tab title="Preview">
+  <ParameterField name="metadata" type="object">
+  Custom key-value pairs for additional data. Maximum size: 16KB.
+
+  Example structure:
+
+  <CodeSnippet language="json">
+  {`{
+    "team_id": "team_123",
+    "project": "mobile-app",
+    "environment": "production"
+  }`}
+  </CodeSnippet>
+
+  <Callout type="tip">
+  Use metadata to store application-specific information without modifying your schema.
+  </Callout>
+  </ParameterField>
+  </Tab>
+
+  <Tab title="Syntax">
+  ````markdown
+  <ParameterField name="metadata" type="object">
+  Custom key-value pairs for additional data. Maximum size: 16KB.
+
+  Example structure:
+
+  <CodeSnippet language="json">
+  {`{
+    "team_id": "team_123",
+    "project": "mobile-app",
+    "environment": "production"
+  }`}
+  </CodeSnippet>
+
+  <Callout type="tip">
+  Use metadata to store application-specific information without modifying your schema.
+  </Callout>
+  </ParameterField>
+  ````
+  </Tab>
+</TabGroup>
+
+### Grouped Parameters with Expand
+
+Use the Expand component to organize related parameters into collapsible sections:
+
+<TabGroup>
+  <Tab title="Preview">
+  <Expand title="Pagination Parameters">
+  <ParameterField name="page" type="integer" default="1">
+  Page number for pagination. Starts at 1.
+  </ParameterField>
+  
+  <ParameterField name="per_page" type="integer" default="20">
+  Number of items per page. Maximum: 100.
+  </ParameterField>
+  
+  <ParameterField name="order" type="string" enum={["asc", "desc"]} default="asc">
+  Sort order for results.
+  </ParameterField>
+  </Expand>
+  </Tab>
+
+  <Tab title="Syntax">
+  ````markdown
+  <Expand title="Pagination Parameters">
+  <ParameterField name="page" type="integer" default="1">
+  Page number for pagination. Starts at 1.
+  </ParameterField>
+  
+  <ParameterField name="per_page" type="integer" default="20">
+  Number of items per page. Maximum: 100.
+  </ParameterField>
+  
+  <ParameterField name="order" type="string" enum={["asc", "desc"]} default="asc">
+  Sort order for results.
+  </ParameterField>
+  </Expand>
+  ````
+  </Tab>
+</TabGroup>
+
+## ResponseField
+
+Document API response structures with clear type information and nullable indicators.
+
+### Basic Usage
+
+<TabGroup>
+  <Tab title="Preview">
+  <ResponseField name="id" type="string">
+  Unique identifier for the resource.
+  </ResponseField>
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  <ResponseField name="id" type="string">
+  Unique identifier for the resource.
+  </ResponseField>
+  ```
+  </Tab>
+</TabGroup>
+
+### Available Props
+
+<ParameterField name="name" type="string" required>
+Response field name. Displayed in monospace font with brand color.
+</ParameterField>
+
+<ParameterField name="type" type="string" required>
+Data type of the response field (e.g., `string`, `integer`, `boolean`, `array`, `object`).
+</ParameterField>
+
+<ParameterField name="nullable" type="boolean" default="false">
+Displays a blue "nullable" badge when set to `true`. Indicates the field may contain `null`.
+</ParameterField>
+
+<ParameterField name="deprecated" type="boolean" default="false">
+Displays a yellow "deprecated" badge when set to `true`.
+</ParameterField>
+
+<ParameterField name="example" type="string">
+Example value for the response field. Displays as a badge.
+</ParameterField>
+
+<ParameterField name="children" type="ReactNode">
+Description text and rich content. Supports full MDX formatting.
+</ParameterField>
+
+### Examples
+
+#### Basic Response Field
+
+<TabGroup>
+  <Tab title="Preview">
+  <ResponseField name="created_at" type="timestamp">
+  ISO 8601 timestamp of when the resource was created.
+  </ResponseField>
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  <ResponseField name="created_at" type="timestamp">
+  ISO 8601 timestamp of when the resource was created.
+  </ResponseField>
+  ```
+  </Tab>
+</TabGroup>
+
+#### Nullable Response Field
+
+<TabGroup>
+  <Tab title="Preview">
+  <ResponseField name="avatar_url" type="string" nullable>
+  URL to user's profile picture. Returns `null` if no avatar is set.
+  </ResponseField>
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  <ResponseField name="avatar_url" type="string" nullable>
+  URL to user's profile picture. Returns `null` if no avatar is set.
+  </ResponseField>
+  ```
+  </Tab>
+</TabGroup>
+
+#### Response Field with Example
+
+<TabGroup>
+  <Tab title="Preview">
+  <ResponseField name="status" type="string" example="active">
+  Current status of the subscription.
+  </ResponseField>
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  <ResponseField name="status" type="string" example="active">
+  Current status of the subscription.
+  </ResponseField>
+  ```
+  </Tab>
+</TabGroup>
+
+#### Deprecated Response Field
+
+<TabGroup>
+  <Tab title="Preview">
+  <ResponseField name="legacy_token" type="string" deprecated>
+  Deprecated authentication token. Use `access_token` instead.
+  </ResponseField>
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  <ResponseField name="legacy_token" type="string" deprecated>
+  Deprecated authentication token. Use `access_token` instead.
+  </ResponseField>
+  ```
+  </Tab>
+</TabGroup>
+
+### Nested Response Fields with Expand
+
+Document nested object structures using Expand components:
+
+<TabGroup>
+  <Tab title="Preview">
+  <ResponseField name="user" type="object">
+  Complete user object with profile information.
+
+  <Expand title="User Properties">
+  <ResponseField name="id" type="string">
+  Unique user identifier.
+  </ResponseField>
+  
+  <ResponseField name="email" type="string">
+  User's email address.
+  </ResponseField>
+  
+  <ResponseField name="profile" type="object">
+  User profile details.
+  
+  <Expand title="Profile Properties">
+    <ResponseField name="first_name" type="string">
+    User's first name.
+    </ResponseField>
+    
+    <ResponseField name="last_name" type="string">
+    User's last name.
+    </ResponseField>
+    
+    <ResponseField name="bio" type="string" nullable>
+    User's biography text. May be null.
+    </ResponseField>
+  </Expand>
+  </ResponseField>
+  </Expand>
+  </ResponseField>
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  <ResponseField name="user" type="object">
+  Complete user object with profile information.
+
+  <Expand title="User Properties">
+  <ResponseField name="id" type="string">
+  Unique user identifier.
+  </ResponseField>
+  
+  <ResponseField name="email" type="string">
+  User's email address.
+  </ResponseField>
+  
+  <ResponseField name="profile" type="object">
+  User profile details.
+  
+  <Expand title="Profile Properties">
+    <ResponseField name="first_name" type="string">
+    User's first name.
+    </ResponseField>
+    
+    <ResponseField name="last_name" type="string">
+    User's last name.
+    </ResponseField>
+    
+    <ResponseField name="bio" type="string" nullable>
+    User's biography text. May be null.
+    </ResponseField>
+  </Expand>
+  </ResponseField>
+  </Expand>
+  </ResponseField>
+  ```
+  </Tab>
+</TabGroup>
+
+## APIResponse & APIResponseField
+
+Document HTTP responses with status codes, descriptions, and field schemas using collapsible response containers.
+
+### Basic Usage
+
+<TabGroup>
+  <Tab title="Preview">
+  <APIResponse status="200" description="Successful response" contentType="application/json" defaultOpen>
+    <APIResponseField name="id" type="string" description="Resource identifier" />
+    <APIResponseField name="name" type="string" description="Resource name" />
+  </APIResponse>
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  <APIResponse status="200" description="Successful response" contentType="application/json" defaultOpen>
+    <APIResponseField name="id" type="string" description="Resource identifier" />
+    <APIResponseField name="name" type="string" description="Resource name" />
+  </APIResponse>
+  ```
+  </Tab>
+</TabGroup>
+
+### APIResponse Props
+
+<ParameterField name="status" type="string" required>
+HTTP status code (e.g., `"200"`, `"400"`, `"500"`). Determines color-coding and status text.
+</ParameterField>
+
+<ParameterField name="description" type="string">
+Human-readable description of the response.
+</ParameterField>
+
+<ParameterField name="contentType" type="string">
+MIME type of the response (e.g., `"application/json"`, `"text/plain"`). Displayed on larger screens.
+</ParameterField>
+
+<ParameterField name="defaultOpen" type="boolean" default="false">
+Whether the response accordion starts in the open state. Set to `true` for primary success responses.
+</ParameterField>
+
+<ParameterField name="children" type="ReactNode">
+`APIResponseField` components describing the response schema.
+</ParameterField>
+
+### APIResponseField Props
+
+<ParameterField name="name" type="string" required>
+Field name in the response.
+</ParameterField>
+
+<ParameterField name="type" type="string" required>
+Data type of the field.
+</ParameterField>
+
+<ParameterField name="description" type="string">
+Brief description of the field's purpose.
+</ParameterField>
+
+### Status Code Color System
+
+The component automatically color-codes responses based on status code ranges:
+
+- **2xx (Green)**: Success responses - emerald color scheme
+- **3xx (Blue)**: Redirect responses - blue color scheme  
+- **4xx (Amber)**: Client error responses - amber color scheme
+- **5xx (Red)**: Server error responses - red color scheme
+
+### Supported Status Codes
+
+The component includes human-readable text for common status codes:
+
+<Expand title="Success Responses (2xx)">
+- **200**: OK
+- **201**: Created
+- **202**: Accepted
+- **204**: No Content
+</Expand>
+
+<Expand title="Redirect Responses (3xx)">
+- **301**: Moved Permanently
+- **302**: Found
+- **304**: Not Modified
+</Expand>
+
+<Expand title="Client Error Responses (4xx)">
+- **400**: Bad Request
+- **401**: Unauthorized
+- **403**: Forbidden
+- **404**: Not Found
+- **405**: Method Not Allowed
+- **409**: Conflict
+- **422**: Unprocessable Entity
+- **429**: Too Many Requests
+</Expand>
+
+<Expand title="Server Error Responses (5xx)">
+- **500**: Internal Server Error
+- **502**: Bad Gateway
+- **503**: Service Unavailable
+</Expand>
+
+### Examples
+
+#### Success Response
+
+<TabGroup>
+  <Tab title="Preview">
+  <APIResponse status="200" description="Document successfully retrieved" contentType="application/json" defaultOpen>
+    <APIResponseField name="id" type="string" description="Unique document identifier" />
+    <APIResponseField name="title" type="string" description="Document title" />
+    <APIResponseField name="created_at" type="timestamp" description="Creation timestamp in ISO 8601 format" />
+    <APIResponseField name="updated_at" type="timestamp" description="Last update timestamp" />
+  </APIResponse>
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  <APIResponse status="200" description="Document successfully retrieved" contentType="application/json" defaultOpen>
+    <APIResponseField name="id" type="string" description="Unique document identifier" />
+    <APIResponseField name="title" type="string" description="Document title" />
+    <APIResponseField name="created_at" type="timestamp" description="Creation timestamp in ISO 8601 format" />
+    <APIResponseField name="updated_at" type="timestamp" description="Last update timestamp" />
+  </APIResponse>
+  ```
+  </Tab>
+</TabGroup>
+
+#### Created Response
+
+<TabGroup>
+  <Tab title="Preview">
+  <APIResponse status="201" description="Resource created successfully" contentType="application/json" defaultOpen>
+    <APIResponseField name="id" type="string" description="New resource identifier" />
+    <APIResponseField name="url" type="string" description="URL to access the resource" />
+  </APIResponse>
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  <APIResponse status="201" description="Resource created successfully" contentType="application/json" defaultOpen>
+    <APIResponseField name="id" type="string" description="New resource identifier" />
+    <APIResponseField name="url" type="string" description="URL to access the resource" />
+  </APIResponse>
+  ```
+  </Tab>
+</TabGroup>
+
+#### No Content Response
+
+<TabGroup>
+  <Tab title="Preview">
+  <APIResponse status="204" description="Resource deleted successfully" contentType="application/json">
+  </APIResponse>
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  <APIResponse status="204" description="Resource deleted successfully" contentType="application/json">
+  </APIResponse>
+  ```
+  </Tab>
+</TabGroup>
+
+<Callout type="info">
+When no `APIResponseField` children are provided, the component displays "No response body" with an icon.
+</Callout>
+
+#### Error Responses
+
+<TabGroup>
+  <Tab title="Preview">
+  <APIResponse status="400" description="Invalid request parameters" contentType="application/json">
+    <APIResponseField name="error" type="string" description="Error code identifier" />
+    <APIResponseField name="message" type="string" description="Human-readable error message" />
+    <APIResponseField name="details" type="array" description="Field-level validation errors" />
+  </APIResponse>
+
+  <APIResponse status="401" description="Authentication required" contentType="application/json">
+    <APIResponseField name="error" type="string" description="Error type: UNAUTHORIZED" />
+    <APIResponseField name="message" type="string" description="Authentication failure reason" />
+  </APIResponse>
+
+  <APIResponse status="404" description="Resource not found" contentType="application/json">
+    <APIResponseField name="error" type="string" description="Error type: NOT_FOUND" />
+    <APIResponseField name="message" type="string" description="Details about missing resource" />
+  </APIResponse>
+
+  <APIResponse status="500" description="Internal server error" contentType="application/json">
+    <APIResponseField name="error" type="string" description="Error type: INTERNAL_ERROR" />
+    <APIResponseField name="message" type="string" description="Generic error message" />
+    <APIResponseField name="request_id" type="string" description="Request identifier for support" />
+  </APIResponse>
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  <APIResponse status="400" description="Invalid request parameters" contentType="application/json">
+    <APIResponseField name="error" type="string" description="Error code identifier" />
+    <APIResponseField name="message" type="string" description="Human-readable error message" />
+    <APIResponseField name="details" type="array" description="Field-level validation errors" />
+  </APIResponse>
+
+  <APIResponse status="401" description="Authentication required" contentType="application/json">
+    <APIResponseField name="error" type="string" description="Error type: UNAUTHORIZED" />
+    <APIResponseField name="message" type="string" description="Authentication failure reason" />
+  </APIResponse>
+
+  <APIResponse status="404" description="Resource not found" contentType="application/json">
+    <APIResponseField name="error" type="string" description="Error type: NOT_FOUND" />
+    <APIResponseField name="message" type="string" description="Details about missing resource" />
+  </APIResponse>
+
+  <APIResponse status="500" description="Internal server error" contentType="application/json">
+    <APIResponseField name="error" type="string" description="Error type: INTERNAL_ERROR" />
+    <APIResponseField name="message" type="string" description="Generic error message" />
+    <APIResponseField name="request_id" type="string" description="Request identifier for support" />
+  </APIResponse>
+  ```
+  </Tab>
+</TabGroup>
+
+## Complete API Endpoint Example
+
+Here's a comprehensive example documenting a complete API endpoint with parameters and responses:
+
+<TabGroup>
+  <Tab title="Preview">
+  ### Authorization
+
+  <ParameterField name="Authorization" type="string" required example="Bearer sk_live_abc123">
+  Bearer token for API authentication. Format: `Bearer <token>`
+  </ParameterField>
+
+  ### Path Parameters
+
+  <ParameterField name="userId" type="string" required>
+  Unique identifier for the user.
+  </ParameterField>
+
+  ### Query Parameters
+
+  <ParameterField name="include" type="string" enum={["profile", "settings", "activity"]}>
+  Additional data to include in the response.
+  </ParameterField>
+
+  <ParameterField name="format" type="string" default="json" enum={["json", "xml"]}>
+  Response format preference.
+  </ParameterField>
+
+  ### Request Body
+
+  <ParameterField name="email" type="string" required example="user@example.com">
+  User's email address. Must be unique and valid.
+  </ParameterField>
+
+  <ParameterField name="name" type="string" required>
+  User's full name.
+  </ParameterField>
+
+  <ParameterField name="role" type="string" default="user" enum={["user", "admin", "moderator"]}>
+  User's role in the system.
+  </ParameterField>
+
+  ### Responses
+
+  <APIResponse status="200" description="User updated successfully" contentType="application/json" defaultOpen>
+    <APIResponseField name="id" type="string" description="User identifier" />
+    <APIResponseField name="email" type="string" description="User's email address" />
+    <APIResponseField name="name" type="string" description="User's full name" />
+    <APIResponseField name="role" type="string" description="User's role" />
+    <APIResponseField name="updated_at" type="timestamp" description="Last update timestamp" />
+  </APIResponse>
+
+  <APIResponse status="400" description="Validation error" contentType="application/json">
+    <APIResponseField name="error" type="string" description="VALIDATION_ERROR" />
+    <APIResponseField name="message" type="string" description="Validation failure message" />
+    <APIResponseField name="fields" type="array" description="List of invalid fields" />
+  </APIResponse>
+
+  <APIResponse status="401" description="Authentication required" contentType="application/json">
+    <APIResponseField name="error" type="string" description="UNAUTHORIZED" />
+    <APIResponseField name="message" type="string" description="Authentication failure reason" />
+  </APIResponse>
+
+  <APIResponse status="404" description="User not found" contentType="application/json">
+    <APIResponseField name="error" type="string" description="NOT_FOUND" />
+    <APIResponseField name="message" type="string" description="User does not exist" />
+  </APIResponse>
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  ### Authorization
+
+  <ParameterField name="Authorization" type="string" required example="Bearer sk_live_abc123">
+  Bearer token for API authentication. Format: `Bearer <token>`
+  </ParameterField>
+
+  ### Path Parameters
+
+  <ParameterField name="userId" type="string" required>
+  Unique identifier for the user.
+  </ParameterField>
+
+  ### Query Parameters
+
+  <ParameterField name="include" type="string" enum={["profile", "settings", "activity"]}>
+  Additional data to include in the response.
+  </ParameterField>
+
+  <ParameterField name="format" type="string" default="json" enum={["json", "xml"]}>
+  Response format preference.
+  </ParameterField>
+
+  ### Request Body
+
+  <ParameterField name="email" type="string" required example="user@example.com">
+  User's email address. Must be unique and valid.
+  </ParameterField>
+
+  <ParameterField name="name" type="string" required>
+  User's full name.
+  </ParameterField>
+
+  <ParameterField name="role" type="string" default="user" enum={["user", "admin", "moderator"]}>
+  User's role in the system.
+  </ParameterField>
+
+  ### Responses
+
+  <APIResponse status="200" description="User updated successfully" contentType="application/json" defaultOpen>
+    <APIResponseField name="id" type="string" description="User identifier" />
+    <APIResponseField name="email" type="string" description="User's email address" />
+    <APIResponseField name="name" type="string" description="User's full name" />
+    <APIResponseField name="role" type="string" description="User's role" />
+    <APIResponseField name="updated_at" type="timestamp" description="Last update timestamp" />
+  </APIResponse>
+
+  <APIResponse status="400" description="Validation error" contentType="application/json">
+    <APIResponseField name="error" type="string" description="VALIDATION_ERROR" />
+    <APIResponseField name="message" type="string" description="Validation failure message" />
+    <APIResponseField name="fields" type="array" description="List of invalid fields" />
+  </APIResponse>
+
+  <APIResponse status="401" description="Authentication required" contentType="application/json">
+    <APIResponseField name="error" type="string" description="UNAUTHORIZED" />
+    <APIResponseField name="message" type="string" description="Authentication failure reason" />
+  </APIResponse>
+
+  <APIResponse status="404" description="User not found" contentType="application/json">
+    <APIResponseField name="error" type="string" description="NOT_FOUND" />
+    <APIResponseField name="message" type="string" description="User does not exist" />
+  </APIResponse>
+  ```
+  </Tab>
+</TabGroup>
+
+## Best Practices
+
+### Component Selection
+
+- Use **ParameterField** for request parameters (headers, query strings, path parameters, request body)
+- Use **ResponseField** for detailed response object documentation with nested structures
+- Use **APIResponse** with **APIResponseField** for HTTP response schemas with status codes
+
+### Naming Conventions
+
+- Use exact field names as they appear in your API (case-sensitive)
+- Match parameter names to your API specification precisely
+- Use descriptive, consistent naming across all endpoints
+
+### Required vs Optional
+
+- Always mark required fields with `required` prop
+- Document default values for optional parameters
+- Explain the behavior when optional fields are omitted
+
+### Type Specification
+
+Common type values:
+- Primitives: `string`, `integer`, `number`, `boolean`
+- Complex: `object`, `array`
+- Special: `timestamp`, `uuid`, `email`, `url`
+
+### Examples and Enums
+
+- Provide realistic examples that users can copy
+- Use enum for fields with limited allowed values
+- Show example values in the exact format expected by the API
+
+### Descriptions
+
+- Write concise, action-oriented descriptions
+- Include validation rules and constraints
+- Mention format requirements (ISO 8601 for dates, UUID format, etc.)
+- Link to related documentation when helpful
+
+### Response Documentation
+
+- Set `defaultOpen={true}` on success responses (2xx)
+- Document all possible error responses
+- Include error field schemas for 4xx and 5xx responses
+- Specify content type for all responses
+
+### Organization
+
+- Group related parameters with Expand components
+- Organize parameters by type: headers, path, query, body
+- Present responses in order: success first, then errors by status code
+- Use consistent section headings across all endpoints
+
+### Accessibility
+
+- Provide clear, descriptive text for all fields
+- Use semantic HTML structure with proper headings
+- Ensure color-coded badges have text labels (not color-only indicators)
+
