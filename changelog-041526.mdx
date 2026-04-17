@@ -1,0 +1,130 @@
+---
+title: "Changelog"
+description: "Latest updates and improvements to Devscribe"
+---
+
+## GitLab Integration
+
+<Callout type="success">
+Devscribe now supports GitLab as a git provider, bringing full feature parity with our existing GitHub integration.
+</Callout>
+
+### Authentication & Onboarding
+
+**GitLab OAuth Integration**
+
+You can now sign up and authenticate using your GitLab account. The OAuth flow includes:
+
+- Single sign-on with GitLab credentials
+- Automatic access token management
+- Support for GitLab invitations to existing organizations
+
+**Streamlined Onboarding**
+
+New GitLab users experience a three-step onboarding process:
+
+<Steps>
+<Step title="Team Information">
+Provide your full name and organization name to set up your workspace.
+</Step>
+
+<Step title="Group Selection">
+Choose a GitLab group or your personal namespace for documentation repositories. You can search through all accessible groups with visibility indicators.
+</Step>
+
+<Step title="Automatic Setup">
+Your documentation repository is created in the selected namespace, and Vercel deployment is configured automatically.
+</Step>
+</Steps>
+
+### Repository Management
+
+**GitLab Project Integration**
+
+Connect and manage your GitLab projects directly within Devscribe:
+
+- Browse repositories from selected GitLab groups
+- Access both group projects and personal repositories
+- View repository metadata including owner, description, and last update
+- Switch between branches for documentation context
+- Navigate project file trees to select specific files
+
+**Cross-Provider Support**
+
+Organizations can now choose between GitHub and GitLab as their git provider. The platform automatically adapts the interface based on your selection while maintaining consistent workflows.
+
+### Documentation Generation
+
+**Generate from GitLab**
+
+Create documentation from your GitLab repositories with the same powerful features available for GitHub:
+
+- Select context files from your project tree
+- Choose target branches for documentation generation
+- Support for API, external, and internal documentation types
+- AI-powered documentation generation from your codebase
+
+### Auto-Updates via Merge Requests
+
+**Merge Request Monitoring**
+
+Keep your documentation synchronized with code changes through GitLab merge requests:
+
+- Webhook integration for real-time MR notifications
+- Automatic documentation updates when MRs are merged
+- Support for manual review, AI suggestions, and autopilot modes
+- Detailed update logs tracking changes per merge request
+
+**Webhook Configuration**
+
+Set up webhooks on your GitLab projects to enable automatic updates. The system requires Maintainer access to configure webhooks for merge request events.
+
+### Platform Management
+
+**Multi-Platform Support**
+
+GitLab organizations can create and manage multiple documentation platforms:
+
+- Each platform can use different GitLab group configurations
+- Independent documentation repositories per platform
+- Separate Vercel deployments for each platform
+- Flexible team member assignments across platforms
+
+### Technical Implementation
+
+**API Integration**
+
+The GitLab integration includes endpoints for:
+
+- Fetching accessible groups and namespaces
+- Retrieving repositories with filtering by group
+- Browsing branches and file trees
+- Creating documentation repositories
+- Managing merge request webhooks
+- Deploying to Vercel
+
+**Database Schema**
+
+Extended data models to support GitLab:
+
+<ResponseField name="provider" type="string">
+Organization-level git provider selection: `github` or `gitlab`
+</ResponseField>
+
+<ResponseField name="gitlab_group_ids" type="array">
+GitLab group IDs associated with the platform for repository access
+</ResponseField>
+
+<ResponseField name="gitlab_docs_repo_id" type="number">
+GitLab project ID for the documentation repository
+</ResponseField>
+
+<ResponseField name="gitlab_source_repo_ids" type="array">
+GitLab project IDs for source code repositories used in documentation
+</ResponseField>
+
+### Migration & Compatibility
+
+<Callout type="info">
+Existing GitHub users are unaffected by this update. The git provider is set at the organization level, and all existing organizations remain on GitHub by default.
+</Callout>
