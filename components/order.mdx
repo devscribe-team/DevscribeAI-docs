@@ -9,16 +9,16 @@ Ordered lists display content as numbered items in sequential order. Use them fo
 
 <TabGroup>
   <Tab title="Preview">
-    1. First item
-    2. Second item
-    3. Third item
+    <ol>
+      <li>First item</li>
+      <li>Second item</li>
+      <li>Third item</li>
+    </ol>
   </Tab>
   <Tab title="Syntax">
-```mdx
-1. First item
+    <pre><code>{`1. First item
 2. Second item
-3. Third item
-```
+3. Third item`}</code></pre>
   </Tab>
 </TabGroup>
 
@@ -45,20 +45,23 @@ Create nested ordered lists by indenting with 2-4 spaces:
 
 <TabGroup>
   <Tab title="Preview">
-    1. First level item
-    2. Another first level item
-       1. Nested item
-       2. Another nested item
-    3. Back to first level
+    <ol>
+      <li>First level item</li>
+      <li>Another first level item
+        <ol>
+          <li>Nested item</li>
+          <li>Another nested item</li>
+        </ol>
+      </li>
+      <li>Back to first level</li>
+    </ol>
   </Tab>
   <Tab title="Syntax">
-```mdx
-1. First level item
+    <pre><code>{`1. First level item
 2. Another first level item
    1. Nested item
    2. Another nested item
-3. Back to first level
-```
+3. Back to first level`}</code></pre>
   </Tab>
 </TabGroup>
 
@@ -68,26 +71,23 @@ Ordered lists work seamlessly with other markdown elements:
 
 <TabGroup>
   <Tab title="Preview">
-    1. Install the package
+    <ol>
+      <li>Install the package</li>
+      <li>Configure your environment variables</li>
+      <li>Start the development server</li>
+    </ol>
 
-```bash
-npm install example-package
-```
-
-    2. Configure your environment variables
-    3. Start the development server
+    <pre><code>npm install example-package</code></pre>
   </Tab>
   <Tab title="Syntax">
-```mdx
-1. Install the package
+    <pre><code>{`1. Install the package
 
-```bash
+\`\`\`bash
 npm install example-package
-```
+\`\`\`
 
 2. Configure your environment variables
-3. Start the development server
-```
+3. Start the development server`}</code></pre>
   </Tab>
 </TabGroup>
 
@@ -99,22 +99,16 @@ Maintain consistent indentation when including code blocks or multi-paragraph co
 
 <CardGroup cols={2} gap="md">
   <Card title="Use ordered lists" icon="list-ol">
-    Simple sequential items
-
-    Brief, single-line steps
-
-    Minimal additional context
-
-    Embedded within larger content
+    <p>Simple sequential items</p>
+    <p>Brief, single-line steps</p>
+    <p>Minimal additional context</p>
+    <p>Embedded within larger content</p>
   </Card>
   <Card title="Use Steps component" icon="stairs">
-    Complex multi-step procedures
-
-    Steps requiring code examples
-
-    Procedures with callouts or warnings
-
-    Standalone tutorials or guides
+    <p>Complex multi-step procedures</p>
+    <p>Steps requiring code examples</p>
+    <p>Procedures with callouts or warnings</p>
+    <p>Standalone tutorials or guides</p>
   </Card>
 </CardGroup>
 
@@ -122,24 +116,30 @@ Maintain consistent indentation when including code blocks or multi-paragraph co
 
 ### Installation procedure
 
-1. Download the installer from the official website
-2. Run the installer and accept the license agreement
-3. Choose your installation directory
-4. Complete the installation wizard
-5. Restart your computer
+<ol>
+  <li>Download the installer from the official website</li>
+  <li>Run the installer and accept the license agreement</li>
+  <li>Choose your installation directory</li>
+  <li>Complete the installation wizard</li>
+  <li>Restart your computer</li>
+</ol>
 
 ### Configuration checklist
 
-1. Create a `.env` file in your project root
-2. Add your API credentials
-3. Configure database connection settings
-4. Set up authentication tokens
-5. Verify configuration by running tests
+<ol>
+  <li>Create a `.env` file in your project root</li>
+  <li>Add your API credentials</li>
+  <li>Configure database connection settings</li>
+  <li>Set up authentication tokens</li>
+  <li>Verify configuration by running tests</li>
+</ol>
 
 ### Troubleshooting steps
 
-1. Check if the service is running
-2. Verify network connectivity
-3. Review error logs for specific messages
-4. Restart the service
-5. Contact support if issues persist
+<ol>
+  <li>Check if the service is running</li>
+  <li>Verify network connectivity</li>
+  <li>Review error logs for specific messages</li>
+  <li>Restart the service</li>
+  <li>Contact support if issues persist</li>
+</ol>
