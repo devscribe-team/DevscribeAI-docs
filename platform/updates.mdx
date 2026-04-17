@@ -1,0 +1,245 @@
+---
+title: "Auto-Updates"
+description: "Learn how to keep your documentation synchronized with code changes using Manual, Auto Suggestions, and Autopilot modes"
+---
+Devscribe offers three update modes to keep your documentation in sync with your codebase. Each mode provides a different level of automation and control.
+
+## Understanding Update Modes
+
+Your platform operates in one of three modes at any time, determined by your automation settings:
+
+- **Manual mode** - You initiate all documentation updates
+- **Auto Suggestions mode** - DevScribe suggests updates for your review
+- **Autopilot mode** - DevScribe automatically applies updates without review
+
+Switch between modes in **Settings → Automation**.
+
+## Manual Mode
+
+The default mode where you maintain full control over when and how documentation is updated.
+
+### How it works
+
+<Steps>
+  <Step title="Trigger an update">
+Navigate to **Autopilot → Update by PR** and select a pull request from your repository.
+  </Step>
+  <Step title="Review suggestions">
+DevScribe analyzes the PR and generates documentation update suggestions based on code changes.
+  </Step>
+  <Step title="Apply changes">
+Review, edit, and manually save the suggested changes to your documentation.
+  </Step>
+</Steps>
+
+### When to use Manual mode
+
+- You want complete control over documentation updates
+- Your team prefers manual review before any changes
+- You update documentation on a scheduled cadence rather than per-PR
+
+<Callout type="info">
+In Manual mode, the "Pending Approvals" page is disabled since there are no automatic suggestions to review.
+</Callout>
+
+## Auto Suggestions Mode
+
+DevScribe automatically monitors merged pull requests and generates documentation update suggestions for your review.
+
+### How it works
+
+<Steps>
+  <Step title="Merge a pull request">
+When you merge a PR in your connected repository, a webhook notifies DevScribe.
+
+<Callout type="success">
+DevScribe analyzes the code changes to identify affected documentation.
+</Callout>
+  </Step>
+  <Step title="Review suggestions">
+Navigate to **Autopilot → Pending Approvals** to see all pending suggestions.
+
+Each suggestion displays:
+- The PR that triggered it (title, author, branch, merge time)
+- The affected documentation file
+- A diff showing old vs. new content
+- Options to edit before accepting
+
+<Callout type="tip">
+You can edit AI-generated suggestions before accepting them to ensure accuracy and tone.
+</Callout>
+  </Step>
+  <Step title="Accept or dismiss">
+Review each suggestion and choose to:
+- **Accept** - Apply the changes to your documentation
+- **Edit & Accept** - Modify the suggestion before applying
+- **Dismiss** - Reject the suggestion
+
+<Callout type="info">
+Changes only appear in your documentation after you accept them. Dismissed suggestions are permanently removed.
+</Callout>
+  </Step>
+</Steps>
+
+### Enabling Auto Suggestions mode
+
+<Steps>
+  <Step title="Navigate to automation settings">
+Go to **Settings → Automation**.
+  </Step>
+  <Step title="Enable automatic suggestions">
+Toggle on **"Enable Automatic Suggestions"**.
+
+This enables DevScribe to monitor your merged pull requests and automatically suggest documentation changes.
+  </Step>
+</Steps>
+
+### User interface changes
+
+When Auto Suggestions mode is active:
+
+- **Pending Approvals** shows a badge count with the number of pending suggestions
+- **Update by PR** is disabled (automation handles PR monitoring)
+- Suggestions appear immediately after PRs are merged
+
+<Callout type="warning">
+Suggestions remain pending until you explicitly accept or dismiss them. They do not expire automatically.
+</Callout>
+
+## Autopilot Mode
+
+The most automated option where DevScribe automatically applies documentation updates without requiring review.
+
+### How it works
+
+<Steps>
+  <Step title="Merge a pull request">
+When you merge a PR in your connected repository, DevScribe receives a webhook notification.
+  </Step>
+  <Step title="Automatic update">
+DevScribe analyzes the code changes, generates documentation updates, and **automatically applies them** to your documentation files.
+
+<Callout type="danger">
+Updates are applied immediately without user review. Use this mode only if you trust the AI-generated content.
+</Callout>
+  </Step>
+  <Step title="Review deployment history">
+Navigate to **Autopilot → Activity Log** to review all automatically applied updates.
+
+Each log entry shows:
+- The PR that triggered the update
+- All files that were changed
+- Before/after diffs (read-only)
+- When the update was deployed
+  </Step>
+</Steps>
+
+### Enabling Autopilot mode
+
+<Steps>
+  <Step title="Navigate to automation settings">
+Go to **Settings → Automation**.
+  </Step>
+  <Step title="Enable automatic suggestions">
+Toggle on **"Enable Automatic Suggestions"** first. This is required for Autopilot mode.
+  </Step>
+  <Step title="Enable Autopilot mode">
+Toggle on **"Autopilot mode"**.
+
+<Callout type="warning">
+A warning indicates: "All AI-generated documentation updates will be applied without review."
+</Callout>
+  </Step>
+</Steps>
+
+### User interface changes
+
+When Autopilot mode is active:
+
+- **Update by PR** is disabled
+- **Pending Approvals** is disabled (no review queue)
+- **Activity Log** becomes your primary interface for reviewing changes
+
+<Callout type="tip">
+Check the Activity Log regularly to ensure updates maintain your documentation quality standards.
+</Callout>
+
+### When to use Autopilot mode
+
+- Your codebase has frequent, incremental changes
+- You trust AI-generated documentation quality
+- You prefer speed over manual review
+- You can monitor the Activity Log for quality control
+
+<Callout type="danger">
+Autopilot mode immediately deploys all changes. If documentation quality is critical, use Auto Suggestions mode instead.
+</Callout>
+
+## Comparing the Three Modes
+
+<CardGroup cols={3} gap="md">
+  <Card title="Manual" icon="hand">
+Full control over updates. You initiate and approve all changes manually.
+
+**Best for:** Teams requiring strict documentation review processes.
+  </Card>
+  <Card title="Auto Suggestions" icon="sparkles">
+Automatic suggestions with human approval. Review and edit before applying.
+
+**Best for:** Balancing automation with quality control.
+  </Card>
+  <Card title="Autopilot" icon="rocket">
+Fully automated updates without review. Changes apply immediately.
+
+**Best for:** High-velocity teams trusting AI-generated content.
+  </Card>
+</CardGroup>
+
+| Feature | Manual | Auto Suggestions | Autopilot | |---------|--------|------------------|-----------| | PR Monitoring | Manual | Automatic | Automatic | | Update Generation | Manual trigger | Automatic | Automatic | | User Review | Required | Required | Not required | | Auto-Apply | No | No | Yes | | Primary Interface | Update by PR | Pending Approvals | Activity Log | | Deployment | Manual | Manual | Automatic |
+
+## Switching Between Modes
+
+You can switch modes at any time in **Settings → Automation**:
+
+<AccordionGroup>
+  <Accordion title="Manual → Auto Suggestions">
+  Enable **"Enable Automatic Suggestions"**. Pending suggestions from new PRs will appear in **Pending Approvals**.
+  </Accordion>
+  <Accordion title="Auto Suggestions → Autopilot">
+  With Automatic Suggestions already enabled, toggle on **"Autopilot mode"**. Future updates will apply automatically.
+
+  <Callout type="info">
+  Existing pending suggestions remain in the queue and still require manual approval.
+  </Callout>
+  </Accordion>
+  <Accordion title="Autopilot → Auto Suggestions">
+  Disable **"Autopilot mode"**. Future updates will queue in **Pending Approvals** for review.
+  </Accordion>
+  <Accordion title="Any mode → Manual">
+  Disable **"Enable Automatic Suggestions"**. DevScribe stops monitoring PRs automatically.
+
+  <Callout type="warning">
+  Pending suggestions are not deleted when switching to Manual mode. Accept or dismiss them before switching.
+  </Callout>
+  </Accordion>
+</AccordionGroup>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Suggestions not appearing after enabling Auto Suggestions">
+  - Verify your repository webhook is configured correctly in **Settings → Integrations**
+  - Ensure you're merging PRs (not just committing to main branch)
+  - Check that the merged PR contains code changes that affect documentation
+  </Accordion>
+  <Accordion title="Autopilot mode toggle is disabled">
+  You must enable **"Enable Automatic Suggestions"** first. Autopilot mode requires automatic suggestions to be active.
+  </Accordion>
+  <Accordion title="How to review changes after Autopilot applies them">
+  Navigate to **Autopilot → Activity Log**. Each entry shows complete before/after diffs of all changes.
+  </Accordion>
+  <Accordion title="Can I edit documentation manually in Autopilot mode?">
+  Yes. Manual edits in your documentation editor are independent of Autopilot updates. Both can coexist.
+  </Accordion>
+</AccordionGroup>
+
