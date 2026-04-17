@@ -1,0 +1,272 @@
+---
+title: "Callouts"
+description: "Learn how to use callouts to highlight important information in your documentation with different types and rich content support"
+---
+
+## Overview
+
+Callouts highlight important information, warnings, tips, and contextual notes in your documentation. They draw reader attention to critical details that shouldn't be missed within the main content flow.
+
+## Callout Types
+
+Devscribe supports six callout types, each designed for specific purposes:
+
+<Tabs>
+<Tab title="Info">
+Use for supplementary information, neutral announcements, or general context.
+
+<Callout type="info">
+This feature requires Node.js version 18 or higher to function properly.
+</Callout>
+</Tab>
+
+<Tab title="Tip">
+Use for best practices, expert advice, shortcuts, or optimization suggestions.
+
+<Callout type="tip">
+Enable caching to reduce API calls by up to 70% in production environments.
+</Callout>
+</Tab>
+
+<Tab title="Warning">
+Use for potential issues, breaking changes, or actions that require careful consideration.
+
+<Callout type="warning">
+Modifying these settings will invalidate all existing user sessions.
+</Callout>
+</Tab>
+
+<Tab title="Success">
+Use for positive confirmations, successful completions, or achievement indicators.
+
+<Callout type="success">
+Your API key has been generated and is ready to use.
+</Callout>
+</Tab>
+
+<Tab title="Error">
+Use when something went wrong or requires immediate attention.
+
+<Callout type="error">
+Database connection failed. Check your credentials and network settings.
+</Callout>
+</Tab>
+
+<Tab title="Danger">
+Use for destructive actions, critical security concerns, or operations that cannot be undone.
+
+<Callout type="danger">
+Deleting this workspace is permanent and cannot be undone. All data will be lost.
+</Callout>
+</Tab>
+</Tabs>
+
+## Basic Syntax
+
+The basic callout structure uses a self-closing component with a `type` attribute:
+
+```markdown
+<Callout type="info">
+Your message goes here.
+</Callout>
+```
+
+Replace `type` with one of: `info`, `tip`, `warning`, `success`, `error`, or `danger`.
+
+## Rich Content Support
+
+Callouts support full Markdown formatting, allowing you to include code blocks, lists, headings, and text formatting.
+
+### Code Blocks in Callouts
+
+<Callout type="tip">
+You can include inline code like `npm install` or full code blocks:
+
+```javascript
+const config = {
+  apiKey: process.env.API_KEY,
+  timeout: 5000
+};
+```
+</Callout>
+
+**Syntax:**
+```markdown
+<Callout type="tip">
+You can include inline code like `npm install` or full code blocks:
+
+```javascript
+const config = {
+  apiKey: process.env.API_KEY,
+  timeout: 5000
+};
+```
+</Callout>
+```
+
+### Lists in Callouts
+
+<Callout type="warning">
+Before proceeding, verify:
+
+- Database backup is complete
+- All users have been notified
+- Rollback plan is documented
+</Callout>
+
+**Syntax:**
+```markdown
+<Callout type="warning">
+Before proceeding, verify:
+
+- Database backup is complete
+- All users have been notified
+- Rollback plan is documented
+</Callout>
+```
+
+### Headings and Multiple Paragraphs
+
+<Callout type="info">
+### Authentication Changes
+
+Version 2.0 introduces OAuth 2.0 support alongside existing API key authentication.
+
+Existing integrations will continue to work, but we recommend migrating to OAuth for enhanced security and features.
+</Callout>
+
+**Syntax:**
+```markdown
+<Callout type="info">
+### Authentication Changes
+
+Version 2.0 introduces OAuth 2.0 support alongside existing API key authentication.
+
+Existing integrations will continue to work, but we recommend migrating to OAuth for enhanced security and features.
+</Callout>
+```
+
+### Text Formatting
+
+<Callout type="success">
+Deployment completed with **zero downtime** and *no errors*. All services are operational.
+</Callout>
+
+**Syntax:**
+```markdown
+<Callout type="success">
+Deployment completed with **zero downtime** and *no errors*. All services are operational.
+</Callout>
+```
+
+## Best Practices
+
+### When to Use Callouts
+
+<CardGroup cols={2}>
+<Card title="Do Use" icon="check">
+- Critical warnings before destructive actions
+- Security-related information
+- Prerequisites or requirements
+- Success confirmations
+- Best practices and optimization tips
+</Card>
+
+<Card title="Avoid Using" icon="xmark">
+- Primary documentation content
+- Information better suited for main text
+- Excessive callouts that create visual clutter
+- Redundant information already in main content
+</Card>
+</CardGroup>
+
+### Choosing the Right Type
+
+<AccordionGroup>
+<Accordion title="Info vs Tip">
+Use **info** for neutral context or background information that doesn't require action. Use **tip** for actionable advice that improves outcomes or efficiency.
+</Accordion>
+
+<Accordion title="Warning vs Danger">
+Use **warning** for actions requiring caution that might cause issues. Use **danger** for destructive or irreversible operations with severe consequences.
+</Accordion>
+
+<Accordion title="Error vs Danger">
+Use **error** to communicate that something went wrong or failed. Use **danger** to warn about potential severe consequences before an action is taken.
+</Accordion>
+</AccordionGroup>
+
+### Content Guidelines
+
+Keep callout content concise and scannable:
+
+- Lead with the most important information
+- Use one to three sentences for simple callouts
+- Break longer callouts into bullet points or headings
+- Ensure the callout adds value beyond the main text
+
+<Callout type="tip">
+Place callouts immediately before or after the relevant content they reference, not separated by multiple paragraphs.
+</Callout>
+
+## Common Patterns
+
+### API Warnings
+
+<Callout type="warning">
+This endpoint is rate-limited to 100 requests per minute. Exceeding this limit returns a `429 Too Many Requests` status.
+</Callout>
+
+### Security Notes
+
+<Callout type="danger">
+Never expose your API secret key in client-side code or public repositories. Use environment variables to store sensitive credentials.
+</Callout>
+
+### Prerequisites
+
+<Callout type="info">
+Before starting, ensure you have:
+- Node.js 18+ installed
+- A valid API key
+- Write access to your project directory
+</Callout>
+
+### Success Verification
+
+<Callout type="success">
+If you see `Server running on port 3000` in your terminal, the setup completed successfully.
+</Callout>
+
+### Pro Tips
+
+<Callout type="tip">
+Use the `--watch` flag during development to automatically restart the server when files change:
+
+```bash
+npm run dev -- --watch
+```
+</Callout>
+
+## Nesting with Other Components
+
+Callouts work seamlessly with Steps, Tabs, and Accordions:
+
+<Steps>
+<Step title="Configure API credentials">
+Add your API key to the environment configuration file.
+
+<Callout type="warning">
+Never commit `.env` files to version control. Add `.env` to your `.gitignore` file.
+</Callout>
+</Step>
+
+<Step title="Test the connection">
+Run the test script to verify your credentials work correctly.
+
+<Callout type="success">
+A successful test returns a `200 OK` status with your account details.
+</Callout>
+</Step>
+</Steps>
+

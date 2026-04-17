@@ -1,0 +1,333 @@
+---
+title: "Cards"
+description: "Display content in organized, visually distinct containers with support for icons, layouts, and interactive links"
+---
+## Overview
+
+Cards organize content into visual containers that highlight important information, features, or navigation options. Use cards to create scannable layouts that guide users to specific resources or explain key concepts.
+
+## Basic Usage
+
+Create a simple card with a title, description, and content.
+
+<TabGroup>
+  <Tab title="Preview">
+  <Card title="Simple Card" description="This is a basic card with title and description">
+  Basic card content goes here. This card uses the default attributes.
+  </Card>
+  </Tab>
+  <Tab title="Syntax">
+  ````markdown
+    <Card title="Simple Card" description="This is a basic card with title and description">
+    Basic card content goes here. This card uses the default attributes.
+    </Card>
+  ```
+  </Tab>
+</TabGroup>
+
+## Card Attributes
+
+<ParameterField name="title" type="string">
+Main heading displayed at the top of the card.
+</ParameterField>
+
+<ParameterField name="description" type="string">
+Subtitle text that appears below the title providing additional context.
+</ParameterField>
+
+<ParameterField name="icon" type="string">
+Icon name from [Lucide React](https://lucide.dev) icon library. Displayed alongside the title when `showIcon` is true.
+</ParameterField>
+
+<ParameterField name="showIcon" type="boolean" default="true">
+Controls icon visibility. Set to `false` to hide the icon even when specified.
+</ParameterField>
+
+<ParameterField name="horizontal" type="boolean" default="false">
+Changes layout orientation. When `true`, displays icon on left with content on right.
+</ParameterField>
+
+<ParameterField name="href" type="string">
+URL destination. Makes the entire card clickable and navigable. Supports both internal and external links.
+</ParameterField>
+
+## Adding Icons
+
+Icons enhance visual hierarchy and help users quickly identify card content. All icons come from the Lucide React library.
+
+<TabGroup>
+  <Tab title="Preview">
+  <Card title="Card with Icon" description="This card demonstrates the icon attribute" icon="star">
+  This card includes an icon. The icon name should be from Lucide React.
+  </Card>
+
+  <Card title="Card without Icon" description="This card has showIcon set to false" icon="user">
+  Even though an icon is specified, it won't be displayed because showIcon is false.
+  </Card>
+  </Tab>
+  <Tab title="Syntax">
+  ````markdown
+    <Card title="Card with Icon" description="This card demonstrates the icon attribute" icon="star">
+    This card includes an icon. The icon name should be from Lucide React.
+    </Card>
+
+    <Card title="Card without Icon" description="This card has showIcon set to false" icon="user" showIcon={false}>
+    Even though an icon is specified, it won't be displayed because showIcon is false.
+    </Card>
+  ```
+  </Tab>
+</TabGroup>
+
+<Callout type="tip">
+Browse available icons at [lucide.dev](https://lucide.dev) and use the exact icon name in lowercase with hyphens (e.g., `external-link`, `file-text`).
+</Callout>
+
+## Layout Options
+
+Cards support two layout modes: vertical (default) and horizontal.
+
+### Vertical Layout
+
+The default layout stacks content from top to bottom with the icon above the title.
+
+<TabGroup>
+  <Tab title="Preview">
+  <Card title="Vertical Card" description="This is the default vertical layout" icon="layers">
+  This card uses the default vertical layout where content flows from top to bottom.
+
+    ### Heading in Card
+    Cards support rich content including headings, paragraphs, and other components.
+  </Card>
+  </Tab>
+  <Tab title="Syntax">
+  ````markdown
+    <Card title="Vertical Card" description="This is the default vertical layout" icon="layers">
+    This card uses the default vertical layout where content flows from top to bottom.
+
+    ### Heading in Card
+    Cards support rich content including headings, paragraphs, and other components.
+    </Card>
+  ```
+  </Tab>
+</TabGroup>
+
+### Horizontal Layout
+
+Set `horizontal={true}` to display the icon on the left with content on the right, similar to callouts.
+
+<TabGroup>
+  <Tab title="Preview">
+  <Card title="Horizontal Card" description="This card uses horizontal layout" icon="layout">
+  This card demonstrates the horizontal layout option where the icon appears on the left and content on the right.
+
+    You can include rich content in horizontal cards:
+    - Lists work great
+    - Code blocks too
+    - Any nested content
+  </Card>
+  </Tab>
+  <Tab title="Syntax">
+  ````markdown
+    <Card title="Horizontal Card" description="This card uses horizontal layout" icon="layout" horizontal={true}>
+    This card demonstrates the horizontal layout option where the icon appears on the left and content on the right.
+
+    You can include rich content in horizontal cards:
+    - Lists work great
+    - Code blocks too
+    - Any nested content
+    </Card>
+  ```
+  </Tab>
+</TabGroup>
+
+## Clickable Cards
+
+Add the `href` attribute to make the entire card clickable and navigate to any URL.
+
+<TabGroup>
+  <Tab title="Preview">
+  <Card title="Linked Card" description="This entire card is clickable" icon="external-link" href="https://example.com">
+  When the href attribute is provided, the entire card becomes clickable and will navigate to the specified URL.
+
+    Click anywhere on this card to test the link functionality.
+  </Card>
+
+  <Card title="Internal Link Card" description="Card linking to internal page" icon="file-text" href="/introduction">
+  This card links to an internal page. The href can be any valid URL - external or internal.
+  </Card>
+  </Tab>
+  <Tab title="Syntax">
+  ````markdown
+    <Card title="Linked Card" description="This entire card is clickable" icon="external-link" href="https://example.com">
+    When the href attribute is provided, the entire card becomes clickable and will navigate to the specified URL.
+
+    Click anywhere on this card to test the link functionality.
+    </Card>
+
+    <Card title="Internal Link Card" description="Card linking to internal page" icon="file-text" href="/introduction">
+    This card links to an internal page. The href can be any valid URL - external or internal.
+    </Card>
+  ```
+  </Tab>
+</TabGroup>
+
+<Callout type="tip">
+Use clickable cards for navigation to guides, API references, or external resources. They provide larger click targets than standard links.
+</Callout>
+
+## Rich Content Support
+
+Cards support all markdown formatting and nested Devscribe components.
+
+### Code Examples
+
+<TabGroup>
+  <Tab title="Preview">
+  <Card title="Card with Code" description="Demonstrating code blocks in cards" icon="code">
+  Cards can contain code examples:
+
+    ```javascript
+    function greetUser(name) {
+      return `Hello, ${name}! Welcome to our app.`;
+    }
+
+    const message = greetUser('Alice');
+    console.log(message);
+    ```
+
+    The code formatting is preserved inside the card component.
+  </Card>
+  </Tab>
+  <Tab title="Syntax">
+  ````markdown
+    <Card title="Card with Code" description="Demonstrating code blocks in cards" icon="code">
+    Cards can contain code examples:
+
+  ```
+
+  function greetUser(name) { return `Hello, ${name}! Welcome to our app.`; }
+
+  const message = greetUser('Alice'); console.log(message);
+
+  ```text
+    The code formatting is preserved inside the card component.
+    </Card>
+  ```
+  </Tab>
+</TabGroup>
+
+### Lists and Mixed Content
+
+<TabGroup>
+  <Tab title="Preview">
+  <Card title="Card with Lists" description="Cards supporting various content types" icon="list">
+  Cards work well with different content types:
+
+    ### Ordered Lists
+    1. First item
+    2. Second item
+    3. Third item
+
+    ### Unordered Lists
+    - Bullet point one
+    - Bullet point two
+    - Bullet point three
+
+    ### Mixed Content
+    You can combine text, lists, and other elements seamlessly.
+  </Card>
+  </Tab>
+  <Tab title="Syntax">
+  ````markdown
+    <Card title="Card with Lists" description="Cards supporting various content types" icon="list">
+    Cards work well with different content types:
+
+    ### Ordered Lists
+    1. First item
+    2. Second item
+    3. Third item
+
+    ### Unordered Lists
+    - Bullet point one
+    - Bullet point two
+    - Bullet point three
+
+    ### Mixed Content
+    You can combine text, lists, and other elements seamlessly.
+    </Card>
+  ```
+  </Tab>
+</TabGroup>
+
+## Card Groups
+
+Use `CardGroup` to display multiple cards in a grid layout with consistent spacing.
+
+<TabGroup>
+  <Tab title="Preview">
+  <CardGroup cols={2} gap="md">
+    <Card title="Authentication" icon="key" href="/auth">
+  Learn how to authenticate requests using API keys or JWT tokens.
+    </Card>
+    <Card title="Rate Limiting" icon="clock" href="/rate-limits">
+  Understand rate limits and best practices for high-volume usage.
+    </Card>
+    <Card title="Error Handling" icon="alert-circle" href="/errors">
+  Handle errors gracefully with proper status codes and messages.
+    </Card>
+    <Card title="Webhooks" icon="webhook" href="/webhooks">
+  Set up webhooks to receive real-time event notifications.
+    </Card>
+  </CardGroup>
+  </Tab>
+  <Tab title="Syntax">
+  ````markdown
+    <CardGroup cols={2}>
+    <Card title="Authentication" icon="key" href="/auth">
+    Learn how to authenticate requests using API keys or JWT tokens.
+    </Card>
+
+    <Card title="Rate Limiting" icon="clock" href="/rate-limits">
+    Understand rate limits and best practices for high-volume usage.
+    </Card>
+
+    <Card title="Error Handling" icon="alert-circle" href="/errors">
+    Handle errors gracefully with proper status codes and messages.
+    </Card>
+
+    <Card title="Webhooks" icon="webhook" href="/webhooks">
+    Set up webhooks to receive real-time event notifications.
+    </Card>
+    </CardGroup>
+  ```
+  </Tab>
+</TabGroup>
+
+<Callout type="info">
+The `cols` attribute on `CardGroup` controls the number of columns in the grid. Common values are 2 or 3 depending on your layout needs.
+</Callout>
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="When to use cards">
+  - **Feature highlights** - Showcase key features or capabilities
+  - **Navigation hubs** - Guide users to different documentation sections
+  - **Quick start guides** - Present multiple getting started paths
+  - **Resource collections** - Group related links or references
+  </Accordion>
+  <Accordion title="Writing effective card content">
+  - Keep titles concise (2-5 words)
+  - Write descriptions that clearly explain the card's purpose
+  - Choose icons that visually represent the content
+  - Use consistent card structures across similar content
+  - Limit card content to essential information
+  </Accordion>
+  <Accordion title="Accessibility considerations">
+  - Ensure linked cards have descriptive titles, not generic "Click here"
+  - Choose icons that reinforce meaning, not as the sole indicator
+  - Maintain sufficient color contrast in custom styling
+  - Test keyboard navigation for clickable cards
+  </Accordion>
+</AccordionGroup>
+

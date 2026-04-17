@@ -1,0 +1,325 @@
+---
+title: "Accordions"
+description: "Learn how to create collapsible content sections using Accordion and AccordionGroup components in your documentation."
+---
+## Overview
+
+Accordions let you hide and show content sections, keeping your documentation clean and scannable. Users can expand only the information they need, making long pages easier to navigate.
+
+Use accordions for:
+
+- FAQs and troubleshooting guides
+- Optional advanced configurations
+- Detailed explanations that might overwhelm the main content
+- Step-by-step tutorials where users focus on one step at a time
+
+## Basic Accordion
+
+Create a collapsible content section with `title` and optional `description` attributes:
+
+<TabGroup>
+  <Tab title="Preview">
+  <AccordionGroup>
+    <Accordion title="Basic Accordion">
+    This accordion starts closed by default. It contains paragraph content that should be collapsible.
+
+      - Item 1
+      - Item 2
+      - Item 3
+    </Accordion>
+  </AccordionGroup>
+  </Tab>
+  <Tab title="Syntax">
+  ```markdown
+    <Accordion title="Basic Accordion" description="This is a basic accordion">
+    This accordion starts closed by default. It contains paragraph content that should be collapsible.
+
+    - Item 1
+    - Item 2
+    - Item 3
+    </Accordion>
+  ```
+  </Tab>
+</TabGroup>
+
+## Accordion Attributes
+
+<ParameterField name="title" type="string">
+The heading text displayed in the accordion header.
+</ParameterField>
+
+<ParameterField name="description" type="string">
+Optional subtext that appears below the title in the accordion header.
+</ParameterField>
+
+<ParameterField name="defaultOpen" type="boolean" default="false">
+Set to `true` to display the accordion expanded when the page loads.
+</ParameterField>
+
+<ParameterField name="icon" type="string">
+Icon name to display in the accordion header. Must be used with `showIcon={true}`.
+</ParameterField>
+
+<ParameterField name="showIcon" type="boolean" default="false">
+Set to `true` to display the icon specified in the `icon` attribute.
+</ParameterField>
+
+## Open by Default
+
+Start an accordion in the expanded state:
+
+<TabGroup>
+  <Tab title="Preview">
+  <AccordionGroup>
+    <Accordion title="Open by Default" defaultOpen={true}>
+    This accordion starts in the open state because defaultOpen is set to true.
+    </Accordion>
+  </AccordionGroup>
+  </Tab>
+  <Tab title="Syntax">
+  ```markdown
+    <Accordion title="Open by Default" description="This accordion starts open" defaultOpen={true}>
+    This accordion starts in the open state because defaultOpen is set to true.
+    </Accordion>
+  ```
+  </Tab>
+</TabGroup>
+
+<Callout type="tip">
+Use `defaultOpen={true}` for the most important or frequently accessed content in a group of accordions.
+</Callout>
+
+## Accordion with Icon
+
+Add visual context with icons:
+
+<TabGroup>
+  <Tab title="Preview">
+  <AccordionGroup>
+    <Accordion title="Accordion with Icon" icon="star">
+    This accordion displays the specified icon because showIcon is explicitly set to true.
+    </Accordion>
+  </AccordionGroup>
+  </Tab>
+  <Tab title="Syntax">
+  ```markdown
+    <Accordion title="Accordion with Icon" description="Testing icon attribute" icon="star" showIcon={true}>
+    This accordion displays the specified icon because showIcon is explicitly set to true.
+    </Accordion>
+  ```
+  </Tab>
+</TabGroup>
+
+## Accordion Groups
+
+Group related accordions together using `AccordionGroup`. This provides better visual organization and enables exclusive mode behavior.
+
+### Basic Accordion Group
+
+<TabGroup>
+  <Tab title="Preview">
+  <AccordionGroup>
+    <Accordion title="FAQ: Getting Started" icon="help-circle">
+    Run the following command:
+
+      ```bash
+      npm install @my-package/core
+      ```
+    </Accordion>
+    <Accordion title="FAQ: Configuration" icon="settings">
+    Create a config file in your project root:
+
+      <CodeSnippet language="javascript" title="config.js">
+      {`module.exports = { apiUrl: 'https://api.example.com' };`}
+      </CodeSnippet>
+    </Accordion>
+  </AccordionGroup>
+  </Tab>
+  <Tab title="Syntax">
+  ```markdown
+    <AccordionGroup>
+    <Accordion title="FAQ: Getting Started" description="Basic setup questions" icon="help-circle" showIcon={true}>
+    Run the following command:
+
+  ```
+
+  npm install @my-package/core
+
+  ```text
+    </Accordion>
+
+    <Accordion title="FAQ: Configuration" description="Setup and configuration help" icon="settings" showIcon={true}>
+    Create a config file in your project root:
+
+    <CodeSnippet language="javascript" title="config.js">
+    {`module.exports = { apiUrl: 'https://api.example.com' };`}
+    </CodeSnippet>
+    </Accordion>
+    </AccordionGroup>
+  ```
+  </Tab>
+</TabGroup>
+
+### Exclusive Accordion Group
+
+Set `exclusive={true}` to allow only one accordion open at a time. Opening a new accordion automatically closes any previously opened one:
+
+<TabGroup>
+  <Tab title="Preview">
+  <AccordionGroup>
+    <Accordion title="Step 1: Project Setup" icon="folder-plus" defaultOpen={true}>
+    ```bash
+      mkdir my-project && cd my-project && npm init -y
+      ```
+    </Accordion>
+    <Accordion title="Step 2: Install Dependencies" icon="download">
+    ```bash
+      npm install react react-dom
+      ```
+    </Accordion>
+  </AccordionGroup>
+  </Tab>
+  <Tab title="Syntax">
+  ```markdown
+    <AccordionGroup exclusive={true}>
+    <Accordion title="Step 1: Project Setup" description="Initialize your project" defaultOpen={true} icon="folder-plus" showIcon={true}>
+  ```
+
+  mkdir my-project && cd my-project && npm init -y
+
+  ```text
+    </Accordion>
+
+    <Accordion title="Step 2: Install Dependencies" description="Add required packages" icon="download" showIcon={true}>
+  ```
+
+  npm install react react-dom
+
+  ```text
+    </Accordion>
+    </AccordionGroup>
+  ```
+  </Tab>
+</TabGroup>
+
+<Callout type="tip">
+Use exclusive mode for sequential tutorials or when you want users to focus on one section at a time.
+</Callout>
+
+## AccordionGroup Attributes
+
+<ParameterField name="exclusive" type="boolean" default="false">
+Set to `true` to ensure only one accordion can be open at a time within the group. Opening a new accordion automatically closes others.
+</ParameterField>
+
+## Nested Content
+
+Accordions support all Devscribe components inside them, including code blocks, callouts, and even nested accordions:
+
+<AccordionGroup>
+  <Accordion title="Accordion with Rich Content" icon="code">
+  <Callout type="info">
+  You can nest any components inside accordions.
+  </Callout>
+
+  <CodeSnippet language="javascript" title="example.js" showLineNumbers={true}>
+  {`function greet(name) {
+    return \`Hello, \${name}!\`;
+  }
+
+  console.log(greet('World'));`}
+  </CodeSnippet>
+
+  <Accordion title="Nested Accordion">
+  This is an accordion inside another accordion.
+  </Accordion>
+</AccordionGroup>
+
+## Common Use Cases
+
+<AccordionGroup>
+  <Accordion title="FAQ Sections" icon="help-circle">
+  Group frequently asked questions in an exclusive accordion group. This keeps your FAQ page scannable while letting users quickly find answers.
+
+  <CodeSnippet language="markdown">
+  {`<AccordionGroup exclusive={true}>
+    <Accordion title="How do I get started?">
+      Follow our quickstart guide...
+  </Accordion>
+  <Accordion title="What are the pricing tiers?">
+  We offer three pricing tiers...
+  </Accordion>
+</AccordionGroup>
+
+<AccordionGroup>
+  <Accordion title="Troubleshooting Guides" icon="alert-circle">
+  Organize troubleshooting steps by error type or category. Users can expand only relevant sections.
+
+  <CodeSnippet language="markdown">
+  {`<AccordionGroup>
+    <Accordion title="Connection Errors" icon="wifi-off" showIcon={true}>
+      - Check your network connection
+      - Verify firewall settings
+  </Accordion>
+</AccordionGroup>
+
+<AccordionGroup>
+  <Accordion title="Authentication Errors" icon="lock">
+  - Confirm your API key is valid
+      - Check token expiration
+  </Accordion>
+</AccordionGroup>
+
+<AccordionGroup>
+  <Accordion title="Advanced Configuration Options" icon="settings">
+  Hide complex or optional configuration details in accordions. This keeps your main documentation focused on essential setup while making advanced options discoverable.
+
+  <CodeSnippet language="markdown">
+  {`<Accordion title="Advanced Options" description="Optional performance tuning">
+    <ParameterField name="maxConnections" type="integer" default="100">
+      Maximum number of concurrent connections...
+    </ParameterField>
+  </Accordion>
+</AccordionGroup>
+
+<AccordionGroup>
+  <Accordion title="Step-by-Step Tutorials" icon="list">
+  Use exclusive mode to guide users through sequential steps, ensuring they complete each step before moving to the next.
+
+  <CodeSnippet language="markdown">
+  {`<AccordionGroup exclusive={true}>
+    <Accordion title="Step 1: Install" defaultOpen={true}>
+      Run \`npm install\`...
+  </Accordion>
+</AccordionGroup>
+
+<AccordionGroup>
+  <Accordion title="Step 2: Configure">
+  Create a \`.env\` file...
+  </Accordion>
+</AccordionGroup>
+
+## Best Practices
+
+<Callout type="tip">
+Write clear, specific accordion titles that tell users exactly what content they'll find inside. Avoid generic titles like "More Information" or "Click Here."
+</Callout>
+
+<Callout type="warning">
+Don't hide critical information in accordions that start closed. Essential setup steps, security warnings, or required configuration should be visible by default.
+</Callout>
+
+**Do:**
+
+- Use descriptive titles that summarize the content
+- Group related accordions with `AccordionGroup`
+- Add icons for visual scanning
+- Keep accordion content focused on a single topic
+
+**Don't:**
+
+- Nest accordions more than two levels deep
+- Put critical warnings in closed accordions
+- Create accordions with only one or two lines of content
+- Use accordions as the primary navigation structure
+
