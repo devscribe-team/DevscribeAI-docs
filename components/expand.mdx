@@ -2,7 +2,8 @@
 title: "Expands"
 description: "Create collapsible sections to organize optional content and improve documentation readability"
 ---
-## Overview 
+
+## Overview
 
 The Expand component creates collapsible sections that hide optional content until users need it. Use it to reduce visual clutter while keeping detailed information accessible.
 
@@ -12,16 +13,16 @@ The simplest implementation uses default settings with the content collapsed by 
 
 <TabGroup>
   <Tab title="Preview">
-  <Expand title="Details">
-  This expand component uses the default title and starts closed.
-  </Expand>
+    <Expand title="Details">
+      This expand component uses the default title and starts closed.
+    </Expand>
   </Tab>
   <Tab title="Syntax">
-  ```markdown
-    <Expand>
-    This expand component uses the default title and starts closed.
-    </Expand>
-  ```
+```mdx
+<Expand>
+  This expand component uses the default title and starts closed.
+</Expand>
+```
   </Tab>
 </TabGroup>
 
@@ -41,28 +42,28 @@ Replace the default "Details" heading with descriptive text that indicates the h
 
 <TabGroup>
   <Tab title="Preview">
-  <Expand title="Custom Expand Title">
-  You can include any content inside, like lists and code blocks.
+    <Expand title="Custom Expand Title">
+      You can include any content inside, like lists and code blocks.
 
-    ```javascript
-    function example() {
-      return 'Expand components show/hide optional content';
-    }
-    ```
-  </Expand>
+```javascript
+function example() {
+  return 'Expand components show/hide optional content';
+}
+```
+    </Expand>
   </Tab>
   <Tab title="Syntax">
-  ````markdown
-    <Expand title="Custom Expand Title">
-    You can include any content inside, like lists and code blocks.
+```mdx
+<Expand title="Custom Expand Title">
+  You can include any content inside, like lists and code blocks.
 
-  ```
-
-  function example() { return 'Expand components show/hide optional content'; }
-
-  ```text
-    </Expand>
-  ```
+```javascript
+function example() {
+  return 'Expand components show/hide optional content';
+}
+```
+</Expand>
+```
   </Tab>
 </TabGroup>
 
@@ -72,16 +73,16 @@ Display content expanded by default when users frequently need the information.
 
 <TabGroup>
   <Tab title="Preview">
-  <Expand title="Open by Default" defaultOpen={true}>
-  This expand component starts in the open state because defaultOpen is true.
-  </Expand>
+    <Expand title="Open by Default" defaultOpen={true}>
+      This expand component starts in the open state because defaultOpen is true.
+    </Expand>
   </Tab>
   <Tab title="Syntax">
-  ```markdown
-    <Expand title="Open by Default" defaultOpen={true}>
-    This expand component starts in the open state because defaultOpen is true.
-    </Expand>
-  ```
+```mdx
+<Expand title="Open by Default" defaultOpen={true}>
+  This expand component starts in the open state because defaultOpen is true.
+</Expand>
+```
   </Tab>
 </TabGroup>
 
@@ -113,10 +114,10 @@ interface ExpandProps {
   children: React.ReactNode;
 }
 
-const MyExpand: React.FC<ExpandProps> = ({ 
-  title = "Details", 
+const MyExpand: React.FC<ExpandProps> = ({
+  title = "Details",
   defaultOpen = false,
-  children 
+  children
 }) => {
   return <Expand title={title} defaultOpen={defaultOpen}>{children}</Expand>;
 };
@@ -141,22 +142,22 @@ npm install @devscribe/components
 
 <AccordionGroup>
   <Accordion title="When to use Expand">
-  - **Optional details** - Advanced configuration, technical specifications, or edge cases
-  - **Verbose examples** - Long code samples or detailed output that clutters the page
-  - **Nested API properties** - Object hierarchies with multiple levels (use with ResponseField)
-  - **Troubleshooting steps** - Error resolution that most users won't need
+    - **Optional details** - Advanced configuration, technical specifications, or edge cases
+    - **Verbose examples** - Long code samples or detailed output that clutters the page
+    - **Nested API properties** - Object hierarchies with multiple levels (use with ResponseField)
+    - **Troubleshooting steps** - Error resolution that most users won't need
   </Accordion>
   <Accordion title="When not to use Expand">
-  - **Critical information** - Prerequisites, warnings, or essential setup steps
-  - **Primary instructions** - Main workflow steps should remain visible
-  - **Short content** - Content under 3-4 lines doesn't justify hiding
-  - **Navigation** - Use Tabs or Accordions for alternative paths or categories
+    - **Critical information** - Prerequisites, warnings, or essential setup steps
+    - **Primary instructions** - Main workflow steps should remain visible
+    - **Short content** - Content under 3-4 lines doesn't justify hiding
+    - **Navigation** - Use Tabs or Accordions for alternative paths or categories
   </Accordion>
   <Accordion title="Writing effective titles">
-  - Use descriptive, actionable titles: "Advanced Configuration Options" not "More Info"
-  - Indicate content type: "Example Response", "Troubleshooting Steps", "Code Sample"
-  - Keep titles concise: 2-6 words maximum
-  - Use parallel structure when multiple expands appear together
+    - Use descriptive, actionable titles: "Advanced Configuration Options" not "More Info"
+    - Indicate content type: "Example Response", "Troubleshooting Steps", "Code Sample"
+    - Keep titles concise: 2-6 words maximum
+    - Use parallel structure when multiple expands appear together
   </Accordion>
 </AccordionGroup>
 
@@ -170,28 +171,24 @@ Use Expand with ResponseField to document nested object properties.
 Complete user profile data.
 
 <Expand title="User properties">
-<ResponseField name="id" type="string">
-Unique identifier in UUID v4 format.
-</ResponseField>
+  <ResponseField name="id" type="string">
+  Unique identifier in UUID v4 format.
+  </ResponseField>
 
-<ResponseField name="metadata" type="object">
-Custom key-value pairs attached to the user.
+  <ResponseField name="metadata" type="object">
+  Custom key-value pairs attached to the user.
 
-<Expand title="Metadata structure">
-<ResponseField name="created_by" type="string">
-User ID of the account creator.
-</ResponseField>
+  <Expand title="Metadata structure">
+    <ResponseField name="created_by" type="string">
+    User ID of the account creator.
+    </ResponseField>
 
-<ResponseField name="tags" type="array">
-Classification labels for organization.
-</ResponseField>
-
+    <ResponseField name="tags" type="array">
+    Classification labels for organization.
+    </ResponseField>
+  </Expand>
+  </ResponseField>
 </Expand>
-
-</ResponseField>
-
-</Expand>
-
 </ResponseField>
 
 ### Troubleshooting Sections
@@ -227,22 +224,22 @@ const result = api.fetchData();
 
 <Expand title="Advanced Examples">
 <CodeGroup>
-<CodeSnippet language="javascript" title="With pagination">
+  <CodeSnippet language="javascript" title="With pagination">
 {`const result = api.fetchData({
   page: 2,
   limit: 50,
   sort: 'created_at:desc'
 });`}
-</CodeSnippet>
+  </CodeSnippet>
 
-<CodeSnippet language="javascript" title="With filtering">
+  <CodeSnippet language="javascript" title="With filtering">
 {`const result = api.fetchData({
   filters: {
     status: 'active',
     created_after: '2024-01-01'
   }
 });`}
-</CodeSnippet>
+  </CodeSnippet>
 </CodeGroup>
 </Expand>
 
