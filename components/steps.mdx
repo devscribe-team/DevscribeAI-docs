@@ -1,0 +1,354 @@
+---
+title: "Steps"
+description: "Create sequential, guided workflows with rich content support including code snippets, callouts, and nested components"
+---
+## Overview
+
+The Steps component displays sequential procedures with automatic numbering and visual progression indicators. Each step can contain text, code examples, callouts, and other Devscribe components.
+
+## Basic Usage
+
+<TabGroup>
+  <Tab title="Preview">
+  <Steps>
+    <Step title="Install Dependencies">
+  ```bash
+    npm install @markdoc/markdoc react
+    ```
+    </Step>
+    <Step title="Create Configuration">
+  <CodeSnippet language="javascript" title="markdoc.config.js">
+    {`export default { nodes: {}, tags: {} }`}
+    </CodeSnippet>
+    </Step>
+    <Step title="Build Your First Document">
+  <CodeSnippet language="markdown" title="example.mdx">
+    {`# Welcome to Markdoc
+    <Callout type="info">Hello from Markdoc!</Callout>`}
+    </CodeSnippet>
+    </Step>
+  </Steps>
+  </Tab>
+  <Tab title="Syntax">
+  ````markdown
+    <Steps>
+    <Step title="Install Dependencies">
+  ```
+
+  npm install @markdoc/markdoc react
+
+  ```text
+    </Step>
+
+    <Step title="Create Configuration">
+    <CodeSnippet language="javascript" title="markdoc.config.js">
+    {`export default { nodes: {}, tags: {} }`}
+    </CodeSnippet>
+    </Step>
+
+    <Step title="Build Your First Document">
+    <CodeSnippet language="markdown" title="example.mdx">
+    {`# Welcome to Markdoc
+    <Callout type="info">Hello from Markdoc!</Callout>`}
+    </CodeSnippet>
+    </Step>
+    </Steps>
+  ```
+  </Tab>
+</TabGroup>
+
+## Component Structure
+
+### Steps Container
+
+The `<Steps>` wrapper creates the numbered sequence container.
+
+```markdown
+<Steps>
+  <!-- Step components go here -->
+</Steps>
+```
+
+### Individual Step
+
+Each `<Step>` requires a `title` attribute and can contain any markdown or Devscribe components.
+
+```markdown
+<Step title="Your step title">
+Step content goes here
+</Step>
+```
+
+## Supported Content Types
+
+### Text and Markdown
+
+Include explanatory text, lists, links, and standard markdown formatting within steps.
+
+<Steps>
+  <Step title="Configure Settings">
+Update your configuration file with the following values:
+
+- Set `timeout` to 5000ms
+- Enable `retryOnFailure`
+- Add your API endpoint URL
+  </Step>
+</Steps>
+
+```markdown
+<Step title="Configure Settings">
+Update your configuration file with the following values:
+
+- Set `timeout` to 5000ms
+- Enable `retryOnFailure`
+- Add your API endpoint URL
+</Step>
+```
+
+### Code Snippets
+
+Use `<CodeSnippet>` with language syntax highlighting, titles, and line numbers.
+
+<Steps>
+  <Step title="Create Database Schema">
+<CodeSnippet language="sql" title="schema.sql" showLineNumbers={true}>
+{`CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);`}
+</CodeSnippet>
+  </Step>
+</Steps>
+
+````markdown
+<Step title="Create Database Schema">
+<CodeSnippet language="sql" title="schema.sql" showLineNumbers={true}>
+{`CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);`}
+</CodeSnippet>
+</Step>
+```
+
+### Callouts
+
+Add contextual information using callout components for tips, warnings, and notes.
+
+<Steps>
+  <Step title="Run Migrations">
+Execute the migration script:
+
+```bash
+npm run migrate
+```
+
+<Callout type="warning">
+Back up your database before running migrations in production.
+</Callout>
+  </Step>
+</Steps>
+
+````markdown
+<Step title="Run Migrations">
+Execute the migration script:
+
+```
+
+npm run migrate
+
+```text
+<Callout type="warning">
+Back up your database before running migrations in production.
+</Callout>
+</Step>
+```
+
+### Multiple Components
+
+Combine text, code, and callouts within a single step for comprehensive instructions.
+
+<Steps>
+  <Step title="Implement Authentication">
+Create the authentication middleware:
+
+<CodeSnippet language="javascript" title="middleware/auth.js" highlight="3-5">
+{`import jwt from 'jsonwebtoken'
+
+export const authenticate = (req, res, next) => {
+  const token = req.headers.authorization?.split(' ')[1]
+  if (!token) return res.status(401).json({ error: 'No token provided' })
+  
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    req.user = decoded
+    next()
+  } catch (error) {
+    res.status(401).json({ error: 'Invalid token' })
+  }
+}`}
+</CodeSnippet>
+
+<Callout type="tip">
+Store JWT secrets in environment variables, never in source code.
+</Callout>
+
+Apply the middleware to protected routes.
+  </Step>
+</Steps>
+
+## Advanced Example
+
+<TabGroup>
+  <Tab title="Preview">
+  <Steps>
+    <Step title="Database Setup">
+  Configure your database connection and schema.
+
+    <CodeSnippet language="sql" title="schema.sql" showLineNumbers={true}>
+    {`CREATE TABLE documents (
+      id SERIAL PRIMARY KEY,
+      name VARCHAR(255) NOT NULL,
+      tag VARCHAR(100),
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );`}
+    </CodeSnippet>
+
+    <Callout type="warning">
+    Make sure to backup your database before running schema changes.
+    </Callout>
+    </Step>
+    <Step title="API Implementation">
+  Build the API endpoints.
+
+    <CodeSnippet language="javascript" title="api/documents.js" highlight="5-7,12-14">
+    {`import express from 'express'
+    const router = express.Router()
+
+    router.get('/documents', async (req, res) => {
+      const documents = await db.query('SELECT * FROM documents')
+      res.json(documents)
+    })
+
+    router.post('/documents', async (req, res) => {
+      const { name, tag } = req.body
+      const result = await db.query('INSERT INTO documents(name, tag) VALUES($1,$2) RETURNING *', [name, tag])
+      res.status(201).json(result.rows[0])
+    })
+
+    export default router`}
+    </CodeSnippet>
+
+    <Callout type="tip">
+    Return precise status codes and validate inputs.
+    </Callout>
+
+    The endpoints above demonstrate basic read and create operations.
+    </Step>
+    <Step title="Testing & Deployment">
+  Write tests and deploy your application.
+
+    <CodeSnippet language="bash" title="ci.yml">
+    {`npm run test && npm run build && npm run deploy`}
+    </CodeSnippet>
+    </Step>
+  </Steps>
+  </Tab>
+  <Tab title="Syntax">
+  ````markdown
+    <Steps>
+    <Step title="Database Setup">
+    Configure your database connection and schema.
+
+    <CodeSnippet language="sql" title="schema.sql" showLineNumbers={true}>
+    {`CREATE TABLE documents (
+      id SERIAL PRIMARY KEY,
+      name VARCHAR(255) NOT NULL,
+      tag VARCHAR(100),
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );`}
+    </CodeSnippet>
+
+    <Callout type="warning">
+    Make sure to backup your database before running schema changes.
+    </Callout>
+    </Step>
+
+    <Step title="API Implementation">
+    Build the API endpoints.
+
+    <CodeSnippet language="javascript" title="api/documents.js" highlight="5-7,12-14">
+    {`import express from 'express'
+    const router = express.Router()
+
+    router.get('/documents', async (req, res) => {
+      const documents = await db.query('SELECT * FROM documents')
+      res.json(documents)
+    })
+
+    router.post('/documents', async (req, res) => {
+      const { name, tag } = req.body
+      const result = await db.query('INSERT INTO documents(name, tag) VALUES($1,$2) RETURNING *', [name, tag])
+      res.status(201).json(result.rows[0])
+    })
+
+    export default router`}
+    </CodeSnippet>
+
+    <Callout type="tip">
+    Return precise status codes and validate inputs.
+    </Callout>
+
+    The endpoints above demonstrate basic read and create operations.
+    </Step>
+
+    <Step title="Testing & Deployment">
+    Write tests and deploy your application.
+
+    <CodeSnippet language="bash" title="ci.yml">
+    {`npm run test && npm run build && npm run deploy`}
+    </CodeSnippet>
+    </Step>
+    </Steps>
+  ```
+  </Tab>
+</TabGroup>
+
+## Best Practices
+
+### Use Clear, Action-Oriented Titles
+
+Write step titles that describe the action users will take.
+
+<CardGroup cols={2} gap="md">
+  <Card title="Good" icon="check">
+```markdown
+<Step title="Install Dependencies">
+<Step title="Configure Environment Variables">
+<Step title="Deploy to Production">
+```
+  </Card>
+  <Card title="Avoid" icon="x">
+```markdown
+<Step title="Dependencies">
+<Step title="Environment">
+<Step title="Production">
+```
+  </Card>
+</CardGroup>
+
+### Provide Context Before Code
+
+Explain what the code does before showing it.
+
+```markdown
+<Step title="Create API Client">
+Create a reusable API client that handles authentication and error handling:
+
+<CodeSnippet language="typescript" title="lib/api-client.ts">
+{`// Implementation here`}
+</CodeSnippet>
+</Step>
+```
