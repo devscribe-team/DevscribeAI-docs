@@ -1,0 +1,541 @@
+---
+title: "Generate Docs"
+description: "Complete guide to connecting repositories, generating docs, and configuring docs.json for deployment"
+---
+## Overview
+
+Devscribe automates documentation generation by analyzing your connected repositories. This guide covers the complete workflow from connecting a repository to publishing your generated documentation.
+
+## Prerequisites
+
+Before generating documentation, ensure you have:
+
+- An active Devscribe account with a platform created
+- GitHub or GitLab repository access
+- Code repository with the content you want to document
+
+## Connecting Your Repository
+
+### GitHub Connection
+
+<Steps>
+  <Step title="Navigate to GitHub settings">
+Go to **Settings** > **GitHub** in your Devscribe dashboard.
+  </Step>
+  <Step title="Authorize GitHub access">
+Click **Connect GitHub**. You'll be redirected to GitHub's OAuth authorization page.
+
+<Callout type="info">
+Devscribe requires repository read access to analyze your code and generate documentation.
+</Callout>
+  </Step>
+  <Step title="Grant repository permissions">
+Select the repositories you want Devscribe to access and click **Install & Authorize**.
+
+<Callout type="success">
+Once authorized, you'll see a **Reconnect GitHub** button with a check mark indicating successful connection.
+</Callout>
+  </Step>
+</Steps>
+
+### GitLab Connection
+
+<Steps>
+  <Step title="Navigate to GitLab settings">
+Go to **Settings** > **GitLab** in your Devscribe dashboard.
+  </Step>
+  <Step title="Connect GitLab account">
+Follow the OAuth flow to authorize Devscribe access to your GitLab groups and projects.
+  </Step>
+  <Step title="Select GitLab groups">
+Choose which GitLab groups Devscribe should access for documentation generation.
+  </Step>
+</Steps>
+
+<Callout type="tip">
+You can connect both GitHub and GitLab to the same Devscribe platform.
+</Callout>
+
+## Generating Documentation
+
+The documentation generation process follows a three-step workflow:
+
+### Step 1: Select Documentation Type
+
+Navigate to **Generate Docs** in your dashboard and choose your documentation type:
+
+<CardGroup cols={3} gap="md">
+  <Card title="API" icon="code">
+Generate comprehensive API reference documentation from your endpoints, functions, or classes.
+  </Card>
+  <Card title="External" icon="book">
+Create user-facing guides, tutorials, and product documentation.
+  </Card>
+  <Card title="Internal" icon="users">
+Build internal team documentation for architecture, processes, or development guides.
+  </Card>
+</CardGroup>
+
+### Step 2: Configure Source Repository
+
+<Steps>
+  <Step title="Select repository">
+Choose from your connected repositories. The dropdown displays all repositories you've authorized.
+
+<CodeSnippet language="text" title="Repository format">
+organization-name/repository-name
+</CodeSnippet>
+  </Step>
+  <Step title="Select branch">
+Choose the branch to analyze. Defaults to your repository's main branch if not specified.
+
+<Callout type="tip">
+Use feature branches when documenting unreleased functionality.
+</Callout>
+  </Step>
+  <Step title="Specify endpoint (API docs only)">
+For API documentation, enter the specific endpoint or function name:
+
+- REST endpoints: `GET /user/auth/data`
+- Functions: `getUserData()`
+- Classes: `AuthenticationService`
+
+<Callout type="info">
+This helps the AI focus on the specific code you want documented rather than analyzing the entire repository.
+</Callout>
+  </Step>
+  <Step title="Add context files (optional)">
+Select up to 5 files or directories to provide additional context for documentation generation.
+
+Click **Add Context** to browse your repository file tree and select relevant files.
+
+<Callout type="warning">
+Context file limit: 5 files or paths maximum
+</Callout>
+
+**Example use cases:**
+- Include related model definitions when documenting API endpoints
+- Add configuration files when documenting setup processes
+- Reference parent classes when documenting inherited methods
+  </Step>
+</Steps>
+
+### Step 3: Generate and Edit Documentation
+
+<Steps>
+  <Step title="Enter generation prompt">
+Provide specific instructions for what you want documented:
+
+<CodeSnippet language="text" title="Example prompt for API documentation">
+Document the user authentication endpoint including request parameters, response format, error codes, and authentication requirements. Include examples in cURL, Python, and JavaScript.
+</CodeSnippet>
+
+<CodeSnippet language="text" title="Example prompt for external documentation">
+Create a getting started guide explaining how to install the package, configure the environment, and run the first example. Target audience is developers new to our platform.
+</CodeSnippet>
+
+<Callout type="tip">
+The more specific your prompt, the better the generated documentation. Include details about target audience, required sections, and example formats.
+</Callout>
+  </Step>
+  <Step title="Monitor generation progress">
+The AI generates documentation in two phases:
+
+1. **Thinking phase** - AI analyzes code and plans documentation structure
+2. **Generation phase** - Content streams in real-time
+
+You can view the thinking process to understand how the AI interpreted your prompt.
+  </Step>
+  <Step title="Review and iterate">
+Once generation completes, you can:
+
+- **Edit mode** - Make manual changes to the generated content
+- **Preview mode** - View how documentation renders with Devscribe components
+- **Continue generation** - Use the chat to refine and improve content
+
+<CodeSnippet language="text" title="Example iteration prompt">
+Add a troubleshooting section covering common authentication errors and their solutions.
+</CodeSnippet>
+
+<Callout type="info">
+Chat history is preserved during your session, allowing iterative improvements without regenerating from scratch.
+</Callout>
+  </Step>
+  <Step title="Set documentation title">
+Enter a descriptive title for your documentation page. This title will:
+
+- Appear in your docs.json navigation
+- Be used to generate the file name
+- Display as the page heading
+
+<CodeSnippet language="text" title="Title examples">
+User Authentication API
+Getting Started Guide
+Deployment Configuration
+</CodeSnippet>
+
+<Callout type="warning">
+File names are automatically generated from titles. "User Authentication API" becomes `user_authentication_api.mdx`
+</Callout>
+  </Step>
+  <Step title="Save documentation">
+Click **Save** to persist your documentation. The system automatically:
+
+1. Creates an `.mdx` file in your platform's `docs/generated/` directory
+2. Adds frontmatter if missing (title, description, icon)
+3. Updates `docs.json` with the new page entry
+4. Updates `metadata.json` with file creation timestamp and hash
+
+<Callout type="success">
+Saved documentation appears immediately in your platform's file structure and is ready for deployment.
+</Callout>
+  </Step>
+</Steps>
+
+## Understanding docs.json
+
+The `docs.json` file controls your documentation site's navigation structure. Every generated document must be added to `docs.json` to appear in your deployed documentation.
+
+### File Location
+
+<CodeSnippet language="text" title="docs.json location">
+{`{platform_id}/docs/docs.json`}
+</CodeSnippet>
+
+### Basic Structure
+
+<CodeSnippet language="json" title="docs.json">
+{`{
+  "name": "your-project-name",
+  "favicon": "/favicon.svg",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Guides",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart/guide"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}`}
+</CodeSnippet>
+
+### Navigation Hierarchy
+
+### Automatic docs.json Updates
+
+When you save generated documentation, Devscribe automatically updates `docs.json`:
+
+<Steps>
+  <Step title="Detection of documentation type">
+The system analyzes frontmatter to determine if documentation is API-related:
+
+<CodeSnippet language="yaml" title="API documentation frontmatter">
+{`---
+title: "User Authentication Endpoint"
+api: "POST /auth/login"
+---`}
+</CodeSnippet>
+
+Documents with `api` or `openapi` fields route to the **API Reference** tab. Others route to the **Guides** tab.
+  </Step>
+  <Step title="Tab creation">
+If the target tab doesn't exist, it's automatically created:
+
+<CodeSnippet language="json">
+{`{
+  "tabs": [
+    {
+      "tab": "Guides",
+      "groups": [{ "group": "Essentials", "pages": [] }]
+    }
+  ]
+}`}
+</CodeSnippet>
+  </Step>
+  <Step title="Page entry addition">
+Your generated documentation is added to the first group in the target tab:
+
+<CodeSnippet language="json">
+{`{
+  "groups": [
+    {
+      "group": "Essentials",
+      "pages": [
+        "introduction",
+        "generated/user_authentication_api"
+      ]
+    }
+  ]
+}`}
+</CodeSnippet>
+
+<Callout type="info">
+Generated pages are stored in the `generated/` directory and automatically prefixed in docs.json.
+</Callout>
+  </Step>
+</Steps>
+
+### Manual docs.json Management
+
+For advanced navigation customization, manually edit `docs.json`:
+
+<AccordionGroup>
+  <Accordion title="Reorganizing page order">
+  Reorder pages within the `pages` array to change sidebar display order:
+
+  <CodeSnippet language="json">
+  {`{
+    "pages": [
+      "introduction",
+      "generated/user_authentication_api",
+      "quickstart/guide"
+    ]
+  }`}
+  </CodeSnippet>
+
+  Pages appear in the sidebar in the order listed.
+  </Accordion>
+  <Accordion title="Moving pages between groups">
+  Cut and paste page references between group arrays:
+
+  <CodeSnippet language="json">
+  {`{
+    "groups": [
+      {
+        "group": "Authentication",
+        "pages": ["generated/user_authentication_api"]
+      },
+      {
+        "group": "User Management", 
+        "pages": ["generated/user_profile_api"]
+      }
+    ]
+  }`}
+  </CodeSnippet>
+  </Accordion>
+  <Accordion title="Creating custom tabs">
+  Add new tab objects for additional top-level navigation:
+
+  <CodeSnippet language="json">
+  {`{
+    "tabs": [
+      { "tab": "Guides", "groups": [...] },
+      { "tab": "API Reference", "groups": [...] },
+      { "tab": "SDK Documentation", "groups": [...] }
+    ]
+  }`}
+  </CodeSnippet>
+  </Accordion>
+  <Accordion title="Adding external links">
+  Use the global anchors array for external navigation links:
+
+  <CodeSnippet language="json">
+  {`{
+    "navigation": {
+      "tabs": [...],
+      "global": {
+        "anchors": [
+          {
+            "anchor": "Community",
+            "href": "https://discord.gg/your-server",
+            "icon": "discord"
+          },
+          {
+            "anchor": "GitHub",
+            "href": "https://github.com/your-org/repo",
+            "icon": "github"
+          }
+        ]
+      }
+    }
+  }`}
+  </CodeSnippet>
+  </Accordion>
+</AccordionGroup>
+
+<Callout type="warning">
+Invalid `docs.json` syntax will prevent your documentation from deploying. Validate JSON structure before saving changes.
+</Callout>
+
+## Page Frontmatter Requirements
+
+Every documentation page must include frontmatter at the top of the `.mdx` file:
+
+<CodeSnippet language="yaml" title="Minimum frontmatter">
+{`---
+title: "Your Page Title"
+description: "Brief description of page content"
+---`}
+</CodeSnippet>
+
+<CodeSnippet language="yaml" title="Complete frontmatter options">
+{`---
+title: "User Authentication API"
+description: "Authenticate users and manage sessions"
+icon: "key"
+api: "POST /auth/login"
+---`}
+</CodeSnippet>
+
+<ParameterField name="title" type="string">
+Page title displayed in navigation and as the H1 heading. Used to generate file names for saved documentation.
+</ParameterField>
+
+<ParameterField name="description" type="string">
+Brief description for SEO and preview cards. Keep under 160 characters.
+</ParameterField>
+
+<ParameterField name="icon" type="string">
+Icon displayed next to the page title in navigation. Reference [icon library](https://docs.devscribeai.com/components/icons) for available options.
+</ParameterField>
+
+<ParameterField name="api" type="string">
+API method and endpoint for API reference pages. Triggers special formatting and routing to API Reference tab.
+</ParameterField>
+
+<Callout type="info">
+Devscribe automatically adds frontmatter to generated documentation if missing. Manual edits may require frontmatter updates.
+</Callout>
+
+## Deploying Your Documentation
+
+After generating and configuring documentation:
+
+<Steps>
+  <Step title="Verify docs.json entries">
+Confirm all generated pages appear in your `docs.json` navigation structure.
+
+<CodeSnippet language="bash" title="Check saved documentation">
+cat {platform_id}/docs/docs.json
+</CodeSnippet>
+  </Step>
+  <Step title="Review generated files">
+Navigate to your platform's `docs/generated/` directory and verify:
+
+- Files have correct names matching your titles
+- Frontmatter includes required fields
+- Content renders properly in preview mode
+
+<Callout type="tip">
+Use the Devscribe editor's preview mode to validate documentation rendering before deployment.
+</Callout>
+  </Step>
+  <Step title="Commit and deploy">
+Devscribe automatically tracks file changes via `metadata.json`. Deploy your documentation through your platform's deployment interface.
+
+<Callout type="success">
+New pages appear immediately in your deployed site once deployment completes.
+</Callout>
+  </Step>
+</Steps>
+
+## File Structure Reference
+
+<CodeSnippet language="text" title="Generated documentation structure">
+{`{platform_id}/
+└── docs/
+    ├── docs.json              # Navigation configuration
+    ├── metadata.json          # File tracking and deployment status
+    └── generated/             # AI-generated documentation
+        ├── user_authentication_api.mdx
+        ├── getting_started_guide.mdx
+        └── deployment_configuration.mdx`}
+</CodeSnippet>
+
+### metadata.json
+
+Tracks file metadata for deployment and change detection:
+
+<CodeSnippet language="json" title="metadata.json structure">
+{`{
+  "lastUpdated": "2026-04-15T10:30:00Z",
+  "totalFiles": 3,
+  "treeStructure": {
+    "generated/user_authentication_api.mdx": {
+      "name": "user_authentication_api.mdx",
+      "path": "generated/user_authentication_api.mdx",
+      "originalHash": "abc123...",
+      "currentHash": "abc123...",
+      "isDeployed": true,
+      "createdAt": "2026-04-15T09:00:00Z",
+      "lastModified": "2026-04-15T10:30:00Z",
+      "lastDeployed": "2026-04-15T10:35:00Z"
+    }
+  }
+}`}
+</CodeSnippet>
+
+<Callout type="info">
+Devscribe uses file hashes to detect changes and track deployment status. You don't need to manually edit `metadata.json`.
+</Callout>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Generated documentation doesn't appear in deployed site">
+  **Cause:** Page not added to `docs.json` navigation
+
+  **Solution:** Verify the page path exists in a `pages` array within `docs.json`. Check that the path matches the file name without the `.mdx` extension.
+
+  <CodeSnippet language="json">
+  {`{
+    "pages": [
+      "generated/your_file_name"
+    ]
+  }`}
+  </CodeSnippet>
+  </Accordion>
+  <Accordion title="Repository connection fails">
+  **Cause:** OAuth authorization incomplete or expired
+
+  **Solution:** Navigate to Settings > GitHub/GitLab and click **Reconnect**. Ensure you've granted repository read permissions during authorization.
+  </Accordion>
+  <Accordion title="Cannot add more than 5 context files">
+  **Cause:** Context file limit reached
+
+  **Solution:** Remove less relevant context files before adding new ones. Focus on files directly related to the code being documented.
+  </Accordion>
+  <Accordion title="Generated file names contain unexpected characters">
+  **Cause:** Special characters in page titles
+
+  **Solution:** Devscribe automatically slugifies titles by converting to lowercase and replacing spaces with underscores. Avoid special characters like `/`, `\`, or `:` in page titles.
+
+  <CodeSnippet language="text" title="Title transformation">
+  "User Authentication: API Guide" → user_authentication_api_guide.mdx
+  </CodeSnippet>
+  </Accordion>
+  <Accordion title="Documentation generation times out">
+  **Cause:** Repository too large or context files too numerous
+
+  **Solution:** 
+  - Specify exact endpoints/functions instead of broad prompts
+  - Reduce context files to essential references
+  - Use smaller branches or repositories for testing
+  </Accordion>
+</AccordionGroup>
+
+## Best Practices
+
+<CardGroup cols={2} gap="md">
+  <Card title="Specific prompts" icon="bullseye">
+Write detailed prompts specifying target audience, required sections, and example formats for higher quality output.
+  </Card>
+  <Card title="Iterative refinement" icon="arrows-rotate">
+Use the chat feature to refine generated content rather than regenerating from scratch.
+  </Card>
+  <Card title="Consistent naming" icon="tags">
+Use clear, consistent naming conventions for page titles to maintain organized navigation.
+  </Card>
+  <Card title="Regular updates" icon="clock">
+Regenerate documentation when code changes significantly to keep docs synchronized with your codebase.
+  </Card>
+</CardGroup>
+

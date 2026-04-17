@@ -1,0 +1,381 @@
+---
+title: "Themes"
+description: "Comprehensive guide to customizing your documentation platform's visual appearance with themes, colors, and typography"
+---
+
+## Overview
+
+The theme settings allow you to customize your documentation's visual appearance including colors, fonts, and logos. Each theme configuration supports both light and dark modes with real-time preview capabilities.
+
+<Callout type="info">
+Access theme settings by navigating to **Settings > Themes** in your dashboard.
+</Callout>
+
+## Understanding Theme Components
+
+Your documentation theme consists of three main customization areas:
+
+**Color Palette** - Customize the visual color scheme across your documentation
+**Typography** - Configure font families and text colors for different content types  
+**Logos** - Upload custom logos for light and dark modes
+
+Each color setting can be configured separately for light and dark modes, ensuring optimal readability in both viewing contexts.
+
+## Getting Started with Theme Presets
+
+Theme presets provide professionally designed color schemes you can apply instantly.
+
+<Steps>
+<Step title="Navigate to theme settings">
+Go to **Settings > Themes** in your dashboard to access the theme editor.
+</Step>
+
+<Step title="Browse available presets">
+Expand the **Theme Presets** section to view six pre-built themes:
+
+- **Black & White** - Timeless monochrome with crisp contrast
+- **Red** - Bold and energetic with warm accents
+- **Blue** - Clean, modern palette with cool tones
+- **Green** - Fresh and natural with organic accents
+- **Orange** - Warm and inviting with sunny tones
+- **Purple** - Elegant and creative with violet accents
+
+Each preset displays color swatches showing the primary colors used in both light and dark modes.
+</Step>
+
+<Step title="Apply a preset">
+Click **Apply** on your chosen preset. The preset automatically configures all color settings for both light and dark modes.
+
+<Callout type="success">
+Preview changes appear immediately in the live preview panel at the top of the page.
+</Callout>
+</Step>
+</Steps>
+
+<Callout type="tip">
+Use presets as a starting point, then customize individual colors to match your brand exactly.
+</Callout>
+
+## Customizing Colors
+
+The color customization system organizes colors into logical groups for easier management.
+
+### Available Color Groups
+
+**Brand & Primary**
+
+<ParameterField name="Brand Color" type="color">
+Primary brand color for logos and key elements. Default: `#fc4c00` (light), `#fc4c00` (dark)
+</ParameterField>
+
+<ParameterField name="Button Color" type="color">
+Main action color for buttons and interactive elements. Default: `#0A0A0A` (light), `#ffffff` (dark)
+</ParameterField>
+
+**Backgrounds & Sidebar**
+
+<ParameterField name="Page Background" type="color">
+Main page background color. Default: `#FFFFFF` (light), `#0A0A0A` (dark)
+</ParameterField>
+
+<ParameterField name="Secondary Background" type="color">
+Background color for cards, panels, and sidebar elements. Default: `#FAFAFA` (light), `#171717` (dark)
+</ParameterField>
+
+### How to Customize Colors
+
+<Steps>
+<Step title="Select display mode">
+Use the **Light/Dark** toggle (sun/moon icons) at the top right of the color controls to switch between modes. This determines which mode you're currently editing.
+</Step>
+
+<Step title="Expand a color group">
+Click on a color group (e.g., "Brand & Primary") to reveal the individual color controls within that category.
+</Step>
+
+<Step title="Change a color">
+Modify colors using either method:
+
+- **Color Picker**: Click the colored square to open a visual color picker
+- **Hex Input**: Type or paste a hex color code (e.g., `#FF5733`) directly into the text field
+
+The hex input validates your entry in real-time and requires valid 6-digit hex codes.
+
+<Callout type="tip">
+The preview updates immediately as you change colors, allowing you to see results before applying.
+</Callout>
+</Step>
+
+<Step title="Reset individual colors">
+To restore a color to its default value, click the **Reset** button next to that specific color control.
+</Step>
+</Steps>
+
+### Auto-Calculated Colors
+
+Two color values are automatically calculated and cannot be edited directly:
+
+- **Foreground**: Automatically set to `#0A0A0A` (light mode) or `#FAFAFA` (dark mode)
+- **Border**: Calculated from the secondary background color with an RGB offset (±16-32) to ensure proper contrast
+
+## Configuring Typography
+
+Typography settings control font families and text colors across your documentation.
+
+### Font Configuration
+
+<Steps>
+<Step title="Access typography settings">
+Expand the **Typography** section and then expand the **Fonts** subsection.
+</Step>
+
+<Step title="Select fonts from Google Fonts">
+You'll configure two font types:
+
+**Body Font** - Used for paragraphs, headings, and UI elements  
+**Code Font** - Used for code blocks and inline code snippets
+
+Follow these steps to obtain Google Font URLs:
+
+1. Visit [fonts.google.com](https://fonts.google.com/)
+2. Select your desired font
+3. Click **Get font** and choose font weights (e.g., 400, 500, 600, 700)
+4. Click the **Get embed code** button
+5. Select the **@import** tab under "Web"
+6. Copy only the URL portion from the `@import` statement (from `https://` to `&display=swap`)
+
+<CodeSnippet language="text" title="Example Font URL">
+https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap
+</CodeSnippet>
+</Step>
+
+<Step title="Paste font URLs">
+Paste the complete Google Fonts URL into the appropriate field:
+- **Body Font** field for general text
+- **Code Font** field for code blocks
+</Step>
+</Steps>
+
+<Callout type="warning">
+**Font Preview Limitation**: Custom fonts will not appear in the theme preview panel. They only take effect after you apply the theme and deploy your documentation.
+</Callout>
+
+<Callout type="danger">
+**Font Availability**: Newer Google Fonts may not be immediately available. If your deployment fails after changing fonts, try a different font or contact support through the Support menu.
+</Callout>
+
+### Typography Colors
+
+Typography colors control the color of different text elements across your documentation.
+
+**Available Typography Colors**
+
+<ParameterField name="Header" type="color">
+Color for headings and titles. Default: `#0A0A0A` (light), `#FAFAFA` (dark)
+</ParameterField>
+
+<ParameterField name="Body" type="color">
+Color for body text and paragraphs. Default: `#737373` (light), `#b2b2b2` (dark)
+</ParameterField>
+
+<ParameterField name="Navigation" type="color">
+Color for navigation links and menu items. Default: `#737373` (light), `#b2b2b2` (dark)
+</ParameterField>
+
+<Steps>
+<Step title="Switch to typography colors">
+In the Typography section, expand the **Typography Colors** subsection.
+</Step>
+
+<Step title="Select display mode">
+Use the Light/Dark toggle to choose which mode you're editing.
+</Step>
+
+<Step title="Customize text colors">
+Adjust each typography color using the color picker or hex input, following the same process as the main color controls.
+
+<Callout type="tip">
+Ensure sufficient contrast between text colors and background colors for optimal readability.
+</Callout>
+</Step>
+</Steps>
+
+## Previewing Your Theme
+
+The live preview panel provides real-time feedback on your theme changes.
+
+### Preview Features
+
+- **Real-time Updates**: Changes to colors appear immediately (with a 300ms debounce)
+- **Mode Switching**: Toggle between light and dark modes to see both configurations
+- **Zoom View**: Preview displays at 0.75x scale for better overview
+- **Embedded Documentation**: Shows actual documentation content with your theme applied
+
+<Callout type="info">
+The preview passes all color values and settings via URL parameters to render your custom theme in real-time.
+</Callout>
+
+### Preview Limitations
+
+**Font Changes**: Custom fonts configured in Typography settings will not appear in the preview. You'll see fonts only after applying the theme and deploying.
+
+**Some Interactions**: Certain dynamic interactions may behave differently in the preview compared to the deployed documentation.
+
+## Applying Your Theme
+
+After customizing your theme, apply it to deploy changes to your live documentation.
+
+<Steps>
+<Step title="Review your changes">
+Toggle between light and dark modes in the preview to ensure both configurations meet your requirements.
+
+Check that:
+- Colors provide sufficient contrast
+- Brand colors are consistent
+- Typography is readable in both modes
+</Step>
+
+<Step title="Validate configuration">
+Before applying, the system automatically validates:
+- Google Font URLs are correctly formatted
+- Selected fonts are available in Google Fonts repository
+- Color values are valid hex codes
+
+<Callout type="warning">
+If validation fails, you'll receive an error message indicating which setting needs correction.
+</Callout>
+</Step>
+
+<Step title="Apply theme">
+Click the **Apply Theme** button in the top-right corner of the theme settings page.
+
+The system will:
+1. Validate font availability
+2. Prepare theme tokens for light and dark modes
+3. Calculate automatic color values (foreground, border)
+4. Send theme data to your deployment repository
+5. Trigger a documentation rebuild with the new theme
+
+<Callout type="success">
+You'll receive a success notification when the theme is applied successfully.
+</Callout>
+</Step>
+
+<Step title="Verify deployment">
+After successful application, you'll be redirected to the dashboard. Your documentation will rebuild with the new theme within a few minutes.
+</Step>
+</Steps>
+
+## Managing Theme Changes
+
+### Reverting Changes
+
+To discard uncommitted theme changes and restore your current deployed theme:
+
+1. Click the **Revert Changes** button (top-right corner)
+2. The system reloads your currently deployed theme settings
+3. All unsaved modifications are discarded
+
+<Callout type="info">
+The Revert Changes button is only enabled when you have uncommitted changes.
+</Callout>
+
+### Change Detection
+
+The theme editor tracks all modifications you make and compares them to your currently deployed theme. The system detects changes to:
+
+- All color values in light and dark modes
+- Font URL configurations
+- Logo uploads
+- Typography color settings
+
+## Logo Customization
+
+Upload custom logos for your documentation platform with separate options for light and dark modes.
+
+<Steps>
+<Step title="Access logo controls">
+Scroll to the logo customization section in theme settings.
+</Step>
+
+<Step title="Upload logos">
+Upload separate logo files for each mode:
+- **Light Logo**: Displayed when documentation is in light mode
+- **Dark Logo**: Displayed when documentation is in dark mode
+
+Logos are converted to data URLs and stored with your theme configuration.
+</Step>
+
+<Step title="Preview logos">
+Uploaded logos appear in the preview showing how they'll look in each mode.
+</Step>
+
+<Step title="Remove or replace logos">
+Use the remove/change options to delete or replace existing logos.
+</Step>
+</Steps>
+
+## Troubleshooting
+
+<AccordionGroup>
+<Accordion title="My custom fonts aren't showing in the preview">
+This is expected behavior. Custom fonts configured through Google Fonts URLs only appear after you apply the theme and your documentation is deployed. The preview uses default fonts to maintain performance.
+</Accordion>
+
+<Accordion title="I get an error when applying my theme">
+Common causes:
+
+- **Invalid Font URL**: Ensure you copied the complete URL from Google Fonts, including `https://` and `&display=swap`
+- **Font Not Available**: Some newer Google Fonts may not be compatible yet. Try a different font or contact support
+- **Invalid Color Code**: Check that all hex color codes are valid 6-digit values (e.g., `#FF5733`)
+</Accordion>
+
+<Accordion title="My colors look different after deployment">
+Verify both light and dark mode configurations. Some colors may appear different depending on:
+
+- Monitor color calibration
+- Browser rendering
+- Operating system display settings
+- Surrounding colors and contrast
+</Accordion>
+
+<Accordion title="The preview isn't updating when I change colors">
+Try these steps:
+
+1. Ensure you're editing the correct mode (light/dark toggle)
+2. Verify the color value is a valid hex code
+3. Refresh the page if the preview becomes unresponsive
+4. Check browser console for any error messages
+</Accordion>
+
+<Accordion title="How do I reset all colors to defaults?">
+To reset all customizations:
+
+1. Click **Revert Changes** to restore your current deployed theme
+2. Or manually reset each color using the individual Reset buttons
+3. Consider applying a theme preset as a fresh starting point
+</Accordion>
+</AccordionGroup>
+
+## Best Practices
+
+<Callout type="tip">
+**Maintain Contrast**: Ensure text colors have sufficient contrast against background colors. Aim for WCAG AA compliance (4.5:1 for normal text, 3:1 for large text).
+</Callout>
+
+<Callout type="tip">
+**Test Both Modes**: Always preview and test both light and dark modes before applying. Many users prefer dark mode for reading documentation.
+</Callout>
+
+<Callout type="tip">
+**Start with Presets**: Use theme presets as a foundation and then fine-tune specific colors to match your brand.
+</Callout>
+
+<Callout type="tip">
+**Consistent Branding**: Keep your brand color consistent with your main product or company branding for cohesive user experience.
+</Callout>
+
+<Callout type="tip">
+**Font Pairings**: Choose complementary fonts for body and code. Popular combinations include Inter (body) + Fira Code (code) or Source Sans Pro (body) + Source Code Pro (code).
+</Callout>
+

@@ -28,7 +28,7 @@
             "pages": [
               "components/accordion",
               "components/callouts",
-              "components/card",
+              "components/cards",
               "components/code",
               "components/code-group",
               "components/expand",

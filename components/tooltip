@@ -1,0 +1,118 @@
+---
+title: "Tooltips"
+description: "Add contextual help and explanations to your documentation using hover tooltips"
+---
+
+## Overview
+
+Tooltips provide additional context and explanations for terms or concepts without cluttering your main content. They appear when users hover over marked text, making them ideal for defining technical terms, acronyms, or providing supplementary information.
+
+## Basic usage
+
+Wrap any text with the `<Tooltip>` component and provide the explanation in the `tip` prop:
+
+<TabGroup>
+  <Tab title="Preview">
+  This is a paragraph with a <Tooltip tip="This is a helpful tooltip message!">hover tooltip</Tooltip> that provides additional context.
+
+  You can also use tooltips to explain <Tooltip tip="Application Programming Interface - a set of protocols and tools for building software applications">technical terms</Tooltip> in your documentation.
+  </Tab>
+
+  <Tab title="Syntax">
+  ````markdown
+  This is a paragraph with a <Tooltip tip="This is a helpful tooltip message!">hover tooltip</Tooltip> that provides additional context.
+
+  You can also use tooltips to explain <Tooltip tip="Application Programming Interface - a set of protocols and tools for building software applications">technical terms</Tooltip> in your documentation.
+  ````
+  </Tab>
+</TabGroup>
+
+## Component properties
+
+<ParameterField name="tip" type="string" required>
+The tooltip message displayed on hover. Keep it concise and focused on a single concept.
+</ParameterField>
+
+<ParameterField name="children" type="string" required>
+The text content that triggers the tooltip when hovered. This should be the term or phrase being explained.
+</ParameterField>
+
+## Common use cases
+
+### Defining acronyms
+
+Use tooltips to expand acronyms without breaking reading flow:
+
+<TabGroup>
+  <Tab title="Preview">
+  Configure your <Tooltip tip="Continuous Integration/Continuous Deployment - automated software delivery process">CI/CD</Tooltip> pipeline to deploy automatically.
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  Configure your <Tooltip tip="Continuous Integration/Continuous Deployment - automated software delivery process">CI/CD</Tooltip> pipeline to deploy automatically.
+  ```
+  </Tab>
+</TabGroup>
+
+### Explaining technical terms
+
+Provide definitions for specialized terminology:
+
+<TabGroup>
+  <Tab title="Preview">
+  The <Tooltip tip="A design pattern where data flows in one direction through components">unidirectional data flow</Tooltip> ensures predictable state management.
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  The <Tooltip tip="A design pattern where data flows in one direction through components">unidirectional data flow</Tooltip> ensures predictable state management.
+  </Tab>
+</TabGroup>
+
+### Adding context to parameters
+
+Clarify parameter values or constraints in code examples:
+
+<TabGroup>
+  <Tab title="Preview">
+  Set the <Tooltip tip="Must be between 1000-5000 milliseconds">timeout value</Tooltip> based on your network conditions.
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  Set the <Tooltip tip="Must be between 1000-5000 milliseconds">timeout value</Tooltip> based on your network conditions.
+  ```
+  </Tab>
+</TabGroup>
+
+## Best practices
+
+<Callout type="tip">
+Keep tooltip content under 100 characters. For longer explanations, consider using an Accordion or dedicated section instead.
+</Callout>
+
+**Do:**
+- Use tooltips for terms that may be unfamiliar to some users
+- Provide concise, focused definitions
+- Explain acronyms on first use in each major section
+- Include relevant context or examples in the tip
+
+**Don't:**
+- Overuse tooltips - too many can overwhelm readers
+- Include formatting or line breaks in tooltip text
+- Use tooltips for critical information usersmust see
+- Add tooltips to every technical term
+
+## Accessibility considerations
+
+Tooltips rely on hover interactions, which may not work well for keyboard-only or mobile users. For critical definitions, consider also:
+
+- Adding a glossary section for important terms
+- Using parenthetical definitions for key concepts
+- Providing expandable sections with the Accordion component
+
+<Callout type="info">
+Tooltips enhance user experience but should supplement, not replace, clear writing. Ensure your main content is understandable even without hovering over tooltips.
+</Callout>
+

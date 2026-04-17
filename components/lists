@@ -1,0 +1,131 @@
+---
+title: "Lists Component"
+description: "Learn how to create unordered and ordered lists in your Devscribe documentation with proper nesting and syntax."
+---
+
+Lists help organize related items in a scannable, hierarchical format. Use lists when presenting multiple related points, steps without specific order, or grouped information.
+
+## Lists
+
+### Unordered
+
+<TabGroup>
+  <Tab title="Preview">
+  - Item 1
+  - Item 2
+    - Nested item
+    - Another nested item
+  - Item 3
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  - Item 1
+  - Item 2
+    - Nested item
+    - Another nested item
+  - Item 3
+  ```
+  </Tab>
+</TabGroup>
+
+<Callout type="info">
+Create nested items by adding two spaces before the dash for each level of indentation.
+</Callout>
+
+### Ordered
+
+<TabGroup>
+  <Tab title="Preview">
+  1. First item
+  2. Second item
+     1. Nested numbered item
+     2. Another nested numbered item
+  3. Third item
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  1. First item
+  2. Second item
+     1. Nested numbered item
+     2. Another nested numbered item
+  3. Third item
+  ```
+  </Tab>
+</TabGroup>
+
+<Callout type="tip">
+The actual numbers you use in ordered lists don't matter. Markdown will automatically renumber them sequentially when rendered.
+</Callout>
+
+### Mixed nesting
+
+Combine ordered and unordered lists for complex hierarchies:
+
+<TabGroup>
+  <Tab title="Preview">
+  1. First ordered item
+  2. Second ordered item
+     - Nested unordered item
+     - Another nested unordered item
+       1. Deeply nested ordered item
+       2. Another deeply nested ordered item
+  3. Third ordered item
+  </Tab>
+
+  <Tab title="Syntax">
+  ```markdown
+  1. First ordered item
+  2. Second ordered item
+     - Nested unordered item
+     - Another nested unordered item
+       1. Deeply nested ordered item
+       2. Another deeply nested ordered item
+  3. Third ordered item
+  ```
+  </Tab>
+</TabGroup>
+
+## When to use lists
+
+**Use unordered lists when:**
+- Order of items is not important
+- Presenting a collection of related features or options
+- Listing requirements or prerequisites without sequence
+
+**Use ordered lists when:**
+- Sequence matters but you don't need the full **Steps** component
+- Ranking items by priority or importance
+- Presenting a simple procedure without detailed explanations
+
+<Callout type="warning">
+For multi-step procedures with detailed instructions, use the **Steps** component instead of ordered lists to provide better structure and context.
+</Callout>
+
+## Best practices
+
+<AccordionGroup>
+  <Accordion title="Keep list items parallel">
+  Start each item with the same part of speech. If one item begins with a verb, all items should begin with verbs.
+  
+  **Good:**
+  - Configure API settings
+  - Install dependencies
+  - Deploy application
+  
+  **Avoid:**
+  - Configure API settings
+  - Dependencies installation
+  - The application should be deployed
+  </Accordion>
+
+  <Accordion title="Limit nesting depth">
+  Avoid more than three levels of nesting. Deeply nested lists become difficult to scan and understand. Consider restructuring content with headings or accordions instead.
+  </Accordion>
+
+  <Accordion title="Use sentence case">
+  Capitalize only the first word of each list item unless the item includes proper nouns or code elements.
+  </Accordion>
+</AccordionGroup>
+
