@@ -12,63 +12,63 @@ Callouts highlight important information, warnings, tips, and contextual notes i
 Devscribe supports six callout types, each designed for specific purposes:
 
 <Tabs>
-<Tab title="Info">
-Use for supplementary information, neutral announcements, or general context.
+  <Tab title="Info">
+    Use for supplementary information, neutral announcements, or general context.
 
-<Callout type="info">
-This feature requires Node.js version 18 or higher to function properly.
-</Callout>
-</Tab>
+    <Callout type="info">
+      This feature requires Node.js version 18 or higher to function properly.
+    </Callout>
+  </Tab>
 
-<Tab title="Tip">
-Use for best practices, expert advice, shortcuts, or optimization suggestions.
+  <Tab title="Tip">
+    Use for best practices, expert advice, shortcuts, or optimization suggestions.
 
-<Callout type="tip">
-Enable caching to reduce API calls by up to 70% in production environments.
-</Callout>
-</Tab>
+    <Callout type="tip">
+      Enable caching to reduce API calls by up to 70% in production environments.
+    </Callout>
+  </Tab>
 
-<Tab title="Warning">
-Use for potential issues, breaking changes, or actions that require careful consideration.
+  <Tab title="Warning">
+    Use for potential issues, breaking changes, or actions that require careful consideration.
 
-<Callout type="warning">
-Modifying these settings will invalidate all existing user sessions.
-</Callout>
-</Tab>
+    <Callout type="warning">
+      Modifying these settings will invalidate all existing user sessions.
+    </Callout>
+  </Tab>
 
-<Tab title="Success">
-Use for positive confirmations, successful completions, or achievement indicators.
+  <Tab title="Success">
+    Use for positive confirmations, successful completions, or achievement indicators.
 
-<Callout type="success">
-Your API key has been generated and is ready to use.
-</Callout>
-</Tab>
+    <Callout type="success">
+      Your API key has been generated and is ready to use.
+    </Callout>
+  </Tab>
 
-<Tab title="Error">
-Use when something went wrong or requires immediate attention.
+  <Tab title="Error">
+    Use when something went wrong or requires immediate attention.
 
-<Callout type="error">
-Database connection failed. Check your credentials and network settings.
-</Callout>
-</Tab>
+    <Callout type="error">
+      Database connection failed. Check your credentials and network settings.
+    </Callout>
+  </Tab>
 
-<Tab title="Danger">
-Use for destructive actions, critical security concerns, or operations that cannot be undone.
+  <Tab title="Danger">
+    Use for destructive actions, critical security concerns, or operations that cannot be undone.
 
-<Callout type="danger">
-Deleting this workspace is permanent and cannot be undone. All data will be lost.
-</Callout>
-</Tab>
+    <Callout type="danger">
+      Deleting this workspace is permanent and cannot be undone. All data will be lost.
+    </Callout>
+  </Tab>
 </Tabs>
 
 ## Basic Syntax
 
-The basic callout structure uses a self-closing component with a `type` attribute:
+The basic callout structure uses a component with a `type` attribute:
 
-```markdown
-<Callout type="info">
+```mdx
+&lt;Callout type="info"&gt;
 Your message goes here.
-</Callout>
+&lt;/Callout&gt;
 ```
 
 Replace `type` with one of: `info`, `tip`, `warning`, `success`, `error`, or `danger`.
@@ -91,8 +91,9 @@ const config = {
 </Callout>
 
 **Syntax:**
-```markdown
-<Callout type="tip">
+
+```mdx
+&lt;Callout type="tip"&gt;
 You can include inline code like `npm install` or full code blocks:
 
 ```javascript
@@ -101,7 +102,8 @@ const config = {
   timeout: 5000
 };
 ```
-</Callout>
+
+&lt;/Callout&gt;
 ```
 
 ### Lists in Callouts
@@ -115,14 +117,15 @@ Before proceeding, verify:
 </Callout>
 
 **Syntax:**
-```markdown
-<Callout type="warning">
+
+```mdx
+&lt;Callout type="warning"&gt;
 Before proceeding, verify:
 
 - Database backup is complete
 - All users have been notified
 - Rollback plan is documented
-</Callout>
+&lt;/Callout&gt;
 ```
 
 ### Headings and Multiple Paragraphs
@@ -136,14 +139,15 @@ Existing integrations will continue to work, but we recommend migrating to OAuth
 </Callout>
 
 **Syntax:**
-```markdown
-<Callout type="info">
+
+```mdx
+&lt;Callout type="info"&gt;
 ### Authentication Changes
 
 Version 2.0 introduces OAuth 2.0 support alongside existing API key authentication.
 
 Existing integrations will continue to work, but we recommend migrating to OAuth for enhanced security and features.
-</Callout>
+&lt;/Callout&gt;
 ```
 
 ### Text Formatting
@@ -153,10 +157,11 @@ Deployment completed with **zero downtime** and *no errors*. All services are op
 </Callout>
 
 **Syntax:**
-```markdown
-<Callout type="success">
+
+```mdx
+&lt;Callout type="success"&gt;
 Deployment completed with **zero downtime** and *no errors*. All services are operational.
-</Callout>
+&lt;/Callout&gt;
 ```
 
 ## Best Practices
@@ -164,36 +169,36 @@ Deployment completed with **zero downtime** and *no errors*. All services are op
 ### When to Use Callouts
 
 <CardGroup cols={2}>
-<Card title="Do Use" icon="check">
-- Critical warnings before destructive actions
-- Security-related information
-- Prerequisites or requirements
-- Success confirmations
-- Best practices and optimization tips
-</Card>
+  <Card title="Do Use" icon="check">
+    - Critical warnings before destructive actions
+    - Security-related information
+    - Prerequisites or requirements
+    - Success confirmations
+    - Best practices and optimization tips
+  </Card>
 
-<Card title="Avoid Using" icon="xmark">
-- Primary documentation content
-- Information better suited for main text
-- Excessive callouts that create visual clutter
-- Redundant information already in main content
-</Card>
+  <Card title="Avoid Using" icon="xmark">
+    - Primary documentation content
+    - Information better suited for main text
+    - Excessive callouts that create visual clutter
+    - Redundant information already in main content
+  </Card>
 </CardGroup>
 
 ### Choosing the Right Type
 
 <AccordionGroup>
-<Accordion title="Info vs Tip">
-Use **info** for neutral context or background information that doesn't require action. Use **tip** for actionable advice that improves outcomes or efficiency.
-</Accordion>
+  <Accordion title="Info vs Tip">
+    Use **info** for neutral context or background information that doesn't require action. Use **tip** for actionable advice that improves outcomes or efficiency.
+  </Accordion>
 
-<Accordion title="Warning vs Danger">
-Use **warning** for actions requiring caution that might cause issues. Use **danger** for destructive or irreversible operations with severe consequences.
-</Accordion>
+  <Accordion title="Warning vs Danger">
+    Use **warning** for actions requiring caution that might cause issues. Use **danger** for destructive or irreversible operations with severe consequences.
+  </Accordion>
 
-<Accordion title="Error vs Danger">
-Use **error** to communicate that something went wrong or failed. Use **danger** to warn about potential severe consequences before an action is taken.
-</Accordion>
+  <Accordion title="Error vs Danger">
+    Use **error** to communicate that something went wrong or failed. Use **danger** to warn about potential severe consequences before an action is taken.
+  </Accordion>
 </AccordionGroup>
 
 ### Content Guidelines
@@ -253,20 +258,19 @@ npm run dev -- --watch
 Callouts work seamlessly with Steps, Tabs, and Accordions:
 
 <Steps>
-<Step title="Configure API credentials">
-Add your API key to the environment configuration file.
+  <Step title="Configure API credentials">
+    Add your API key to the environment configuration file.
 
-<Callout type="warning">
-Never commit `.env` files to version control. Add `.env` to your `.gitignore` file.
-</Callout>
-</Step>
+    <Callout type="warning">
+      Never commit `.env` files to version control. Add `.env` to your `.gitignore` file.
+    </Callout>
+  </Step>
 
-<Step title="Test the connection">
-Run the test script to verify your credentials work correctly.
+  <Step title="Test the connection">
+    Run the test script to verify your credentials work correctly.
 
-<Callout type="success">
-A successful test returns a `200 OK` status with your account details.
-</Callout>
-</Step>
+    <Callout type="success">
+      A successful test returns a `200 OK` status with your account details.
+    </Callout>
+  </Step>
 </Steps>
-
