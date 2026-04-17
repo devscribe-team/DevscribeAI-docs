@@ -1,0 +1,210 @@
+---
+title: "Tabs"
+description: "Organize content with interactive tab groups for multi-language code examples, API documentation, and platform-specific instructions"
+---
+## Overview 
+
+The Tabs component organizes related content into separate views that users can switch between. Use tabs when presenting the same information in different formats, languages, or contexts.
+
+**Common use cases:**
+
+- Multi-language code examples (JavaScript, Python, TypeScript)
+- Platform-specific instructions (macOS, Windows, Linux)
+- Request/response/error documentation
+- Before/after comparisons
+- Framework-specific implementations
+
+## Basic syntax
+
+Wrap components inside a container:
+
+```mdx
+<TabGroup>
+  <Tab title="JavaScript">
+  Content for JavaScript tab
+  </Tab>
+  <Tab title="Python">
+  Content for Python tab
+  </Tab>
+</TabGroup>
+```
+
+## Properties
+
+### TabGroup
+
+<ParameterField name="className" type="string">
+Optional CSS class for custom styling
+</ParameterField>
+
+### Tab
+
+<ParameterField name="title" type="string">
+Display text shown on the tab button
+</ParameterField>
+
+## Usage patterns
+
+### Multi-language code examples
+
+Show equivalent code across programming languages:
+
+<TabGroup>
+  <Tab title="JavaScript">
+  ```javascript
+      function greetUser(name) {
+        return `Hello, ${name}!`;
+      }
+  ```
+  </Tab>
+  <Tab title="Python">
+  ```python
+      def greet_user(name):
+          return f"Hello, {name}!"
+  ```
+  </Tab>
+  <Tab title="TypeScript">
+  ```typescript
+      function greetUser(name: string): string {
+        return `Hello, ${name}!`;
+      }
+  ```
+  </Tab>
+</TabGroup>
+
+### API documentation structure
+
+Separate request details, response format, and error handling:
+
+<TabGroup>
+  <Tab title="Request">
+  Make a POST request to create a new user:
+
+  ```bash
+      curl -X POST https://api.example.com/v1/users \
+        -H "Content-Type: application/json" \
+        -d '{"name":"Jane","email":"jane@example.com"}'
+  ```
+
+  #### Headers
+
+  <ParameterField name="Content-Type" type="string">
+  Must be `application/json`
+  </ParameterField>
+
+  <ParameterField name="Authorization" type="string">
+  Bearer token: `Bearer <token>`
+  </ParameterField>
+
+  #### Body parameters
+
+  <ParameterField name="name" type="string">
+  Full name of the new user
+  </ParameterField>
+
+  <ParameterField name="email" type="string">
+  Valid email address for the account
+  </ParameterField>
+
+  <ParameterField name="role" type="string" default="user">
+  User role. Defaults to `user`
+  </ParameterField>
+  </Tab>
+  <Tab title="Response">
+  Successful response (200 OK):
+
+  ```json
+      {
+        "id": "user_123",
+        "name": "Jane",
+        "email": "jane@example.com"
+      }
+  ```
+
+  <ResponseField name="id" type="string">
+  Unique identifier for the created user
+  </ResponseField>
+
+  <ResponseField name="name" type="string">
+  User's full name
+  </ResponseField>
+
+  <ResponseField name="email" type="string">
+  User's email address
+  </ResponseField>
+  </Tab>
+  <Tab title="Errors">
+  #### Validation error (400)
+
+  ```json
+      {
+        "error": {
+          "code": "VALIDATION_ERROR",
+          "message": "Invalid input data",
+          "details": [
+            {
+              "field": "email",
+              "message": "Email format is invalid"
+            }
+          ]
+        }
+      }
+  ```
+
+  <Callout type="warning">
+  Validate all input fields before submission to avoid validation errors
+  </Callout>
+  </Tab>
+</TabGroup>
+
+## Rich content support
+
+Tabs support all Devscribe components:
+
+<TabGroup>
+  <Tab title="With Steps">
+  <Steps>
+    <Step title="Install dependencies">
+  Run `npm install` to download packages
+    </Step>
+    <Step title="Configure settings">
+  Update your `.env` file with API credentials
+    </Step>
+  </Steps>
+  </Tab>
+  <Tab title="With Callouts">
+  <Callout type="tip">
+  Cache frequently accessed data to improve performance
+  </Callout>
+
+  <Callout type="warning">
+  Never commit API keys to version control
+  </Callout>
+  </Tab>
+</TabGroup>
+
+## Best practices
+
+**Do:**
+
+- Use descriptive tab titles (avoid generic labels like "Option 1")
+- Keep tab count between 2-5 for optimal usability
+- Maintain consistent formatting across all tabs
+- Order tabs by popularity or logical sequence
+
+**Don't:**
+
+- Nest TabGroups more than two levels deep
+- Use tabs for unrelated content that should be separate pages
+- Duplicate content across multiple tabs unnecessarily
+- Create tabs with drastically different content lengths
+
+## Accessibility
+
+Tab components are keyboard navigable:
+
+- **Tab key**: Move focus between tab buttons
+- **Enter/Space**: Activate focused tab
+- **Arrow keys**: Navigate between tab buttons
+
+Always provide meaningful tab titles for screen readers.
