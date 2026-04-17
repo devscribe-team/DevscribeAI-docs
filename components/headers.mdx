@@ -1,0 +1,164 @@
+---
+title: "Headers"
+description: "Learn how to use header components to structure your documentation with proper heading hierarchy"
+---
+## Overview 
+
+Headers are fundamental markdown elements that create a hierarchical structure in your documentation. They range from H1 (largest) to H6 (smallest) and help organize content into scannable sections.
+
+## Syntax
+
+Headers are created using hash symbols (`#`) followed by a space and your heading text. The number of hash symbols determines the heading level:
+
+### Headers
+
+<TabGroup>
+  <Tab title="Preview">
+  # H1 Header
+
+  ## H2 Header
+
+  ### H3 Header
+
+  #### H4 Header
+
+  ##### H5 Header
+
+  ###### H6 Header
+  </Tab>
+  <Tab title="Syntax">
+  ```markdown
+    # H1 Header
+    ## H2 Header
+    ### H3 Header
+    #### H4 Header
+    ##### H5 Header
+    ###### H6 Header
+  ```
+  </Tab>
+</TabGroup>
+
+## Heading Hierarchy
+
+<Callout type="warning">
+Always maintain proper heading hierarchy. Skip levels (e.g., H2 to H4) disrupts document structure and affects accessibility.
+</Callout>
+
+**Correct hierarchy:**
+
+```markdown
+## Main Section (H2)
+### Subsection (H3)
+#### Detail (H4)
+```
+
+**Incorrect hierarchy:**
+
+```markdown
+## Main Section (H2)
+#### Detail (H4) ❌ Skips H3
+```
+
+## Best Practices
+
+<Steps>
+  <Step title="Start with H2 for page content">
+Reserve H1 for the page title defined in frontmatter. Begin your content sections with H2 headers.
+
+<CodeSnippet language="markdown">
+---
+title: "Your Page Title" # This becomes H1
+---
+
+## First Section (H2)
+Content here...
+
+### Subsection (H3)
+More content...
+</CodeSnippet>
+  </Step>
+  <Step title="Use descriptive, keyword-rich headers">
+Write headers that clearly describe the section content and include relevant keywords for search optimization.
+
+<CodeGroup>
+<CodeSnippet language="markdown" title="Good">
+## Authentication with API Keys
+## Configuring Environment Variables
+</CodeSnippet>
+
+<CodeSnippet language="markdown" title="Avoid">
+## Setup
+## Details
+</CodeSnippet>
+</CodeGroup>
+  </Step>
+  <Step title="Keep headers concise">
+Aim for 3-7 words per header. Long headers reduce scannability.
+
+<Callout type="tip">
+If your header exceeds 10 words, consider breaking the content into multiple sections or simplifying the header text.
+</Callout>
+  </Step>
+</Steps>
+
+## Common Use Cases
+
+<AccordionGroup>
+  <Accordion title="Organizing API documentation">
+  ```markdown
+  ## Authentication
+  ### API Key Authentication
+  ### OAuth 2.0 Flow
+
+  ## Endpoints
+  ### Create User
+  ### Get User Details
+  ```
+  </Accordion>
+  <Accordion title="Tutorial structure">
+  ```markdown
+  ## Prerequisites
+  ## Installation
+  ### Install via npm
+  ### Install via yarn
+  ## Configuration
+  ## Usage Examples
+  ```
+  </Accordion>
+  <Accordion title="Reference documentation">
+  ```markdown
+  ## Methods
+  ### initialize()
+  ### connect()
+  ### disconnect()
+
+  ## Properties
+  ### connectionStatus
+  ### errorHandlers
+  ```
+  </Accordion>
+</AccordionGroup>
+
+## Accessibility Considerations
+
+Headers provide semantic structure for screen readers and assistive technologies:
+
+- **Screen readers** use headers to navigate document sections
+- **Keyboard users** can jump between headers for faster navigation
+- **Search engines** prioritize header text for indexing
+
+<Callout type="info">
+Proper heading hierarchy improves both user experience and SEO performance.
+</Callout>
+
+## Parameters
+
+<ParameterField name="Level (# count)" type="integer">
+Number of hash symbols (1-6) determining header size and hierarchy level.
+</ParameterField>
+
+<ParameterField name="Text content" type="string">
+The visible header text. Use clear, descriptive language that summarizes the section content.
+</ParameterField>
+
+## Examples

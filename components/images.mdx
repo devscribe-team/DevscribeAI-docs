@@ -2,8 +2,7 @@
 title: "Images"
 description: "Learn how to add and configure images in your Devscribe documentation with proper syntax and formatting"
 ---
-
-## Overview
+## Overview 
 
 Images enhance documentation by providing visual context and improving comprehension. Devscribe supports standard Markdown image syntax with additional configuration options.
 
@@ -42,11 +41,10 @@ Add an optional title that appears on hover by including quoted text after the i
 
   ![Devscribe logo](/devscribe-logo.png "Devscribe Logo")
   </Tab>
-
   <Tab title="Syntax">
   ```markdown
-  ![Devscribe icon](/devscribe-logo.png)
-  ![Devscribe logo](/devscribe-logo.png "Devscribe Logo")
+    ![Devscribe icon](/devscribe-logo.png)
+    ![Devscribe logo](/devscribe-logo.png "Devscribe Logo")
   ```
   </Tab>
 </TabGroup>
@@ -57,13 +55,12 @@ Write descriptive alt text that conveys the image's purpose and content:
 
 <CodeGroup>
   <CodeSnippet language="markdown" title="Poor alt text">
-    ![Image](/screenshot.png)
-    ![Picture](/diagram.png)
+  {`![Image](/screenshot.png)
+    ![Picture](/diagram.png)`}
   </CodeSnippet>
-
   <CodeSnippet language="markdown" title="Good alt text">
-    ![Authentication flow diagram showing OAuth token exchange](/auth-flow.png)
-    ![Dashboard displaying active users and revenue metrics](/dashboard.png)
+  {`![Authentication flow diagram showing OAuth token exchange](/auth-flow.png)
+    ![Dashboard displaying active users and revenue metrics](/dashboard.png)`}
   </CodeSnippet>
 </CodeGroup>
 
@@ -125,19 +122,18 @@ Large image files slow page load times. Keep individual images under 500KB when 
 ## Troubleshooting
 
 <AccordionGroup>
-<Accordion title="Image not displaying">
-- Verify the file path is correct and case-sensitive
-- Ensure the image exists in your repository's public directory
-- Check that the file extension matchesthe actual file type
-- Confirm the image is committed to version control
-</Accordion>
-
-<Accordion title="Image displays but appears broken">
-- Validate the image file is not corrupted
-- Check file permissions allow public access
-- Ensure the image format is supported by browsers
-- Try re-uploading or re-committing the image file
-</Accordion>
+  <Accordion title="Image not displaying">
+  - Verify the file path is correct and case-sensitive
+  - Ensure the image exists in your repository's public directory
+  - Check that the file extension matchesthe actual file type
+  - Confirm the image is committed to version control
+  </Accordion>
+  <Accordion title="Image displays but appears broken">
+  - Validate the image file is not corrupted
+  - Check file permissions allow public access
+  - Ensure the image format is supported by browsers
+  - Try re-uploading or re-committing the image file
+  </Accordion>
 </AccordionGroup>
 
 ## Examples
@@ -169,4 +165,3 @@ Updated interface with streamlined design:
 
 ![New dashboard with simplified navigation and improved layout](/screenshots/new-dashboard.png)
 ```
-

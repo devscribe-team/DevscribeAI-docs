@@ -2,10 +2,9 @@
 title: "Ordered Lists"
 description: "Create numbered sequential lists in your documentation"
 ---
-
 Ordered lists display content as numbered items in sequential order. Use them for step-by-step instructions, ranked items, or any content where sequence matters.
 
-## Basic usage
+## Basic usage 
 
 <TabGroup>
   <Tab title="Preview">
@@ -13,12 +12,11 @@ Ordered lists display content as numbered items in sequential order. Use them fo
   2. Second item
   3. Third item
   </Tab>
-
   <Tab title="Syntax">
   ```markdown
-  1. First item
-  2. Second item
-  3. Third item
+    1. First item
+    2. Second item
+    3. Third item
   ```
   </Tab>
 </TabGroup>
@@ -48,18 +46,17 @@ Create nested ordered lists by indenting with 2-4 spaces:
   <Tab title="Preview">
   1. First level item
   2. Another first level item
-     1. Nested item
-     2. Another nested item
-  3. Back to first level
+  3. Nested item
+  4. Another nested item
+  5. Back to first level
   </Tab>
-
   <Tab title="Syntax">
   ```markdown
-  1. First level item
-  2. Another first level item
-     1. Nested item
-     2. Another nested item
-  3. Back to first level
+    1. First level item
+    2. Another first level item
+       1. Nested item
+       2. Another nested item
+    3. Back to first level
   ```
   </Tab>
 </TabGroup>
@@ -71,21 +68,24 @@ Ordered lists work seamlessly with other markdown elements:
 <TabGroup>
   <Tab title="Preview">
   1. Install the package
-     ```bash
-     npm install example-package
-     ```
-  2. Configure your environment variables
-  3. Start the development server
-  </Tab>
 
+  ```bash
+       npm install example-package
+  ```
+
+  1. Configure your environment variables
+  2. Start the development server
+  </Tab>
   <Tab title="Syntax">
   ```markdown
-  1. Install the package
-     ```bash
-     npm install example-package
-     ```
-  2. Configure your environment variables
-  3. Start the development server
+    1. Install the package
+  ```
+
+  npm install example-package
+
+  ```text
+    2. Configure your environment variables
+    3. Start the development server
   ```
   </Tab>
 </TabGroup>
@@ -96,16 +96,15 @@ Maintain consistent indentation when including code blocks or multi-paragraph co
 
 ## Ordered lists vs Steps component
 
-<CardGroup cols={2}>
+<CardGroup cols={2} gap="md">
   <Card title="Use ordered lists" icon="list-ol">
-  - Simple sequential items
+- Simple sequential items
   - Brief, single-line steps
   - Minimal additional context
   - Embedded within larger content
   </Card>
-
   <Card title="Use Steps component" icon="stairs">
-  - Complex multi-step procedures
+- Complex multi-step procedures
   - Steps requiring code examples
   - Procedures with callouts or warnings
   - Standalone tutorials or guides
@@ -137,4 +136,3 @@ Maintain consistent indentation when including code blocks or multi-paragraph co
 3. Review error logs for specific messages
 4. Restart the service
 5. Contact support if issues persist
-

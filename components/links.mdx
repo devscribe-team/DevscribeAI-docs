@@ -4,17 +4,17 @@ description: "Learn how to create and customize hyperlinks in your Devscribe doc
 ---
 Links allow you to connect your documentation pages to external resources, internal pages, or specific sections within your content.
 
-## Basic link syntax
+## Basic link syntax 
 
 Create links using standard Markdown syntax with the pattern `[link text](URL)`:
 
 <TabGroup>
   <Tab title="Preview">
-  <a href="https://devscribe.com">Devscribe</a>
+
   </Tab>
   <Tab title="Syntax">
   ```markdown
-    [Devscribe](https://devscribe.com)
+      [Devscribe](https://devscribe.com)
   ```
   </Tab>
 </TabGroup>
@@ -95,14 +95,14 @@ Install via npm: [`npm install devscribe`](https://npmjs.com/package/devscribe)
 <AccordionGroup>
   <Accordion title="Link not working or showing 404">
   - Verify the URL is correct and accessible
-  - For internal links, ensure the path matches your docs.json navigation structure
-  - Check for typos in anchor links (they're case-sensitive in some systems)
-  - Confirm relative paths are correct relative to the current file location
+    - For internal links, ensure the path matches your docs.json navigation structure
+    - Check for typos in anchor links (they're case-sensitive in some systems)
+    - Confirm relative paths are correct relative to the current file location
   </Accordion>
   <Accordion title="Link title tooltip not appearing">
   - Ensure the title attribute is enclosed in quotes: `"Title text"`
-  - Verify there's a space between the URL closing parenthesis and title
-  - Some browsers may have accessibility settings that affect tooltip display
+    - Verify there's a space between the URL closing parenthesis and title
+    - Some browsers may have accessibility settings that affect tooltip display
   </Accordion>
 </AccordionGroup>
 
